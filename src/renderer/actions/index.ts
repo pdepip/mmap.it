@@ -1,3 +1,7 @@
-import { CounterAction } from './counterActions';
+//import { SearchAction } from './searchActions';
+import * as search from './searchActions';
 
-export type RootActions = CounterAction[keyof CounterAction];
+export default {
+    search,
+}
+//export type RootActions = SearchAction[keyof SearchAction];

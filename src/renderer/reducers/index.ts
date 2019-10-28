@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
 
-import { CounterState, counterReducer } from './counterReducer';
+import { SearchState, searchReducer } from './searchReducer';
 
 export interface RootState {
-    counter: CounterState;
+    search: SearchState;
 }
 
 export const rootReducer = combineReducers<RootState | undefined>({
-    counter: counterReducer
+    search: searchReducer
 });

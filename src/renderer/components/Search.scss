@@ -1,0 +1,86 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat);
+
+$snappy:  cubic-bezier(0.694,  0.048, 0.335, 1.000);
+$tundora: #4B4848;
+$hint: #FAF8F8;
+$cornflower-blue: #6078EA;
+
+body {
+  font-family: 'Montserrat', 'Helevtica', sans-serif;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background-color: darken($hint, 4%);
+  color: $tundora;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 1.25s ease-in-out;
+}
+
+input {
+	font-size: 100%;
+}
+
+.search {
+  position: absolute;
+  top: 38%;
+  left: 50%;
+  width: 80%;
+  margin: 0 auto;
+  text-align: center;
+  overflow: hidden;
+  transform: translate(-50%, -50%);
+}
+
+.field {
+  border: 0;
+  width: 100%;
+  height: 100%;
+  padding: 10px 20px;
+  background: white;
+  border-radius: 3px;
+  box-shadow: 0px 8px 15px rgba($tundora, 0.1);
+  transition: all 0.4s ease;
+}
+
+.icon-search {
+  position: relative;
+  top: 5px;
+  left: 8px;
+  width: 50%;
+  height: 50%;
+  opacity: 1;
+  border-radius: 50%;
+  border: 3px solid mix($cornflower-blue, white, 35%);
+  transition: opacity 0.25s ease, transform 0.43s $snappy;
+  &:after {
+    content: "";
+    position: absolute;
+    bottom: -9px;
+    right: -2px;
+    width: 4px;
+    border-radius: 3px;
+    transform: rotate(-45deg);
+    height: 10px;
+    background-color: mix($cornflower-blue, white, 35%);
+  }
+}
+
+.icons-container {
+  position: absolute;
+  top: 11px;
+  right: -25px;
+  width: 35px;
+  height: 35px;
+  overflow: hidden;
+}
+
+.field-container {
+  position: relative;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  width: 330px;
+  height: 40px;
+}

@@ -1,9 +1,11 @@
 import { hot } from 'react-hot-loader/root';
 import * as React from 'react';
 
+import SearchContainer from '../containers/SearchContainer';
+
 const Application = () => (
     <div>
-        Hello world
+      <SearchContainer />
     </div>
 );
 
