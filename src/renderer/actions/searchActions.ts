@@ -1,9 +1,14 @@
 import { Action, ActionCreator } from 'redux';
 
-export const SET_SEARCH_QUERY = 'SET_SEARCH_QUERY';
+export enum SearchActionTypes {
+    SET_SEARCH_QUERY = 'SET_SEARCH_QUERY',
+}
 
-export const setSearchQuery = (query: string) => {
-    return { type: SET_SEARCH_QUERY, query }
+export function setSearchQuery(query: string) {
+    return { 
+        type: SET_SEARCH_QUERY, 
+        query 
+    };
 }
 
 /*
