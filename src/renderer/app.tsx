@@ -8,6 +8,7 @@ import store from './store';
 
 // Create main element
 const mainElement = document.createElement('div');
+mainElement.className = 'root';
 document.body.appendChild(mainElement);
 
 // Render components

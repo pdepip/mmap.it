@@ -1,9 +1,4 @@
-import { 
-    app, 
-    BrowserWindow,
-    globalShortcut,
-} from 'electron';
-import electron from 'electron';
+import electron, { app, BrowserWindow, globalShortcut } from 'electron';
 import * as path from 'path';
 import * as url from 'url';
 
@@ -26,23 +21,21 @@ const createWindow = async () => {
         await installExtensions();
     }
 
-    let displays = electron.screen.getAllDisplays();
+    const displays = electron.screen.getAllDisplays();
     let width: number = 0;
-    for (var i in displays) {
+    for (const i in displays) {
         width += displays[i].bounds.width;
     }
 
-    win = new BrowserWindow(
-        { 
-            x: width - 800,
-            y: 0,
-            width: 800, 
-            height: 600, 
-            webPreferences: 
-            { 
-                nodeIntegration: true, 
-            },
-        });
+    win = new BrowserWindow({
+        x: width - 800,
+        y: 0,
+        width: 500,
+        height: 600,
+        webPreferences: {
+            nodeIntegration: true
+        }
+    });
 
     if (process.env.NODE_ENV !== 'production') {
         process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = '1';
@@ -70,15 +63,10 @@ const createWindow = async () => {
 };
 
 const createShortcuts = () => {
-
-    const searchShortcut = globalShortcut.register(
-        'CommandOrControl+Option+C',
-        () => {
-            if (win) win.isVisible() ? win.hide() : win.show()
-        }
-    );
+    const searchShortcut = globalShortcut.register('CommandOrControl+Option+C', () => {
+        if (win) win.isVisible() ? win.hide() : win.show();
+    });
     console.log('searchShortcut', searchShortcut);
-
 };
 
 app.on('ready', () => {
