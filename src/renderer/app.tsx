@@ -14,7 +14,7 @@ document.body.appendChild(mainElement);
 const render = (Component: () => JSX.Element) => {
     ReactDOM.render(
         <AppContainer>
-            <Provider store={store}>
+            <Provider store={store as any}>
                 <Component />
             </Provider>
         </AppContainer>,

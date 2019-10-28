@@ -1,23 +1,24 @@
 import { Reducer } from 'redux';
-import Actions from '../actions';
+import { SearchActionTypes, SearchAction } from '../actions/searchActions';
 
 export interface SearchState {
-    readonly value: string;
+    readonly query: string;
 }
 
 const defaultState: SearchState = {
-    value: ""
+    query: ''
 };
 
 export const searchReducer: Reducer<SearchState> = (
-    state = defaultState,
+    state: SearchState = defaultState,
     action: SearchAction
 ) => {
+    console.log('query', action.query);
     switch (action.type) {
-        case Actions.SET_SEARCH_QUERY:
+        case SearchActionTypes.SET_SEARCH_QUERY:
             return {
                 ...state,
-                value: action.query,
+                query: action.query
             };
         default:
             return state;

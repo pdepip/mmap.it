@@ -1,21 +1,17 @@
 import { Action, ActionCreator } from 'redux';
 
 export enum SearchActionTypes {
-    SET_SEARCH_QUERY = 'SET_SEARCH_QUERY',
+    SET_SEARCH_QUERY = 'SET_SEARCH_QUERY'
 }
 
-export function setSearchQuery(query: string) {
-    return { 
-        type: SET_SEARCH_QUERY, 
-        query 
-    };
+interface SetSearchQueryAction {
+    readonly type: SearchActionTypes.SET_SEARCH_QUERY;
+    readonly query: string;
 }
 
-/*
-export const update: ActionCreator<UpdateAction> = (value) => ({
-    type: UPDATE,
-    value: value
+const setSearchQuery = (query: string): SetSearchQueryAction => ({
+    type: SearchActionTypes.SET_SEARCH_QUERY,
+    query
 });
-*/
 
-//export type SearchAction = UpdateAction;
+export type SearchAction = SetSearchQueryAction;
