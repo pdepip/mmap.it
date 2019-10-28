@@ -1,4 +1,4 @@
-import { Reducer } from 'redux';
+import { Reducer, Action } from 'redux';
 import { SearchActionTypes, SearchAction } from '../actions/searchActions';
 
 export interface SearchState {
@@ -11,9 +11,10 @@ const defaultState: SearchState = {
 
 export const searchReducer: Reducer<SearchState> = (
     state: SearchState = defaultState,
-    action: SearchAction
+    incomingAction: Action
 ) => {
-    console.log('query', action.query);
+    const action = incomingAction as SearchAction;
+    console.log('quer', action);
     switch (action.type) {
         case SearchActionTypes.SET_SEARCH_QUERY:
             return {

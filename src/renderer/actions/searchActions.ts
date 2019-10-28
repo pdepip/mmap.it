@@ -9,9 +9,9 @@ interface SetSearchQueryAction {
     readonly query: string;
 }
 
-const setSearchQuery = (query: string): SetSearchQueryAction => ({
-    type: SearchActionTypes.SET_SEARCH_QUERY,
-    query
+export const setSearchQuery = (query: string): SetSearchQueryAction => ({
+    query,
+    type: SearchActionTypes.SET_SEARCH_QUERY
 });
 
 export type SearchAction = SetSearchQueryAction;
