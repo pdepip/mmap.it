@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-require('./Create.scss');
+require('./Search.scss');
 
 export interface Props {
     // text: string;
@@ -8,7 +8,9 @@ export interface Props {
 
 const QueryResults: React.FunctionComponent<Props> = ({}) => (
     <div className="textarea">
-        <textarea id="input" className="textarea-elem" placeholder="Enter QueryResults Here" />
+        <div className="item active">Postgres tables with rows</div>
+        <div className="item">Comet instructions</div>
+        <div className="item">k8s port forwarding</div>
     </div>
 );
 

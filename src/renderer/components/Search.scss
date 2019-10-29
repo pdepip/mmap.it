@@ -102,3 +102,13 @@ input {
         border-bottom: 1px solid rgb(240, 240, 240);
     }
 }
+
+.item {
+    padding: 10px;
+    cursor: pointer;
+}
+.active {
+    border: 1px solid rgb(240, 240, 240);
+    border-radius: 3px;
+    border-left: 6px solid rgb(238, 238, 238);
+}

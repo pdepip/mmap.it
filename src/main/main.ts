@@ -30,8 +30,8 @@ const createWindow = async () => {
     win = new BrowserWindow({
         x: width - 800,
         y: 0,
-        width: 500,
-        height: 600,
+        width: 700,
+        height: 460,
         webPreferences: {
             nodeIntegration: true
         }
