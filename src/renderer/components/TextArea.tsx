@@ -14,7 +14,7 @@ const TextArea: React.FunctionComponent<Props> = ({ text, updateText }) => (
             className="textarea-elem"
             onChange={updateText}
             value={text}
-            placeholder=""
+            placeholder="Enter Text Here"
         />
     </div>
 );

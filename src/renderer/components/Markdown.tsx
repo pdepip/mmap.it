@@ -9,7 +9,6 @@ export interface Props {
 
 const Markdown: React.FunctionComponent<Props> = ({ markdown }) => (
     <div className="markdown">
-        {markdown}
         <ReactMarkdown source={markdown} />
     </div>
 );

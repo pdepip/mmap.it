@@ -14,7 +14,7 @@ const Title: React.FunctionComponent<Props> = ({ title, updateTitle }) => (
             value={title}
             onChange={updateTitle}
             type="text"
-            placeholder="Title..."
+            placeholder="New Title"
             className="field"
         />
     </fieldset>

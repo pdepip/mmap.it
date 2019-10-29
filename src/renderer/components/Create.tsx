@@ -15,11 +15,13 @@ export interface Props {
 
 const Create: React.FunctionComponent<Props> = ({ title, text, updateTitle, updateText }) => (
     <div className="application">
-        <div className="search-container">
+        <div className="search-container title-container">
             <Title title={title} updateTitle={updateTitle} />
         </div>
-        <TextArea text={text} updateText={updateText} />
-        <Markdown markdown={text} />
+        <div className="body-container">
+            <TextArea text={text} updateText={updateText} />
+            <Markdown markdown={text} />
+        </div>
     </div>
 );
 
