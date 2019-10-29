@@ -1,5 +1,5 @@
 import * as React from 'react';
-import reactMarkdown from 'react-markdown';
+import * as ReactMarkdown from 'react-markdown';
 
 require('./Create.scss');
 
