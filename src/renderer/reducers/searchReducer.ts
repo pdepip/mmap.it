@@ -3,10 +3,12 @@ import { SearchActionTypes, SearchAction } from '../actions/searchActions';
 
 export interface SearchState {
     readonly query: string;
+    readonly markdown: string;
 }
 
 const defaultState: SearchState = {
-    query: ''
+    query: '',
+    markdown: ''
 };
 
 export const searchReducer: Reducer<SearchState> = (

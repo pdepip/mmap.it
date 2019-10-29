@@ -1,25 +1,27 @@
 import * as React from 'react';
 
+import SearchBar from './SearchBar';
+import Markdown from './Markdown';
+import QueryResults from './QueryResults';
+
 require('./Search.scss');
 
 export interface Props {
     query: string;
+    markdown: string;
     updateQuery: (e: React.ChangeEvent<HTMLInputElement>) => any;
 }
 
-const Search: React.FunctionComponent<Props> = ({ query, updateQuery }) => (
-    <fieldset className="field-container">
-        <input
-            value={query}
-            onChange={updateQuery}
-            type="text"
-            placeholder="Search..."
-            className="field"
-        />
-        <div className="icons-container">
-            <div className="icon-search" />
+const Search: React.FunctionComponent<Props> = ({ query, markdown, updateQuery }) => (
+    <div className="application">
+        <div className="search-container">
+            <SearchBar query={query} updateQuery={updateQuery} />
         </div>
-    </fieldset>
+        <div className="body-container">
+            <QueryResults />
+            <Markdown markdown={markdown} />
+        </div>
+    </div>
 );
 
 export default Search;

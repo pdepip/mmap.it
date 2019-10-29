@@ -7,7 +7,8 @@ import { RootState } from '../reducers';
 import { SearchAction, setSearchQuery } from '../actions/searchActions';
 
 const mapStateToProps = (state: RootState) => ({
-    query: state.search.query
+    query: state.search.query,
+    markdown: state.search.markdown
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<SearchAction>) => ({

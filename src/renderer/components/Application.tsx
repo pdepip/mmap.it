@@ -4,20 +4,9 @@ import * as React from 'react';
 require('./Application.scss');
 import SearchContainer from '../containers/SearchContainer';
 import CreateContainer from '../containers/CreateContainer';
-import Markdown from './Markdown';
-import TextArea from './TextArea';
 
-const markdown: string = '# This is a header\n\nAnd this is a paragraph';
+// const search: boolean = true;
 
-const Application = () => (
-    <div className="application">
-        {/*
-        <div className="search-container">
-     <SearchContainer />
-        </div>
-    */}
-        <CreateContainer />
-    </div>
-);
+const Application = () => <SearchContainer />;
 
 export default hot(Application);
