@@ -41,7 +41,7 @@ textarea {
         bottom: 0;
         height: 1px;
         width: 95%;
-        border-bottom: 1px solid #aaaaaa;
+        border-bottom: 1px solid rgb(240, 240, 240);
     }
 
     input {
@@ -64,7 +64,7 @@ textarea {
         top: 0;
         height: 1px;
         width: 95%;
-        border-bottom: 1px solid #aaaaaa;
+        border-bottom: 1px solid rgb(240, 240, 240);
     }
 
     .button-container {
@@ -85,6 +85,7 @@ textarea {
             display: flex;
             width: 15%;
             cursor: pointer;
+            color: rgb(169, 169, 169);
 
             &:hover {
                 background: #fafcff;
@@ -94,6 +95,7 @@ textarea {
 
         #save-btn {
             font-weight: 800;
+            color: rgb(51, 51, 51);
         }
     }
 }
