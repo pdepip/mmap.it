@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactMarkdown from 'react-markdown';
 
-require('./Create.scss');
+require('./Editor.scss');
 
 export interface Props {
     markdown: string;

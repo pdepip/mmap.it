@@ -145,6 +145,7 @@
     "react-redux": "^7.0.3",
     "redux": "^4.0.1",
     "typesafe-actions": "^4.4.2",
-    "url": "^0.11.0"
+    "url": "^0.11.0",
+    "yunodb": "http://github.com/pdepip/yunodb"
   }
 }

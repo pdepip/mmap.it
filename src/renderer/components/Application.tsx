@@ -3,7 +3,7 @@ import * as React from 'react';
 
 require('./Application.scss');
 import SearchContainer from '../containers/SearchContainer';
-import CreateContainer from '../containers/CreateContainer';
+import EditorContainer from '../containers/EditorContainer';
 
 // const search: boolean = true;
 

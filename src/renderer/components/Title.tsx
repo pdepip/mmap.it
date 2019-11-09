@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-require('./Create.scss');
+require('./Editor.scss');
 require('./Search.scss');
 
 export interface Props {

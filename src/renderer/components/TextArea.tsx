@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-require('./Create.scss');
+require('./Editor.scss');
 
 export interface Props {
     text: string;

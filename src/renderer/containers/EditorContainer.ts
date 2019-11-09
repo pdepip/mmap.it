@@ -2,16 +2,16 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
-import Create from '../components/Create';
+import Editor from '../components/Editor';
 import { RootState } from '../reducers';
-import { CreateAction, setTitle, setText, saveBit } from '../actions/createActions';
+import { EditorAction, setTitle, setText, saveBit } from '../actions/editorActions';
 
 const mapStateToProps = (state: RootState) => ({
-    title: state.create.title,
-    text: state.create.text
+    title: state.editor.title,
+    text: state.editor.text
 });
 
-const mapDispatchToProps = (dispatch: Dispatch<CreateAction>) => ({
+const mapDispatchToProps = (dispatch: Dispatch<EditorAction>) => ({
     updateTitle: (event: React.ChangeEvent<HTMLInputElement>) =>
         dispatch(setTitle(event.target.value)),
     updateText: (event: React.ChangeEvent<HTMLTextAreaElement>) =>
@@ -22,4 +22,4 @@ const mapDispatchToProps = (dispatch: Dispatch<CreateAction>) => ({
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Create);
+)(Editor);

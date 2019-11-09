@@ -3,9 +3,9 @@ import * as React from 'react';
 import Markdown from '../components/Markdown';
 import TextArea from '../components/TextArea';
 import Title from '../components/Title';
-import CreateActions from '../components/CreateActions';
+import EditorActions from '../components/EditorActions';
 
-require('./Create.scss');
+require('./Editor.scss');
 
 export interface Props {
     title: string;
@@ -15,7 +15,7 @@ export interface Props {
     save: () => any;
 }
 
-const Create: React.FunctionComponent<Props> = ({ title, text, updateTitle, updateText, save }) => (
+const Editor: React.FunctionComponent<Props> = ({ title, text, updateTitle, updateText, save }) => (
     <div className="application">
         <div className="search-container title-container">
             <Title title={title} updateTitle={updateTitle} />
@@ -25,9 +25,9 @@ const Create: React.FunctionComponent<Props> = ({ title, text, updateTitle, upda
             <Markdown markdown={text} />
         </div>
         <div className="footer-container">
-            <CreateActions save={save} />
+            <EditorActions save={save} />
         </div>
     </div>
 );
 
-export default Create;
+export default Editor;

@@ -1,14 +1,14 @@
 import { combineReducers } from 'redux';
 
 import { SearchState, searchReducer } from './searchReducer';
-import { CreateState, createReducer } from './createReducer';
+import { EditorState, editorReducer } from './editorReducer';
 
 export interface RootState {
     search: SearchState;
-    create: CreateState;
+    editor: EditorState;
 }
 
 export const rootReducer = combineReducers<RootState | undefined>({
     search: searchReducer,
-    create: createReducer
+    editor: editorReducer
 });

@@ -1,29 +1,29 @@
 import { Reducer, Action } from 'redux';
-import { CreateActionTypes, CreateAction } from '../actions/createActions';
+import { EditorActionTypes, EditorAction } from '../actions/editorActions';
 
-export interface CreateState {
+export interface EditorState {
     readonly title: string;
     readonly text: string;
 }
 
-const defaultState: CreateState = {
+const defaultState: EditorState = {
     title: '',
     text: ''
 };
 
-export const createReducer: Reducer<CreateState> = (
-    state: CreateState = defaultState,
+export const editorReducer: Reducer<EditorState> = (
+    state: EditorState = defaultState,
     incomingAction: Action
 ) => {
-    const action = incomingAction as CreateAction;
+    const action = incomingAction as EditorAction;
     console.log(action);
     switch (action.type) {
-        case CreateActionTypes.SET_TITLE:
+        case EditorActionTypes.SET_TITLE:
             return {
                 ...state,
                 title: action.title
             };
-        case CreateActionTypes.SET_TEXT:
+        case EditorActionTypes.SET_TEXT:
             return {
                 ...state,
                 text: action.text

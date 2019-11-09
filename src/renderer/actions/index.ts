@@ -1,4 +1,4 @@
 import { SearchAction } from './searchActions';
-import { CreateAction } from './createActions';
+import { EditorAction } from './editorActions';
 
-export type RootActions = SearchAction[keyof SearchAction] | CreateAction[keyof CreateAction];
+export type RootActions = SearchAction[keyof SearchAction] | EditorAction[keyof EditorAction];
