@@ -94,6 +94,7 @@
     "@hot-loader/react-dom": "^16.8.6",
     "@types/electron-devtools-installer": "^2.2.0",
     "@types/jest": "^24.0.13",
+    "@types/node": "^12.12.7",
     "@types/react": "^16.8.18",
     "@types/react-dom": "^16.8.4",
     "@types/react-hot-loader": "^4.1.0",
@@ -138,6 +139,9 @@
     "webpack-merge": "^4.2.1"
   },
   "dependencies": {
+    "@types/url-search-params": "^1.1.0",
+    "electron-log": "^3.0.9",
+    "events": "^3.0.0",
     "path": "^0.12.7",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",

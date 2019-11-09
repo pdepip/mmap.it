@@ -1,3 +1,4 @@
+/*
 import electron, { app, BrowserWindow, globalShortcut } from 'electron';
 import * as path from 'path';
 import * as url from 'url';
@@ -90,3 +91,4 @@ app.on('activate', () => {
         createWindow();
     }
 });
+*/

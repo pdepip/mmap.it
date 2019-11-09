@@ -7,7 +7,7 @@ const baseConfig = require('./webpack.base.config');
 module.exports = merge.smart(baseConfig, {
     target: 'electron-main',
     entry: {
-        main: './src/main/main.ts'
+        main: './src/main/index.ts'
     },
     module: {
         rules: [
@@ -34,6 +34,10 @@ module.exports = merge.smart(baseConfig, {
         ]
     },
     plugins: [
+        new webpack.ProvidePlugin({
+          URLSearchParams: ['url', 'URLSearchParams'],
+          fetch: 'node-fetch',
+        }),
         new ForkTsCheckerWebpackPlugin({
             reportFiles: ['src/main/**/*']
         }),
