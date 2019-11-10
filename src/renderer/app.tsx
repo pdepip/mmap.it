@@ -11,16 +11,16 @@ const mainElement = document.createElement('div');
 mainElement.className = 'root';
 document.body.appendChild(mainElement);
 
-// Render components
-const render = (Component: () => JSX.Element) => {
-    ReactDOM.render(
-        <AppContainer>
-            <Provider store={store as any}>
-                <Component />
-            </Provider>
-        </AppContainer>,
-        mainElement
-    );
-};
+// Get args to determine what window to render
+const params = new URLSearchParams(window.location.search);
+const type = params.get('type');
 
-render(Application);
+// Render components
+ReactDOM.render(
+    <AppContainer>
+        <Provider store={store as any}>
+            <Application type={type} />
+        </Provider>
+    </AppContainer>,
+    mainElement
+);

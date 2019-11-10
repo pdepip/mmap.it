@@ -34,12 +34,13 @@ class EditorWindow extends BaseWindow {
             }
         });
         this.id = win.id;
+        this.type = WindowType.EDITOR;
 
         const urlString = super._buildUrlString();
         win.loadURL(urlString);
 
-        // Set titlebar heightR_HEIGHT
-        win.setSheetOffset(32);
+        // Set titlebar height
+        win.setSheetOffset(40);
 
         this.browserWindow = win;
     }

@@ -5,8 +5,30 @@ require('./Application.scss');
 import SearchContainer from '../containers/SearchContainer';
 import EditorContainer from '../containers/EditorContainer';
 
-// const search: boolean = true;
+type Props = {
+    type: string | null;
+};
 
-const Application = () => <SearchContainer />;
+class Application extends React.Component<Props> {
+    render() {
+        switch (this.props.type) {
+        case 'editor':
+            {
+                    return <EditorContainer />;
+                }
+            break;
+        case 'search':
+            {
+                    return <SearchContainer />;
+                }
+            break;
+        default:
+            {
+                    return <SearchContainer />;
+                }
+            break;
+        }
+    }
+}
 
 export default hot(Application);

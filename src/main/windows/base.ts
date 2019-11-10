@@ -72,6 +72,8 @@ class BaseWindow extends EventEmitter {
             });
         }
 
+        winUrl += '?type=' + this.type;
+
         return winUrl;
     }
 }
