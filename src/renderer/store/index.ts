@@ -7,9 +7,14 @@ import { editorReducer } from './editor/reducer';
 import { EditorState } from './editor/types';
 import editorSaga from './editor/sagas';
 
+import { searchReducer } from './search/reducer';
+import { SearchState } from './search/types';
+import searchSaga from './search/sagas';
+
 // Top level state object
 export interface ApplicationState {
     editor: EditorState;
+    search: SearchState;
 }
 
 // Whenevr an action is dispatched, redux will update each top-level applciation state property
@@ -18,10 +23,14 @@ export interface ApplicationState {
 export const createRootReducer = (history: History) =>
     combineReducers({
         editor: editorReducer,
+        search: searchReducer,
         router: connectRouter(history)
     });
 
 // Here we use redux-saga to trigger action asynchrnonously. redux-saga uses generator functions
 export function* rootSaga() {
-    yield all([fork(editorSaga)]);
+    yield all([
+        fork(editorSaga),
+        fork(searchSaga),
+    ]);
 }

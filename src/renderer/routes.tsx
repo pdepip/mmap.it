@@ -2,6 +2,7 @@ import { hot } from 'react-hot-loader/root';
 import * as React from 'react';
 
 import EditorPage from './pages/editor';
+import SearchPage from './pages/search';
 
 type Props = {
     page: string | null;
@@ -9,6 +10,7 @@ type Props = {
 
 class Routes extends React.Component<Props> {
     render() {
+        console.log('page', this.props.page)
         switch (this.props.page) {
         case 'editor':
             {
@@ -17,7 +19,7 @@ class Routes extends React.Component<Props> {
             break;
         case 'search':
             {
-                    return <EditorPage />;
+                    return <SearchPage />;
                 }
             break;
         default:

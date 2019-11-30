@@ -4,14 +4,14 @@ require('./Search.scss');
 
 export interface Props {
     query: string;
-    updateQuery: (e: React.ChangeEvent<HTMLInputElement>) => any;
+    setQuery: (query: string) => void;
 }
 
-const SearchBar: React.FunctionComponent<Props> = ({ query, updateQuery }) => (
+const SearchBar: React.FunctionComponent<Props> = ({ query, setQuery }) => (
     <fieldset className="field-container">
         <input
             value={query}
-            onChange={updateQuery}
+            onChange={(e) => setQuery(e.target.value)}
             type="text"
             placeholder="Search..."
             className="field"

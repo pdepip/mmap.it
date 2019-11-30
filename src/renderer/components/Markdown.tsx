@@ -10,9 +10,10 @@ export interface Props {
     // setText: (e: React.ChangeEvent<HTMLTextAreaElement>) => any;
     onSave: (doc: Document) => void;
     setMarkdown: (markdown: string) => void;
+    readOnly?: boolean;
 }
 
-const Markdown: React.FunctionComponent<Props> = ({ markdown, setMarkdown, onSave }) => (
+const Markdown: React.FunctionComponent<Props> = ({ markdown, setMarkdown, onSave, readOnly = false}) => (
     <div className="markdown" id="editor">
         <Editor
             id="example"
@@ -20,6 +21,7 @@ const Markdown: React.FunctionComponent<Props> = ({ markdown, setMarkdown, onSav
             onSave={onSave}
             onCancel={() => console.log('Cancel triggered')}
             onChange={setMarkdown}
+            readOnly={readOnly}
         />
     </div>
 );
