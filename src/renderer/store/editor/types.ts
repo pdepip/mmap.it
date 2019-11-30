@@ -7,6 +7,11 @@ export enum EditorActionTypes {
     SAVE_ERROR = '@@editor/SAVE_ERROR'
 }
 
+export interface Document {
+    title: string
+    markdown: string
+}
+
 // State
 export interface EditorState {
     readonly loading: boolean;

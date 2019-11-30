@@ -14,6 +14,18 @@ class EditorWindow extends BaseWindow {
      */
     constructor(accessor: Accessor | undefined) {
         super(accessor);
+
+        this.init();
+    }
+
+    init() {
+        this._listenForIpcRenderer()
+    }
+
+    _listenForIpcRenderer() {
+        ipcMain.on('kb::hide-editor', (e) => {
+            win.hide()
+        });
     }
 
     /*
