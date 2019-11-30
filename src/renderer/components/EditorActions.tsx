@@ -1,10 +1,11 @@
+/*
 import * as React from 'react';
 
 require('./Editor.scss');
 require('./Search.scss');
 
 export interface Props {
-    save: () => any;
+    //save: (title: string, text: string) => any;
 }
 
 const EditorActions: React.FunctionComponent<Props> = ({ save }) => (
@@ -17,3 +18,4 @@ const EditorActions: React.FunctionComponent<Props> = ({ save }) => (
 );
 
 export default EditorActions;
+*/

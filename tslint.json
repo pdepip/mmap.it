@@ -16,6 +16,13 @@
                 "SwitchCase": 0
             }
         ],
+		"import-name": [
+		  true,
+		  null,
+		  {},
+		  null,
+		  { "ignoreExternalModule": false, "case": "any-case" }
+    	],
         "variable-name": false,
         "jsx-alignment": true,
         "jsx-equals-spacing": [true, "never"],

@@ -1,9 +1,9 @@
-import { BrowserWindow } from 'electron';
-import events from 'events';
+import { BrowserWindow, globalShortcut } from 'electron';
+import EventEmitter from 'events';
 import * as path from 'path';
 import * as url from 'url';
 
-import accessor from '../app/accessor';
+import { Accessor } from '../app/accessor';
 
 export enum WindowType {
     BASE = 'base',
@@ -34,6 +34,18 @@ class BaseWindow extends EventEmitter {
         this.browserWindow = null;
         this.lifecycle = WindowLifecycle.NONE;
         this.type = WindowType.BASE;
+    }
+
+    registerShortcut(key: string) {
+        const shortcut = globalShortcut.register(key, () => {
+            if (this.browserWindow) {
+                if (this.browserWindow.isVisible()) {
+                    this.browserWindow.hide();
+                } else {
+                    this.browserWindow.show();
+                }
+            }
+        });
     }
 
     bringToFront() {
@@ -78,4 +90,4 @@ class BaseWindow extends EventEmitter {
     }
 }
 
-export default BaseWindow;
+export { BaseWindow };

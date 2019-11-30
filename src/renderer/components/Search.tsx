@@ -1,3 +1,4 @@
+/*
 import * as React from 'react';
 
 import SearchBar from './SearchBar';
@@ -25,3 +26,4 @@ const Search: React.FunctionComponent<Props> = ({ query, markdown, updateQuery }
 );
 
 export default Search;
+*/

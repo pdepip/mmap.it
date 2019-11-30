@@ -19,11 +19,10 @@
     "pack": "npm run build && electron-builder --dir",
     "dist": "npm run build && electron-builder",
     "postinstall": "electron-builder install-app-deps",
-    "rebuild": "electron-rebuild -f"
+    "rebuild": "electron-rebuild -f -w leveldown"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
     }
   },
   "lint-staged": {
@@ -140,16 +139,21 @@
   },
   "dependencies": {
     "@types/url-search-params": "^1.1.0",
+    "connected-react-router": "^6.6.1",
     "electron-log": "^3.0.9",
     "events": "^3.0.0",
+    "history": "^4.10.1",
+    "immutable": "^4.0.0-rc.12",
     "path": "^0.12.7",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-markdown": "^4.2.2",
     "react-redux": "^7.0.3",
+    "react-router": "^5.1.2",
     "redux": "^4.0.1",
+    "redux-saga": "^1.1.3",
+    "rich-markdown-editor": "^9.10.0",
     "typesafe-actions": "^4.4.2",
-    "url": "^0.11.0",
-    "yunodb": "http://github.com/pdepip/yunodb"
+    "url": "^0.11.0"
   }
 }

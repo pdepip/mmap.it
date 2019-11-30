@@ -1,3 +1,4 @@
+/*
 import { hot } from 'react-hot-loader/root';
 import * as React from 'react';
 
@@ -32,3 +33,4 @@ class Application extends React.Component<Props> {
 }
 
 export default hot(Application);
+*/

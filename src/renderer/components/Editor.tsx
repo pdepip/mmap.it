@@ -1,3 +1,4 @@
+/*
 import * as React from 'react';
 
 import Markdown from '../components/Markdown';
@@ -9,20 +10,21 @@ require('./Editor.scss');
 
 export interface Props {
     title: string;
-    text: string;
-    updateTitle: (event: React.ChangeEvent<HTMLInputElement>) => any;
-    updateText: (event: React.ChangeEvent<HTMLTextAreaElement>) => any;
-    save: () => any;
+    markdown: string;
+    //setTitle: (event: React.ChangeEvent<HTMLInputElement>) => any;
+    //setText: (event: React.ChangeEvent<HTMLTextAreaElement>) => any;
+    //save: (title: string, markdown: string) => any;
+    setTitle: (title: string) => void;
+    setMarkdown: (markdown: string) => void;
 }
 
-const Editor: React.FunctionComponent<Props> = ({ title, text, updateTitle, updateText, save }) => (
+const Editor: React.FunctionComponent<Props> = ({ title, markdown, setTitle, setMarkdown }) => (
     <div className="application">
         <div className="search-container title-container">
-            <Title title={title} updateTitle={updateTitle} />
+            <Title title={title} setTitle={setTitle} />
         </div>
         <div className="body-container">
-            <TextArea text={text} updateText={updateText} />
-            <Markdown markdown={text} />
+            <Markdown markdown={markdown} />
         </div>
         <div className="footer-container">
             <EditorActions save={save} />
@@ -31,3 +33,4 @@ const Editor: React.FunctionComponent<Props> = ({ title, text, updateTitle, upda
 );
 
 export default Editor;
+*/

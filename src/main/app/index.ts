@@ -1,17 +1,22 @@
 import { app, BrowserWindow, globalShortcut } from 'electron';
 
-import editor from '../windows/editor';
-import accessor from './accessor';
+import { EditorWindow } from '../windows/editor';
+import { Accessor } from './accessor';
 
 class App {
     // properties
     _accessor: Accessor | undefined;
     _args: object | undefined;
 
+    editorWindow: EditorWindow | null;
+    // searchWindow: BrowserWindow | null;
+
     constructor(accessor: Accessor | undefined, args: object | undefined) {
         this._accessor = accessor;
         this._args = args || { _: [] };
-        // this._windowManager = this._accessor.windowManager
+
+        this.editorWindow = null;
+        // this.searchWindow = null;
     }
 
     init() {
@@ -41,13 +46,22 @@ class App {
             this.ready();
         });
 
+        /*
+        app.on('browser-window-blur', () => {
+            if (this.editorWindow) {
+                console.log('registering shortcut');
+                this.editorWindow.registerShortcut('CommandOrControl+Option+C')
+            }
+        });
+         */
+
         // createTray()
     }
 
     ready = () => {
         // Create windows
-        console.log('Ready, launching windows');
-        this._createEditorWindow();
+        this.editorWindow = this._createEditorWindow();
+        this.editorWindow.registerShortcut('CommandOrControl+Option+C');
     };
 
     // --- private --------------------------------

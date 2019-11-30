@@ -5,14 +5,14 @@ require('./Search.scss');
 
 export interface Props {
     title: string;
-    updateTitle: (e: React.ChangeEvent<HTMLInputElement>) => any;
+    setTitle: (title: string) => void;
 }
 
-const Title: React.FunctionComponent<Props> = ({ title, updateTitle }) => (
+const Title: React.FunctionComponent<Props> = ({ title, setTitle }) => (
     <fieldset className="field-container">
         <input
             value={title}
-            onChange={updateTitle}
+            onChange={e => setTitle(e.target.value)}
             type="text"
             placeholder="New Title"
             className="field"

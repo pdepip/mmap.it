@@ -1,5 +1,5 @@
-import app from './app';
-import accessor from './app/accessor';
+import App from './app';
+import { Accessor } from './app/accessor';
 
 let accessor: Accessor | undefined;
 let args: object | undefined;

@@ -8,4 +8,4 @@ class Accessor {
     }
 }
 
-export default Accessor;
+export { Accessor };

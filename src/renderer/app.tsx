@@ -1,26 +1,30 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import { Store } from 'redux';
 import { Provider } from 'react-redux';
 import { AppContainer } from 'react-hot-loader';
 
-import Application from './components/Application';
 import store from './store';
-
-// Create main element
-const mainElement = document.createElement('div');
-mainElement.className = 'root';
-document.body.appendChild(mainElement);
+import { ApplicationState } from './store';
+import Routes from './routes';
 
 // Get args to determine what window to render
 const params = new URLSearchParams(window.location.search);
-const type = params.get('type');
+const page = params.get('type');
 
-// Render components
-ReactDOM.render(
-    <AppContainer>
-        <Provider store={store as any}>
-            <Application type={type} />
-        </Provider>
-    </AppContainer>,
-    mainElement
-);
+interface AppProps {
+    store: Store<ApplicationState>;
+    history: History;
+}
+
+const App: React.FC<AppProps> = ({ store, history }) => {
+    return (
+        <AppContainer>
+            <Provider store={store}>
+                <Routes page={page} />
+            </Provider>
+        </AppContainer>
+    );
+};
+
+export default App;

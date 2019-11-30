@@ -2,13 +2,15 @@
     display: flex;
     flex-direction: row;
     height: 100%;
+    background-color: #fff;
+    padding: 24px;
 }
 
 .textarea,
 .markdown {
-    width: 50%;
+    width: 100%;
     height: calc(100% - 40px);
-    font-size: 14px;
+    font-size: 16px;
     padding: 20px;
 }
 
@@ -18,6 +20,7 @@ textarea {
     height: 100%;
     border: none;
     resize: none;
+    font-size: 16px;
 }
 
 .textarea {
@@ -28,24 +31,30 @@ textarea {
 .markdown {
     padding-top: 6px;
     //border-left: 1px solid #aaaaaa;
-    background: #fafcff;
+    //background: #fafcff;
 }
 
 .title-container {
     position: relative;
+    font-size: 24px;
+    height: 125px !important;
+    line-height: 80px;
+    padding-bottom: 0px;
 
     &:after {
         content: '';
         position: absolute;
-        left: 2.5%;
-        bottom: 0;
+        left: 4%;
+        bottom: -4;
         height: 1px;
-        width: 95%;
+        width: 92%;
         border-bottom: 1px solid rgb(240, 240, 240);
     }
 
     input {
-        padding-left: 20px;
+        padding-bottom: 0px;
+        padding-left: 42px;
+        padding-top: 32px;
     }
 }
 
