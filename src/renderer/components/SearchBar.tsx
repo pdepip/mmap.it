@@ -14,7 +14,7 @@ const SearchBar: React.FunctionComponent<Props> = ({ query, setQuery }) => (
             onChange={(e) => setQuery(e.target.value)}
             type="text"
             placeholder="Search..."
-            className="field"
+            className="field search-field"
         />
         <div className="icons-container">
             <div className="icon-search" />

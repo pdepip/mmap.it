@@ -21,6 +21,19 @@ body {
     transition: background-color 1.25s ease-in-out;
 }
 
+.search-body {
+	padding: 0px;
+}
+
+.query-results {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    min-width: 40%;
+    background-color: rgb(238, 238, 238);
+}
+
 input {
     font-size: 100%;
     box-sizing: border-box;
@@ -71,9 +84,15 @@ input {
     }
 }
 
+.search-field {
+    font-size: 24px;
+    line-height: 40px;
+    padding-top: 20px;
+}
+
 .icons-container {
     position: absolute;
-    top: 11px;
+    top: 24px;
     //right: -46px;
     width: 35px;
     height: 35px;
@@ -106,9 +125,9 @@ input {
 .item {
     padding: 10px;
     cursor: pointer;
+	font-size: 14px;
 }
 .active {
-    border: 1px solid rgb(240, 240, 240);
-    border-radius: 3px;
-    border-left: 6px solid rgb(238, 238, 238);
+    background-color: rgb(63, 147, 247);
+    color: #fff;
 }

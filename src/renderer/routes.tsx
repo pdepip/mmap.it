@@ -10,7 +10,6 @@ type Props = {
 
 class Routes extends React.Component<Props> {
     render() {
-        console.log('page', this.props.page)
         switch (this.props.page) {
         case 'editor':
             {

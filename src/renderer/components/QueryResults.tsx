@@ -1,16 +1,29 @@
 import * as React from 'react';
+import { Document } from '../store/search/types';
+import classnames from 'classnames';
 
 require('./Search.scss');
 
 export interface Props {
-    // text: string;
+    activeIdx: number;
+    documents: Document[];
+    increaseActiveIdx: () => void;
+    decreaseActiveIdx: () => void;
 }
 
-const QueryResults: React.FunctionComponent<Props> = ({}) => (
-    <div className="textarea">
-        <div className="item active">Postgres tables with rows</div>
-        <div className="item">Comet instructions</div>
-        <div className="item">k8s port forwarding</div>
+const QueryResults: React.FunctionComponent<Props> = ({documents, activeIdx}) => (
+    <div className="query-results">
+
+    { documents.map((document, idx) => {
+            return (
+                <div className={classnames({
+                    'item': true,
+                    'active': idx == activeIdx,
+                    })}
+                >{document.title}</div>
+            )
+        })
+    }
     </div>
 );
 

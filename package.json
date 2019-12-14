@@ -22,8 +22,7 @@
     "rebuild": "electron-rebuild -f -w leveldown"
   },
   "husky": {
-    "hooks": {
-    }
+    "hooks": {}
   },
   "lint-staged": {
     "{src,test,mocks}/**/*.{js,ts,tsx,json,css,scss,md}": [
@@ -139,7 +138,9 @@
   },
   "dependencies": {
     "@types/url-search-params": "^1.1.0",
+    "classnames": "^2.2.6",
     "connected-react-router": "^6.6.1",
+    "elasticlunr": "^0.9.5",
     "electron-log": "^3.0.9",
     "events": "^3.0.0",
     "history": "^4.10.1",
