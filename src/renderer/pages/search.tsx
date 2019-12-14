@@ -94,8 +94,7 @@ class SearchPage extends React.Component<AllProps> {
             activeIdxDecrease,
         } = this.props;
 
-        const markdown: string = documents[activeIdx].text
-		console.log(activeIdx, markdown)
+        const markdown: string = documents.length > 0 ? documents[activeIdx].text : ""
 
         return (
             <div className="application">

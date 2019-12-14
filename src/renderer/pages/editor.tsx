@@ -25,6 +25,11 @@ type AllProps = PropsFromState & PropsFromDispatch;
 
 class EditorPage extends React.Component<AllProps> {
 
+    public handleMarkdownChange(value) {
+        const { setMarkdown } = this.props;
+        setMarkdown(value())
+    }
+
     public render() {
         const { markdown, title, setTitle, setMarkdown, saveRequest } = this.props;
 
@@ -41,7 +46,7 @@ class EditorPage extends React.Component<AllProps> {
                 <div className="body-container">
                     <Markdown 
                       onSave={() => saveRequest(doc)}
-                      setMarkdown={setMarkdown} 
+                      setMarkdown={this.handleMarkdownChange.bind(this)} 
                       markdown={markdown} 
                     />
                 </div>

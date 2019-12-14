@@ -28,7 +28,7 @@ export const initialState: SearchState = {
     query: '',
     loading: false,
     activeIdx: 0,
-    documents: demores,
+    documents: [],
     markdown: '',
 };
 
@@ -42,6 +42,9 @@ const reducer: Reducer<SearchState> = (state = initialState, action) => {
     }
     case SearchActionTypes.DECREASE_ACTIVE_IDX: {
         return { ...state, activeIdx: state.activeIdx - 1 }
+    }
+    case SearchActionTypes.QUERY_SUCCESS: {
+        return { ...state, documents: action.payload };
     }
     default: {
             return state;

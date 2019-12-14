@@ -1,4 +1,4 @@
-import { all, call, fork, put, takeEvery, takeLatest } from 'redux-saga/effects';
+import { all, call, fork, put, takeEvery, takeLatest, select } from 'redux-saga/effects';
 import { ipcRenderer } from 'electron'
 import { EditorActionTypes } from './types';
 import { saveError, saveSuccess } from './actions'
@@ -8,7 +8,14 @@ const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:500
 
 function* handleSave() {
     try {
-        const res = yield call(callApi, 'post', API_ENDPOINT, '/v1/documents')
+        const state = yield select();
+        console.log(state.editor)
+        const data: any = {
+            title: state.editor.title,
+            text: state.editor.markdown,
+        }
+        
+        const res = yield call(callApi, 'post', API_ENDPOINT, '/v1/documents', data)
 
         if (res.error) {
             yield put(saveError(res.error))

@@ -16,10 +16,12 @@ const QueryResults: React.FunctionComponent<Props> = ({documents, activeIdx}) =>
 
     { documents.map((document, idx) => {
             return (
-                <div className={classnames({
+                <div 
+                  className={classnames({
                     'item': true,
                     'active': idx == activeIdx,
                     })}
+                  key={idx} 
                 >{document.title}</div>
             )
         })

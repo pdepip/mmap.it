@@ -16,6 +16,9 @@ const reducer: Reducer<EditorState> = (state = initialState, action) => {
     case EditorActionTypes.SET_MARKDOWN: {
             return { ...state, markdown: action.payload };
         }
+    case EditorActionTypes.SAVE_SUCCESS: {
+        return { ...state, markdown: '', title: '' };
+    }
     default: {
             return state;
         }

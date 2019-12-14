@@ -1,4 +1,4 @@
-import { all, call, fork, put, takeEvery, takeLatest } from 'redux-saga/effects';
+import { all, call, fork, put, takeEvery, takeLatest, select } from 'redux-saga/effects';
 import { ipcRenderer } from 'electron'
 import { SearchActionTypes } from './types';
 import { queryError, querySuccess } from './actions'
@@ -8,12 +8,14 @@ const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:500
 
 function* handleQuery() {
     try {
-        const res = yield call(callApi, 'post', API_ENDPOINT, '/v1/documents')
+        const state = yield select();
+        const query: string = '/v1/documents?q=' + state.search.query
+        
+        const res = yield call(callApi, 'get', API_ENDPOINT, query)
 
         if (res.error) {
             yield put(queryError(res.error))
         } else {
-            ipcRenderer.send('kb::hide-search')
             yield put(querySuccess(res))
         }
     } catch (err) {
@@ -26,7 +28,7 @@ function* handleQuery() {
 }
 
 function* watchQueryRequest() {
-    yield takeEvery(SearchActionTypes.QUERY_REQUEST, handleQuery)
+    yield takeEvery(SearchActionTypes.SET_QUERY, handleQuery)
 }
 
 function* searchSaga() {
