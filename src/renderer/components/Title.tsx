@@ -11,6 +11,7 @@ export interface Props {
 const Title: React.FunctionComponent<Props> = ({ title, setTitle }) => (
     <fieldset className="field-container">
         <input
+            autoFocus
             value={title}
             onChange={e => setTitle(e.target.value)}
             type="text"

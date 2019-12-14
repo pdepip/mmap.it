@@ -10,6 +10,7 @@ export interface Props {
 const SearchBar: React.FunctionComponent<Props> = ({ query, setQuery }) => (
     <fieldset className="field-container">
         <input
+            autoFocus
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             type="text"
