@@ -52,10 +52,10 @@
     }
   },
   "build": {
-    "productName": "ProductName",
-    "appId": "org.your.productname",
+    "productName": "mmap",
+    "appId": "org.mmap.mmap",
     "mac": {
-      "category": "your.app.category.type"
+      "category": "public.app-category.developer-tools"
     },
     "directories": {
       "output": "release"
@@ -73,14 +73,14 @@
     }
   },
   "author": {
-    "name": "Your name",
-    "email": "Your email"
+    "name": "Patrick DePippo",
+    "email": "pat@mmap.it"
   },
   "license": "SEE LICENSE",
   "bugs": {
     "url": "https://github.com/Robinfr/electron-react-typescript/issues"
   },
-  "homepage": "https://github.com/Robinfr/electron-react-typescript",
+  "homepage": "https://mmap.it",
   "devDependencies": {
     "@babel/core": "^7.4.5",
     "@babel/plugin-proposal-class-properties": "^7.4.4",

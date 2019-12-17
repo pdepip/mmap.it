@@ -1,4 +1,5 @@
 import { BrowserWindow, ipcMain, dialog } from 'electron';
+import electron from 'electron';
 import * as path from 'path';
 import * as url from 'url';
 import electronLog from 'electron-log';
@@ -34,8 +35,12 @@ class SearchWindow extends BaseWindow {
      * @param {string}
      */
     createWindow(options = {}) {
+
+		let display = electron.screen.getPrimaryDisplay();
+		let width = display.bounds.width;
+
         win = new BrowserWindow({
-            x: 0,
+            x: width - 600,
             y: 0,
             width: 600,
             height: 500,

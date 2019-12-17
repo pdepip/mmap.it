@@ -2,6 +2,7 @@ import { app, BrowserWindow, globalShortcut } from 'electron';
 
 import { EditorWindow } from '../windows/editor';
 import { SearchWindow } from '../windows/search';
+import { FileManager } from '../filemanager';
 import { Accessor } from './accessor';
 
 class App {
@@ -12,12 +13,16 @@ class App {
     editorWindow: EditorWindow | null;
     searchWindow: SearchWindow | null;
 
+    fileManager: FileManager | null;
+
     constructor(accessor: Accessor | undefined, args: object | undefined) {
         this._accessor = accessor;
         this._args = args || { _: [] };
 
         this.editorWindow = null;
         this.searchWindow = null;
+
+        this.fileManager = null;
     }
 
     init() {
@@ -66,6 +71,8 @@ class App {
 
         this.searchWindow = this._createSearchWindow();
         this.searchWindow.registerShortcut('CommandOrControl+Option+Space');
+
+        this.fileManager = this._createFileManager();
     };
 
     // --- private --------------------------------
@@ -83,6 +90,11 @@ class App {
         const search: SearchWindow = new SearchWindow(this._accessor);
         search.createWindow();
         return search;
+    }
+
+    _createFileManager() {
+        const fileManager: FileManager = new FileManager(this._accessor);
+        return fileManager
     }
 }
 

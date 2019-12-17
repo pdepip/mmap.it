@@ -9,7 +9,6 @@ const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:500
 function* handleSave() {
     try {
         const state = yield select();
-        console.log(state.editor)
         const data: any = {
             title: state.editor.title,
             text: state.editor.markdown,
@@ -21,6 +20,8 @@ function* handleSave() {
             yield put(saveError(res.error))
         } else {
             ipcRenderer.send('kb::hide-editor')
+            console.log(res);
+            ipcRenderer.send('fm::save', res.document_id, res.document_title, res.document_text)
             yield put(saveSuccess(res))
         }
     } catch (err) {
