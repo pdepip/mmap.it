@@ -110,7 +110,7 @@ class SearchPage extends React.Component<AllProps> {
                     />
                     <Markdown 
                       markdown={markdown} 
-					  activeIdx={activeIdx}
+					  activeIdx={markdown}
                       onSave={() => console.log("no op")}
                       setMarkdown={() => console.log("no op")}
                       readOnly={true}

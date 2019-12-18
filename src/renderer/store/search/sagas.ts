@@ -9,6 +9,10 @@ const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:500
 function* handleQuery() {
     try {
         const state = yield select();
+
+        // dont search for empty string
+        if (!state.search.query) return;
+
         const query: string = '/v1/documents?q=' + state.search.query
         
         const res = yield call(callApi, 'get', API_ENDPOINT, query)

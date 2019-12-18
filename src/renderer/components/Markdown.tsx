@@ -7,11 +7,10 @@ require('./Editor.scss');
 
 export interface Props {
     markdown: string;
-    // setText: (e: React.ChangeEvent<HTMLTextAreaElement>) => any;
     onSave: (doc: Document) => void;
     setMarkdown: (markdown: string) => void;
     readOnly?: boolean;
-    activeIdx?: number;
+    activeIdx?: string | undefined;
 }
 
 const Markdown: React.FunctionComponent<Props> = ({ markdown, setMarkdown, onSave, readOnly = false, activeIdx=0}) => (
