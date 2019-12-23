@@ -8,3 +8,5 @@ export const setMarkdown = (markdown: string) => action(EditorActionTypes.SET_MA
 export const saveRequest = (document: Document) => action(EditorActionTypes.SAVE_REQUEST, document)
 export const saveSuccess = (data: any) => action(EditorActionTypes.SAVE_SUCCESS, data)
 export const saveError = (message: string) => action(EditorActionTypes.SAVE_ERROR, message)
+
+export const toggleJustSaved = () => action(EditorActionTypes.TOGGLE_JUST_SAVED)

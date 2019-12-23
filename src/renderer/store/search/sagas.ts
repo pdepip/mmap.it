@@ -15,7 +15,9 @@ function* handleQuery() {
 
         const query: string = '/v1/documents?q=' + state.search.query
         
-        const res = yield call(callApi, 'get', API_ENDPOINT, query)
+        const res = ipcRenderer.sendSync('fm::search', state.search.query)
+
+        //const res = yield call(callApi, 'get', API_ENDPOINT, query)
 
         if (res.error) {
             yield put(queryError(res.error))

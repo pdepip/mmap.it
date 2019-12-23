@@ -26,12 +26,15 @@ body {
 }
 
 .query-results {
-    width: 50%;
+    //width: 50%;
+    //min-width: 40%;
     height: 100%;
     display: flex;
     flex-direction: column;
-    min-width: 40%;
-    background-color: rgb(238, 238, 238);
+    width: 300px;
+
+    background-color: rgb(246,246,246);
+    border-right: 1px solid rgb(222, 222, 222);
 }
 
 input {
@@ -111,6 +114,7 @@ input {
 
 .search-container {
     position: relative;
+    border-bottom: 1px solid rgb(222, 222, 222);
     &:after {
         content: '';
         position: absolute;
@@ -118,7 +122,7 @@ input {
         bottom: 0;
         height: 1px;
         width: 95%;
-        border-bottom: 1px solid rgb(240, 240, 240);
+        //border-bottom: 1px solid rgb(240, 240, 240);
     }
 }
 

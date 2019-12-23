@@ -40,9 +40,9 @@ class SearchWindow extends BaseWindow {
 		let width = display.bounds.width;
 
         win = new BrowserWindow({
-            x: width - 600,
+            x: width - 700,
             y: 0,
-            width: 600,
+            width: 700,
             height: 500,
             useContentSize: true,
             // titleBarStyle: 'hiddenInset',
