@@ -1,5 +1,5 @@
 {
-  "name": "knowledgebase",
+  "name": "mmap.it",
   "version": "0.0.1",
   "description": "",
   "main": "./dist/main.js",
@@ -78,7 +78,7 @@
   },
   "license": "SEE LICENSE",
   "bugs": {
-    "url": "https://github.com/Robinfr/electron-react-typescript/issues"
+    "url": "https://github.com/pdepip/mmap.it/issues"
   },
   "homepage": "https://mmap.it",
   "devDependencies": {
@@ -141,7 +141,9 @@
     "classnames": "^2.2.6",
     "connected-react-router": "^6.6.1",
     "elasticlunr": "^0.9.5",
+    "electron-is-dev": "^1.1.0",
     "electron-log": "^3.0.9",
+    "electron-updater": "^4.2.0",
     "events": "^3.0.0",
     "history": "^4.10.1",
     "immutable": "^4.0.0-rc.12",

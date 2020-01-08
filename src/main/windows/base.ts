@@ -1,4 +1,4 @@
-import { BrowserWindow, globalShortcut } from 'electron';
+import { BrowserWindow, globalShortcut, screen } from 'electron';
 import EventEmitter from 'events';
 import * as path from 'path';
 import * as url from 'url';
@@ -42,16 +42,12 @@ class BaseWindow extends EventEmitter {
                 if (this.browserWindow.isVisible()) {
                     this.browserWindow.hide();
                 } else {
-                    this.browserWindow.show();
+                    this.browserWindow.setVisibleOnAllWorkspaces(true); // put the window on all screens
+                    this.browserWindow.show(); // focus the window up front on the active screen
+                    this.browserWindow.setVisibleOnAllWorkspaces(false); // disable all screen behavior
                 }
             }
         });
-    }
-
-    bringToFront() {
-        const { browserWindow: win } = this;
-        if (win && win.isMinimized()) win.restore();
-        if (win && !win.isVisible()) win.show();
     }
 
     reload() {

@@ -4,6 +4,9 @@ import { EditorWindow } from '../windows/editor';
 import { SearchWindow } from '../windows/search';
 import { FileManager } from '../filemanager';
 import { Accessor } from './accessor';
+import { appUpdater } from './autoupdate';
+
+const isDev: boolean = require('electron-is-dev');
 
 class App {
     // properties
@@ -70,9 +73,21 @@ class App {
         this.editorWindow.registerShortcut('CommandOrControl+Option+C');
 
         this.searchWindow = this._createSearchWindow();
-        this.searchWindow.registerShortcut('CommandOrControl+Option+Space');
+        this.searchWindow.registerShortcut('Control+Space');
 
         this.fileManager = this._createFileManager();
+
+        // Set up autoupdater
+        if (this.editorWindow.browserWindow) {
+            this.editorWindow.browserWindow.webContents.once('did-frame-finish-load', () => {
+                const checkOS = this._isWindowsOrmacOS();
+                if (checkOS && !isDev) {
+                    // Initate auto-updates on macOs and windows
+                    appUpdater();
+                }
+            });
+        }
+
     };
 
     // --- private --------------------------------
@@ -95,6 +110,10 @@ class App {
     _createFileManager() {
         const fileManager: FileManager = new FileManager(this._accessor);
         return fileManager
+    }
+
+    _isWindowsOrmacOS() {
+        return process.platform === 'darwin' || process.platform === 'win32';
     }
 }
 
