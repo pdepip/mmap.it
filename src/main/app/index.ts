@@ -4,7 +4,7 @@ import { EditorWindow } from '../windows/editor';
 import { SearchWindow } from '../windows/search';
 import { FileManager } from '../filemanager';
 import { Accessor } from './accessor';
-import { appUpdater } from './autoupdate';
+//import { appUpdater } from './autoupdate';
 
 const isDev: boolean = require('electron-is-dev');
 
@@ -36,8 +36,22 @@ class App {
         app.on('ready', this.ready);
 
         app.on('window-all-closed', () => {
-            if (process.platform !== 'darwin') {
-                app.quit();
+            console.log('yo in window all closed')
+            //if (process.platform !== 'darwin') {
+                //app.quit();
+            //}
+        });
+
+        app.on('before-quit', () => {
+            console.log('here')
+            if (this.editorWindow && this.editorWindow.browserWindow) {
+                this.editorWindow.browserWindow.removeAllListeners('close');
+                this.editorWindow.browserWindow.close();
+            } 
+
+            if (this.searchWindow && this.searchWindow.browserWindow) {
+                this.searchWindow.browserWindow.removeAllListeners('close');
+                this.searchWindow.browserWindow.close();
             }
         });
 
@@ -78,6 +92,7 @@ class App {
         this.fileManager = this._createFileManager();
 
         // Set up autoupdater
+        /*
         if (this.editorWindow.browserWindow) {
             this.editorWindow.browserWindow.webContents.once('did-frame-finish-load', () => {
                 const checkOS = this._isWindowsOrmacOS();
@@ -87,6 +102,7 @@ class App {
                 }
             });
         }
+         */
 
     };
 

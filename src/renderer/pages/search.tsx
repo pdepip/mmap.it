@@ -12,6 +12,7 @@ import {
     setQuery, 
     activeIdxIncrease,
     activeIdxDecrease,
+    openDocument,
 } from '../store/search/actions';
 import { Document } from '../store/search/types';
 
@@ -25,39 +26,10 @@ interface PropsFromDispatch {
     setQuery: typeof setQuery;
     activeIdxIncrease: typeof activeIdxIncrease;
     activeIdxDecrease: typeof activeIdxDecrease;
+    openDocument: typeof openDocument;
 }
 
 type AllProps = PropsFromState & PropsFromDispatch;
-
-/*
-const useKeyPress = function(targetKey) {
-  const [keyPressed, setKeyPressed] = useState(false);
-
-  function downHandler({ key }) {
-    if (key === targetKey) {
-      setKeyPressed(true);
-    }
-  }
-
-  const upHandler = ({ key }) => {
-    if (key === targetKey) {
-      setKeyPressed(false);
-    }
-  };
-
-  React.useEffect(() => {
-    window.addEventListener("keydown", downHandler);
-    window.addEventListener("keyup", upHandler);
-
-    return () => {
-      window.removeEventListener("keydown", downHandler);
-      window.removeEventListener("keyup", upHandler);
-    };
-  });
-
-  return keyPressed;
-};
-*/
 
 class SearchPage extends React.Component<AllProps> {
 
@@ -67,13 +39,17 @@ class SearchPage extends React.Component<AllProps> {
             activeIdx,
             activeIdxIncrease,
             activeIdxDecrease,
+            openDocument,
         } = this.props;
 
         if (e.keyCode === 38 && activeIdx > 0) {
             activeIdxDecrease()
         } else if (e.keyCode === 40 && activeIdx < documents.length - 1) {
             activeIdxIncrease()
+        } else if (e.key === "Enter") {
+            openDocument()
         }
+
     }
 
  	componentWillMount() {
@@ -131,6 +107,7 @@ const mapDispatchToProps = {
     setQuery,
     activeIdxIncrease,
     activeIdxDecrease,
+    openDocument,
 };
 
 export default connect(

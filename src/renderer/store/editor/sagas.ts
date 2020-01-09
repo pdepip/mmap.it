@@ -1,7 +1,7 @@
 import { all, call, fork, put, takeEvery, takeLatest, select } from 'redux-saga/effects';
 import { ipcRenderer } from 'electron'
 import { EditorActionTypes } from './types';
-import { saveError, saveSuccess } from './actions'
+import { saveError, saveSuccess, setTitle, setMarkdown } from './actions'
 import { callApi } from '../../utils/api'
 import { uuidv4 } from '../../utils/general'
 

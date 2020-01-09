@@ -66,6 +66,12 @@ class SearchWindow extends BaseWindow {
         // Set titlebar height
         win.setSheetOffset(32);
 
+        // Prevent from being closed normally
+        win.on('close', (e) => {
+            e.preventDefault();
+            win.hide();
+        });
+
         this.browserWindow = win;
     }
 }

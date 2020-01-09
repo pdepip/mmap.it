@@ -1,10 +1,23 @@
 import { all, call, fork, put, takeEvery, takeLatest, select } from 'redux-saga/effects';
 import { ipcRenderer } from 'electron'
-import { SearchActionTypes } from './types';
+import { SearchActionTypes, Document } from './types';
 import { queryError, querySuccess } from './actions'
 import { callApi } from '../../utils/api'
 
 const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:5000'
+
+function* handleOpenDocument() {
+    try {
+        const state = yield select();
+        const activeIdx: number = state.search.activeIdx
+        const activeDocument: Document = state.search.documents[activeIdx];
+        ipcRenderer.send('kb::hide-search')
+        ipcRenderer.send('kb::open-document', activeDocument)
+
+    } catch (err) {
+        console.log('[ERROR] handleOpenDocument', err)
+    }
+}
 
 function* handleQuery() {
     try {
@@ -37,8 +50,12 @@ function* watchQueryRequest() {
     yield takeEvery(SearchActionTypes.SET_QUERY, handleQuery)
 }
 
+function* watchOpenDocument() {
+    yield takeEvery(SearchActionTypes.OPEN_DOCUMENT, handleOpenDocument);
+}
+
 function* searchSaga() {
-    yield all([fork(watchQueryRequest)])
+    yield all([fork(watchQueryRequest), fork(watchOpenDocument)])
 }
 
 export default searchSaga;

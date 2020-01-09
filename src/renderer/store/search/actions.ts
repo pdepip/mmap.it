@@ -10,3 +10,5 @@ export const queryError = (message: string) => action(SearchActionTypes.QUERY_ER
 
 export const activeIdxIncrease = () => action(SearchActionTypes.INCREASE_ACTIVE_IDX)
 export const activeIdxDecrease = () => action(SearchActionTypes.DECREASE_ACTIVE_IDX)
+
+export const openDocument = () => action(SearchActionTypes.OPEN_DOCUMENT)

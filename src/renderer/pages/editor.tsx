@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-
+import { ipcRenderer } from 'electron';
+import { Dispatch } from 'redux';
 require('../components/Application.scss');
 
 import Markdown from '../components/Markdown';
@@ -27,12 +28,31 @@ type AllProps = PropsFromState & PropsFromDispatch;
 
 class EditorPage extends React.Component<AllProps> {
 
+    constructor(props: AllProps) {
+        super(props);
+
+    }
+
+    componentDidMount() {
+        console.log(this);
+        ipcRenderer.on('document-data', (e, doc) => {
+            this.props.setTitle(doc.title)
+            this.props.setMarkdown(doc.text)
+            this.props.toggleJustSaved();
+        })
+    }
+
+    componentWillUnmount() {
+        //ipcRenderer.removeListener('document-data', this.handleDocumentData);
+    }
+
     public handleMarkdownChange(value) {
         const { setMarkdown } = this.props;
         setMarkdown(value())
     }
 
     public render() {
+
         const { 
             markdown, 
             title, 
@@ -46,6 +66,8 @@ class EditorPage extends React.Component<AllProps> {
             title: title,
             markdown: markdown
         }
+
+        console.log(justSaved);
 
         return (
             <div className="application">

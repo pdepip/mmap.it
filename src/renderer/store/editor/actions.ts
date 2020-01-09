@@ -1,4 +1,5 @@
 import { action } from 'typesafe-actions';
+import { ipcRenderer } from 'electron';
 
 import { EditorActionTypes, Document } from './types';
 

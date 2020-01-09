@@ -46,6 +46,9 @@ const reducer: Reducer<SearchState> = (state = initialState, action) => {
     case SearchActionTypes.QUERY_SUCCESS: {
         return { ...state, documents: action.payload };
     }
+    case SearchActionTypes.OPEN_DOCUMENT: {
+        return { ...state, }
+    }
     default: {
             return state;
         }

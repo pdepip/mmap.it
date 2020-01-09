@@ -34,6 +34,7 @@ class BaseWindow extends EventEmitter {
         this.browserWindow = null;
         this.lifecycle = WindowLifecycle.NONE;
         this.type = WindowType.BASE;
+
     }
 
     registerShortcut(key: string) {
@@ -45,10 +46,28 @@ class BaseWindow extends EventEmitter {
                     this.browserWindow.setVisibleOnAllWorkspaces(true); // put the window on all screens
                     this.browserWindow.show(); // focus the window up front on the active screen
                     this.browserWindow.setVisibleOnAllWorkspaces(false); // disable all screen behavior
+
+					// Get mouse cursor absolute position
+					const {x, y} = screen.getCursorScreenPoint();
+					// Find the display where the mouse cursor will be
+					const currentDisplay = screen.getDisplayNearestPoint({ x, y });
+					// Set window position to that display coordinates
+					this.browserWindow.setPosition(currentDisplay. workArea.x, currentDisplay. workArea.y);
+					// Center window relatively to that display
+					if (this.type === WindowType.EDITOR) {
+					    this.browserWindow.center();
+                    } else if (this.type === WindowType.SEARCH) {
+                        let width = currentDisplay.bounds.width;
+                        this.browserWindow.setPosition(currentDisplay.workArea.x + width - 700, 0)
+                    }
+					// Display the window
+					this.browserWindow.show();
                 }
             }
         });
     }
+
+
 
     reload() {
         if (this.browserWindow) this.browserWindow.reload();

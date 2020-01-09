@@ -21,7 +21,7 @@ const reducer: Reducer<EditorState> = (state = initialState, action) => {
         return { ...state, markdown: '', title: '', justSaved: true };
     }
     case EditorActionTypes.TOGGLE_JUST_SAVED: {
-        return { ...state, justSaved: false };
+        return { ...state, justSaved: !state.justSaved };
     }
     default: {
             return state;

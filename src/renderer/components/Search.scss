@@ -23,6 +23,10 @@ body {
 
 .search-body {
 	padding: 0px;
+
+    .markdown {
+        overflow-y: scroll;
+    }
 }
 
 .query-results {

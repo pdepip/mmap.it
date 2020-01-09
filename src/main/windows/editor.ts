@@ -26,6 +26,11 @@ class EditorWindow extends BaseWindow {
         ipcMain.on('kb::hide-editor', (e) => {
             win.hide()
         });
+
+        ipcMain.on('kb::open-document', (e, doc) => {
+            win.webContents.send('document-data', doc);
+            win.show();
+        });
     }
 
     /*
@@ -61,6 +66,12 @@ class EditorWindow extends BaseWindow {
 
         // Set titlebar height
         win.setSheetOffset(32);
+
+        // Prevent from being closed normally
+        win.on('close', (e) => {
+            e.preventDefault();
+            win.hide();
+        });
 
         this.browserWindow = win;
     }
