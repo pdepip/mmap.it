@@ -1,6 +1,6 @@
 {
   "name": "mmap.it",
-  "version": "0.0.4",
+  "version": "0.0.6",
   "description": "",
   "main": "./dist/main.js",
   "scripts": {
@@ -53,9 +53,14 @@
   },
   "build": {
     "productName": "mmap",
-    "appId": "org.mmap.mmap",
+    "appId": "com.mmap.app",
+    "afterSign": "build/scripts/notarize.js",
     "mac": {
-      "category": "public.app-category.developer-tools"
+      "category": "public.app-category.developer-tools",
+      "gatekeeperAssess": false,
+      "hardenedRuntime": true,
+      "entitlements": "build/entitlements.mac.plist",
+      "entitlementsInherit": "build/entitlements.mac.plist"
     },
     "directories": {
       "output": "release"
@@ -107,6 +112,7 @@
     "electron": "^7.0.0",
     "electron-builder": "^21.2.0",
     "electron-devtools-installer": "^2.2.4",
+    "electron-notarize": "^0.2.1",
     "electron-prebuilt": "^1.4.13",
     "electron-rebuild": "^1.8.6",
     "file-loader": "^3.0.1",
