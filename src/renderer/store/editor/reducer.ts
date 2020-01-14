@@ -12,6 +12,9 @@ export const initialState: EditorState = {
 
 const reducer: Reducer<EditorState> = (state = initialState, action) => {
     switch (action.type) {
+    case EditorActionTypes.SET_ID: {
+        return { ...state, id: action.payload };
+    }
     case EditorActionTypes.SET_TITLE: {
             return { ...state, title: action.payload };
         }

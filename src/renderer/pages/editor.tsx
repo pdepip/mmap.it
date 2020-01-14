@@ -8,7 +8,8 @@ import Markdown from '../components/Markdown';
 import Title from '../components/Title';
 
 import { ApplicationState } from '../store';
-import { setTitle, setMarkdown, saveRequest, toggleJustSaved } from '../store/editor/actions';
+import { uuidv4 } from '../utils/general';
+import { setTitle, setMarkdown, saveRequest, setId, toggleJustSaved } from '../store/editor/actions';
 import { Document } from '../store/editor/types';
 
 interface PropsFromState {
@@ -21,6 +22,7 @@ interface PropsFromState {
 interface PropsFromDispatch {
     setTitle: typeof setTitle;
     setMarkdown: typeof setMarkdown;
+    setId: typeof setId;
     saveRequest: typeof saveRequest;
     toggleJustSaved: typeof toggleJustSaved
 }
@@ -31,11 +33,11 @@ class EditorPage extends React.Component<AllProps> {
 
     constructor(props: AllProps) {
         super(props);
-
     }
 
     componentDidMount() {
         ipcRenderer.on('document-data', (e, doc) => {
+            this.props.setId(doc.id);
             this.props.setTitle(doc.title)
             this.props.setMarkdown(doc.text)
             this.props.toggleJustSaved();
@@ -79,7 +81,7 @@ class EditorPage extends React.Component<AllProps> {
                       onSave={() => saveRequest(doc)}
                       setMarkdown={this.handleMarkdownChange.bind(this)} 
                       markdown={markdown}
-                      activeIdx={justSaved ? "refresh" : undefined}
+                      activeIdx={justSaved ? uuidv4() : undefined}
                     />
                 </div>
             </div>
@@ -97,6 +99,7 @@ const mapStateToProps = ({ editor }: ApplicationState) => ({
 const mapDispatchToProps = {
     setTitle,
     setMarkdown,
+    setId,
     saveRequest,
     toggleJustSaved,
 };

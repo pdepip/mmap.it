@@ -14,9 +14,10 @@ function* handleSave() {
             id: state.editor.id ? state.editor.id : uuidv4(),
             title: state.editor.title,
             text: state.editor.markdown,
+            isUpdate: !!state.editor.id
         }
         ipcRenderer.send('kb::hide-editor')
-        ipcRenderer.send('fm::save', data.id, data.title, data.text)
+        ipcRenderer.send('fm::save', data.id, data.title, data.text, data.isUpdate)
         yield put(saveSuccess(data))
         
         /* REMOVED BECAUSE WE ARE NOT USING AN API. 

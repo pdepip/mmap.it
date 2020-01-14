@@ -11,6 +11,7 @@ function* handleOpenDocument() {
         const state = yield select();
         const activeIdx: number = state.search.activeIdx
         const activeDocument: Document = state.search.documents[activeIdx];
+        console.log('active doc', activeDocument)
         ipcRenderer.send('kb::hide-search')
         ipcRenderer.send('kb::open-document', activeDocument)
 

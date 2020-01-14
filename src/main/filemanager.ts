@@ -57,8 +57,8 @@ class FileManager extends EventEmitter {
     }
 
     _listenForIpcRenderer() {
-        ipcMain.on('fm::save', (e, id, title, text) => {
-            this._saveFile(id, title, text);
+        ipcMain.on('fm::save', (e, id, title, text, isUpdate) => {
+            this._saveFile(id, title, text, isUpdate);
         });
 
         ipcMain.on('fm::search', (event, query) => {
@@ -84,7 +84,7 @@ class FileManager extends EventEmitter {
         return result        
     }
 
-    _saveFile(id: string, title: string, text: string) {
+    _saveFile(id: string, title: string, text: string, isUpdate: boolean) {
         const filename: string = this._directory + '/' + id + '.json';
 
         const doc: any = {
@@ -94,7 +94,11 @@ class FileManager extends EventEmitter {
             createdAt: new Date().toISOString(),
         }
 
-        this._index.addDoc(doc);
+        if (isUpdate) {
+            this._index.updateDoc(doc);
+        } else {
+            this._index.addDoc(doc);
+        }
 
         fs.writeFile(filename, JSON.stringify(doc), (err) => {
             if (err) {
