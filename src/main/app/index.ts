@@ -47,9 +47,9 @@ class App {
 
         app.on('window-all-closed', () => {
             console.log('yo in window all closed')
-            //if (process.platform !== 'darwin') {
-                //app.quit();
-            //}
+            if (process.platform !== 'darwin') {
+                app.quit();
+            }
         });
 
         app.on('before-quit', () => {

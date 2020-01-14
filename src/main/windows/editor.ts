@@ -73,6 +73,13 @@ class EditorWindow extends BaseWindow {
             win.hide();
         });
 
+        /*
+        win.on('closed', (e) => {
+            e.preventDefault();
+            win.hide()
+        });
+        */
+
         this.browserWindow = win;
     }
 }
