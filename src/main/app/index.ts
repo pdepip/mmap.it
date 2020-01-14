@@ -33,6 +33,16 @@ class App {
             app.commandLine.appendSwitch('enable-experimental-web-platform-features', 'true');
         }
 
+        // Mark a single instance application
+        if (!process.mas && !isDev) {
+            const gotSingleInstanceLock = app.requestSingleInstanceLock();
+            if (!gotSingleInstanceLock) {
+                process.stdout.write('Other mmap.it instance deteced: exiting')
+                app.exit()
+            }
+        }
+
+
         app.on('ready', this.ready);
 
         app.on('window-all-closed', () => {

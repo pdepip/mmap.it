@@ -1,4 +1,4 @@
-import { BrowserWindow, globalShortcut, screen } from 'electron';
+import { BrowserWindow, globalShortcut, ipcMain, screen } from 'electron';
 import EventEmitter from 'events';
 import * as path from 'path';
 import * as url from 'url';
@@ -41,6 +41,10 @@ class BaseWindow extends EventEmitter {
         const shortcut = globalShortcut.register(key, () => {
             if (this.browserWindow) {
                 if (this.browserWindow.isVisible()) {
+
+                    if (this.type === WindowType.EDITOR) {
+                        this.browserWindow.webContents.send('rnd::clear-doc')
+                    }
                     this.browserWindow.hide();
                 } else {
                     this.browserWindow.setVisibleOnAllWorkspaces(true); // put the window on all screens
@@ -58,7 +62,8 @@ class BaseWindow extends EventEmitter {
 					    this.browserWindow.center();
                     } else if (this.type === WindowType.SEARCH) {
                         let width = currentDisplay.bounds.width;
-                        this.browserWindow.setPosition(currentDisplay.workArea.x + width - 700, 0)
+                        //this.browserWindow.setPosition(currentDisplay.workArea.x + width - 700, 0)
+                        this.browserWindow.setPosition(currentDisplay.workArea.x + width - 700, currentDisplay.workArea.y)
                     }
 					// Display the window
 					this.browserWindow.show();

@@ -11,7 +11,7 @@ function* handleSave() {
     try {
         const state = yield select();
         const data: any = {
-            id: uuidv4(),
+            id: state.editor.id ? state.editor.id : uuidv4(),
             title: state.editor.title,
             text: state.editor.markdown,
         }

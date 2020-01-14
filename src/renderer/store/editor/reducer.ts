@@ -5,6 +5,7 @@ import { EditorState, EditorActionTypes } from './types';
 export const initialState: EditorState = {
     title: '',
     markdown: '',
+    id: '',
     loading: false,
     justSaved: false,
 };
@@ -22,6 +23,9 @@ const reducer: Reducer<EditorState> = (state = initialState, action) => {
     }
     case EditorActionTypes.TOGGLE_JUST_SAVED: {
         return { ...state, justSaved: !state.justSaved };
+    }
+    case EditorActionTypes.CLEAR_DOC: {
+        return { ...initialState }
     }
     default: {
             return state;

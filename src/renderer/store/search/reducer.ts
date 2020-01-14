@@ -35,8 +35,12 @@ export const initialState: SearchState = {
 const reducer: Reducer<SearchState> = (state = initialState, action) => {
     switch (action.type) {
     case SearchActionTypes.SET_QUERY: {
-            return { ...state, query: action.payload };
-        }
+        return { 
+            ...state, 
+            query: action.payload,
+            activeIdx: action.payload == '' ? 0 : state.activeIdx,
+        };
+    }
     case SearchActionTypes.INCREASE_ACTIVE_IDX: {
         return { ...state, activeIdx: state.activeIdx + 1 }
     }

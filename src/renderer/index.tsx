@@ -1,6 +1,14 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { createBrowserHistory } from 'history';
+import { ipcRenderer } from 'electron';
+import { 
+    clearDoc,
+    setTitle,
+    setMarkdown,
+    setId,
+    toggleJustSaved,
+} from './store/editor/actions';
 
 import App from './app';
 // import * as serviceWorker from './serviceWorker';
@@ -15,6 +23,10 @@ document.body.appendChild(mainElement);
 
 const initialState = window.INITIAL_REDUX_STATE;
 const store = configureStore(history, initialState);
+
+ipcRenderer.on('rnd::clear-doc', (e) => {
+    store.dispatch(clearDoc());
+})
 
 ReactDOM.render(<App store={store} history={history} />, mainElement);
 

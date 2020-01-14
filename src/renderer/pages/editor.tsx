@@ -12,6 +12,7 @@ import { setTitle, setMarkdown, saveRequest, toggleJustSaved } from '../store/ed
 import { Document } from '../store/editor/types';
 
 interface PropsFromState {
+    id: string;
     title: string;
     markdown: string;
     justSaved: boolean;
@@ -34,7 +35,6 @@ class EditorPage extends React.Component<AllProps> {
     }
 
     componentDidMount() {
-        console.log(this);
         ipcRenderer.on('document-data', (e, doc) => {
             this.props.setTitle(doc.title)
             this.props.setMarkdown(doc.text)
@@ -43,7 +43,7 @@ class EditorPage extends React.Component<AllProps> {
     }
 
     componentWillUnmount() {
-        //ipcRenderer.removeListener('document-data', this.handleDocumentData);
+        ipcRenderer.removeListener('document-data', (e, doc) => { });
     }
 
     public handleMarkdownChange(value) {
@@ -55,6 +55,7 @@ class EditorPage extends React.Component<AllProps> {
 
         const { 
             markdown, 
+            id,
             title, 
             setTitle, 
             setMarkdown, 
@@ -63,11 +64,10 @@ class EditorPage extends React.Component<AllProps> {
         } = this.props;
 
         const doc: Document = { 
+            id: id,
             title: title,
             markdown: markdown
         }
-
-        console.log(justSaved);
 
         return (
             <div className="application">
@@ -88,6 +88,7 @@ class EditorPage extends React.Component<AllProps> {
 }
 
 const mapStateToProps = ({ editor }: ApplicationState) => ({
+    id: editor.id,
     title: editor.title,
     markdown: editor.markdown,
     justSaved: editor.justSaved,
