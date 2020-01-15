@@ -8,7 +8,7 @@ const version = app.getVersion();
 const platform = os.platform() + '_' + os.arch();
 
 const updateFeedUrl: any = {
-    'url': 'https://mmapit.herokuapp.com/update/' + platform + '/' + version,
+    'url': 'https://mmapit-autoupdate.herokuapp.com/update/' + platform + '/' + version,
 }
 
 function appUpdater() {
