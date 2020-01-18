@@ -22,7 +22,7 @@ const reducer: Reducer<EditorState> = (state = initialState, action) => {
             return { ...state, markdown: action.payload };
         }
     case EditorActionTypes.SAVE_SUCCESS: {
-        return { ...state, markdown: '', title: '', justSaved: true };
+        return { ...state, id: '', markdown: '', title: '', justSaved: true };
     }
     case EditorActionTypes.TOGGLE_JUST_SAVED: {
         return { ...state, justSaved: !state.justSaved };

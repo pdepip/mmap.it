@@ -7,7 +7,6 @@ import {
     setTitle,
     setMarkdown,
     setId,
-    toggleJustSaved,
 } from './store/editor/actions';
 
 import App from './app';

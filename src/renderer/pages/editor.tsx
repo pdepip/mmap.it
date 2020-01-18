@@ -40,12 +40,11 @@ class EditorPage extends React.Component<AllProps> {
             this.props.setId(doc.id);
             this.props.setTitle(doc.title)
             this.props.setMarkdown(doc.text)
-            this.props.toggleJustSaved();
         })
     }
 
     componentWillUnmount() {
-        ipcRenderer.removeListener('document-data', (e, doc) => { });
+        //ipcRenderer.removeListener('document-data', (e, doc) => { });
     }
 
     public handleMarkdownChange(value) {
@@ -63,12 +62,23 @@ class EditorPage extends React.Component<AllProps> {
             setMarkdown, 
             saveRequest, 
             justSaved, 
+            toggleJustSaved,
         } = this.props;
 
         const doc: Document = { 
             id: id,
             title: title,
             markdown: markdown
+        }
+
+        // Force Reload 
+        let activeIdx: any = undefined;
+        if (justSaved) {
+            toggleJustSaved()
+            activeIdx = "refresh"
+        }
+        if (id) {
+            activeIdx = uuidv4()
         }
 
         return (
@@ -81,7 +91,7 @@ class EditorPage extends React.Component<AllProps> {
                       onSave={() => saveRequest(doc)}
                       setMarkdown={this.handleMarkdownChange.bind(this)} 
                       markdown={markdown}
-                      activeIdx={justSaved ? uuidv4() : undefined}
+                      activeIdx={activeIdx}
                     />
                 </div>
             </div>
