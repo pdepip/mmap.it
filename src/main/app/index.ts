@@ -1,4 +1,5 @@
 import { app, BrowserWindow, globalShortcut } from 'electron';
+import log from 'electron-log';
 
 import { EditorWindow } from '../windows/editor';
 import { SearchWindow } from '../windows/search';
@@ -18,6 +19,8 @@ class App {
 
     fileManager: FileManager | null;
 
+    appEnvironment: string | undefined;
+
     constructor(accessor: Accessor | undefined, args: object | undefined) {
         this._accessor = accessor;
         this._args = args || { _: [] };
@@ -26,9 +29,13 @@ class App {
         this.searchWindow = null;
 
         this.fileManager = null;
+        this.appEnvironment = undefined;
     }
 
     init() {
+        this.appEnvironment = process.env.NODE_ENV
+        this._initializeLogger(this.appEnvironment);
+
         if (process.platform === 'darwin') {
             app.commandLine.appendSwitch('enable-experimental-web-platform-features', 'true');
         }
@@ -46,14 +53,14 @@ class App {
         app.on('ready', this.ready);
 
         app.on('window-all-closed', () => {
-            console.log('yo in window all closed')
+            log.info('yo in window all closed')
             if (process.platform !== 'darwin') {
                 app.quit();
             }
         });
 
         app.on('before-quit', () => {
-            console.log('here')
+            log.info('before quit')
             if (this.editorWindow && this.editorWindow.browserWindow) {
                 this.editorWindow.browserWindow.removeAllListeners('close');
                 this.editorWindow.browserWindow.close();
@@ -79,15 +86,6 @@ class App {
             this.ready();
         });
 
-        /*
-        app.on('browser-window-blur', () => {
-            if (this.editorWindow) {
-                console.log('registering shortcut');
-                this.editorWindow.registerShortcut('CommandOrControl+Option+C')
-            }
-        });
-         */
-
         // createTray()
     }
 
@@ -101,6 +99,14 @@ class App {
 
         this.fileManager = this._createFileManager();
 
+        const checkOS = this._isWindowsOrmacOS();
+        if (checkOS && !isDev) {
+            log.info("setting up appupdater")
+            // Initate auto-updates on macOs and windows
+            appUpdater();
+        }
+
+        /*
         // Set up autoupdater
         if (this.editorWindow.browserWindow) {
             this.editorWindow.browserWindow.webContents.once('did-frame-finish-load', () => {
@@ -111,6 +117,7 @@ class App {
                 }
             });
         }
+        */
 
     };
 
@@ -139,6 +146,60 @@ class App {
     _isWindowsOrmacOS() {
         return process.platform === 'darwin' || process.platform === 'win32';
     }
+
+    _initializeLogger(environment) {
+        /*
+        log.transports.console.level = true
+        log.transports.rendererConsole = null
+        //log.transports.file.file = path.join(appEnvironment.paths.logPath, 'main.log')
+        log.transports.file.file = "/Users/patrick.depippo/main.log"
+        log.transports.file.leel = getLogLevel()
+        log.transports.file.sync = true
+        log.transports.file.init()
+        */
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
 
 export default App;

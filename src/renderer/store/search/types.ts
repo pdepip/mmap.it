@@ -7,6 +7,7 @@ export enum SearchActionTypes {
     INCREASE_ACTIVE_IDX = '@@search/INCREASE_ACTIVE_IDX',
     DECREASE_ACTIVE_IDX = '@@search/DECREASE_ACTIVE_IDX',
     OPEN_DOCUMENT = '@@search/OPEN_DOCUMENT',
+    CLEAR_SEARCH = '@@search/CLEAR_SEARCH',
 }
 
 export interface Document {

@@ -12,3 +12,5 @@ export const activeIdxIncrease = () => action(SearchActionTypes.INCREASE_ACTIVE_
 export const activeIdxDecrease = () => action(SearchActionTypes.DECREASE_ACTIVE_IDX)
 
 export const openDocument = () => action(SearchActionTypes.OPEN_DOCUMENT)
+
+export const clearSearch = () => action(SearchActionTypes.CLEAR_SEARCH)

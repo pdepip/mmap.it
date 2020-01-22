@@ -1,6 +1,6 @@
 {
   "name": "mmap.it",
-  "version": "0.0.9",
+  "version": "0.1.1",
   "description": "",
   "main": "./dist/main.js",
   "scripts": {
@@ -148,7 +148,7 @@
     "connected-react-router": "^6.6.1",
     "elasticlunr": "^0.9.5",
     "electron-is-dev": "^1.1.0",
-    "electron-log": "^3.0.9",
+    "electron-log": "^4.0.3",
     "electron-updater": "^4.2.0",
     "events": "^3.0.0",
     "history": "^4.10.1",

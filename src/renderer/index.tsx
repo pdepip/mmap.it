@@ -2,12 +2,8 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { createBrowserHistory } from 'history';
 import { ipcRenderer } from 'electron';
-import { 
-    clearDoc,
-    setTitle,
-    setMarkdown,
-    setId,
-} from './store/editor/actions';
+import { clearDoc } from './store/editor/actions';
+import { clearSearch } from './store/search/actions';
 
 import App from './app';
 // import * as serviceWorker from './serviceWorker';
@@ -26,6 +22,10 @@ const store = configureStore(history, initialState);
 ipcRenderer.on('rnd::clear-doc', (e) => {
     store.dispatch(clearDoc());
 })
+
+ipcRenderer.on('rnd::clear-search', (e) => {
+    store.dispatch(clearSearch())
+});
 
 ReactDOM.render(<App store={store} history={history} />, mainElement);
 

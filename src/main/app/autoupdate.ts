@@ -1,4 +1,5 @@
 import * as os from 'os';
+import * as log from 'electron-log';
 import { app, autoUpdater, dialog, ipcMain, BrowserWindow } from 'electron';
 
 let runningUpdate: boolean = false
@@ -11,17 +12,17 @@ const updateFeedUrl: any = {
     'url': 'https://mmapit-autoupdate.herokuapp.com/update/' + platform + '/' + version,
 }
 
+
 function appUpdater() {
     autoUpdater.setFeedURL(updateFeedUrl);
     
     autoUpdater.on('error', error => { 
         runningUpdate = false
-        console.log(error)
+        log.error("errror " + error.toString())
     })
-
-    autoUpdater.on('checking-for-update', () => console.log('checking for update'));
-    autoUpdater.on('update-available', () => console.log('update-available'));
-    autoUpdater.on('update-not-available', () => console.log('update-not-available'));
+    autoUpdater.on('checking-for-update', () => log.info("chhecking for update"))
+    autoUpdater.on('update-available', () => log.info('update-available'));
+    autoUpdater.on('update-not-available', () => log.info('update-not-available'));
 
     autoUpdater.on('update-downloaded', async (event, releaseNotes, releaseName) => {
         let message = app.getName() + ' ' + releaseName + ' is now available. It will be installed next time you restart the application';
@@ -43,7 +44,13 @@ function appUpdater() {
         }
         const { response } = await dialog.showMessageBox(options)
         if (response === 0) {
-            setImmediate(() => autoUpdater.quitAndInstall())
+            log.info("quitting and installing")
+            setImmediate(() => {
+                app.removeAllListeners("window-all-closed")
+                app.removeAllListeners("before-quit")
+                autoUpdater.quitAndInstall()
+                app.exit()
+            })
         }
     });
 

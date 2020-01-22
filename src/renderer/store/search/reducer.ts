@@ -53,6 +53,9 @@ const reducer: Reducer<SearchState> = (state = initialState, action) => {
     case SearchActionTypes.OPEN_DOCUMENT: {
         return { ...state, }
     }
+    case SearchActionTypes.CLEAR_SEARCH: {
+        return { ...initialState }
+    }
     default: {
             return state;
         }
