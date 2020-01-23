@@ -9,9 +9,10 @@ export interface Props {
     documents: Document[];
     increaseActiveIdx: () => void;
     decreaseActiveIdx: () => void;
+    setActiveIdx: (number) => void;
 }
 
-const QueryResults: React.FunctionComponent<Props> = ({documents, activeIdx}) => (
+const QueryResults: React.FunctionComponent<Props> = ({documents, activeIdx, setActiveIdx}) => (
     <div className="query-results">
 
     { documents.map((document, idx) => {
@@ -22,6 +23,7 @@ const QueryResults: React.FunctionComponent<Props> = ({documents, activeIdx}) =>
                     'active': idx == activeIdx,
                     })}
                   key={idx} 
+                  onClick={() => setActiveIdx(idx)}
                 >{document.title}</div>
             )
         })

@@ -12,6 +12,7 @@ import {
     setQuery, 
     activeIdxIncrease,
     activeIdxDecrease,
+    setActiveIdx,
     openDocument,
 } from '../store/search/actions';
 import { Document } from '../store/search/types';
@@ -26,6 +27,7 @@ interface PropsFromDispatch {
     setQuery: typeof setQuery;
     activeIdxIncrease: typeof activeIdxIncrease;
     activeIdxDecrease: typeof activeIdxDecrease;
+    setActiveIdx: typeof setActiveIdx;
     openDocument: typeof openDocument;
 }
 
@@ -68,6 +70,7 @@ class SearchPage extends React.Component<AllProps> {
             activeIdx,
             activeIdxIncrease,
             activeIdxDecrease,
+            setActiveIdx,
         } = this.props;
 
         const markdown: string = documents.length > 0 ? documents[activeIdx].text : ""
@@ -83,6 +86,7 @@ class SearchPage extends React.Component<AllProps> {
                       activeIdx={activeIdx}
                       increaseActiveIdx={activeIdxIncrease}
                       decreaseActiveIdx={activeIdxDecrease}
+                      setActiveIdx={setActiveIdx}
                     />
                     <Markdown 
                       markdown={markdown} 
@@ -107,6 +111,7 @@ const mapDispatchToProps = {
     setQuery,
     activeIdxIncrease,
     activeIdxDecrease,
+    setActiveIdx,
     openDocument,
 };
 

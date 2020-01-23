@@ -47,6 +47,9 @@ const reducer: Reducer<SearchState> = (state = initialState, action) => {
     case SearchActionTypes.DECREASE_ACTIVE_IDX: {
         return { ...state, activeIdx: state.activeIdx - 1 }
     }
+    case SearchActionTypes.SET_ACTIVE_IDX: {
+        return { ...state, activeIdx: action.payload }
+    }
     case SearchActionTypes.QUERY_SUCCESS: {
         return { ...state, documents: action.payload };
     }
