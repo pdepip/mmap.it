@@ -56,6 +56,8 @@ class SearchPage extends React.Component<AllProps> {
 
  	componentWillMount() {
     	document.addEventListener("keydown", this.handleKeyDown.bind(this));
+
+        this.props.setQuery("")
   	}
 
   	componentWillUnmount() {

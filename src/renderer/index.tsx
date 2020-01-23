@@ -3,7 +3,7 @@ import * as ReactDOM from 'react-dom';
 import { createBrowserHistory } from 'history';
 import { ipcRenderer } from 'electron';
 import { clearDoc } from './store/editor/actions';
-import { clearSearch } from './store/search/actions';
+import { clearSearch, setQuery } from './store/search/actions';
 
 import App from './app';
 // import * as serviceWorker from './serviceWorker';
@@ -25,6 +25,7 @@ ipcRenderer.on('rnd::clear-doc', (e) => {
 
 ipcRenderer.on('rnd::clear-search', (e) => {
     store.dispatch(clearSearch())
+    store.dispatch(setQuery(""))
 });
 
 ReactDOM.render(<App store={store} history={history} />, mainElement);

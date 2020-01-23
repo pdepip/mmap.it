@@ -69,18 +69,28 @@ class FileManager extends EventEmitter {
 
 	_search(query: string) {
         let result: any[] = [];
-        this._index.search(query, {
-            fields: {
-                title: { boost: 2 },
-            },
-            bool: 'OR',
-            expand: true,
-        })
-        .map(({ ref, score }) => {
-            const doc: any = this._index.documentStore.getDoc(ref)
-            const obj: any = { text: doc.text, id: doc.id, title: doc.title };
-            result.push(obj)
-        })
+        if (query == "") {
+            const docs: any = this._index.documentStore.docs
+            const allDocs = Object.keys(docs).map((key) => docs[key])
+
+            allDocs.sort((a, b) => {
+                return b.createdAt.localeCompare(a.createdAt)
+            })
+            return allDocs.slice(0, 10)
+        } else {
+            this._index.search(query, {
+                fields: {
+                    title: { boost: 2 },
+                },
+                bool: 'OR',
+                expand: true,
+            })
+            .map(({ ref, score }) => {
+                const doc: any = this._index.documentStore.getDoc(ref)
+                const obj: any = { text: doc.text, id: doc.id, title: doc.title };
+                result.push(obj)
+            })
+        }
         return result        
     }
 
