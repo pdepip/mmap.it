@@ -9698,10 +9698,10 @@ rgb2hex@^0.1.9:
   resolved "https://registry.yarnpkg.com/rgb2hex/-/rgb2hex-0.1.9.tgz#5d3e0e14b0177b568e6f0d5b43e34fbfdb670346"
   integrity sha512-32iuQzhOjyT+cv9aAFRBJ19JgHwzQwbjUhH3Fj2sWW2EEGAW8fpFrDFP5ndoKDxJaLO06x1hE3kyuIFrUQtybQ==
 
-rich-markdown-editor@^9.10.0:
-  version "9.10.0"
-  resolved "https://registry.yarnpkg.com/rich-markdown-editor/-/rich-markdown-editor-9.10.0.tgz#df59720ed969c1288d672d58f239664a64dd1465"
-  integrity sha512-9FGzjPExSYb/T0Rp5YEkz8qgEQkiwprAzlg4J6aj5acFZlaon2QZ4sNO/2feBaT3IBfAbnPNZEb+JeuZpL7s7w==
+rich-markdown-editor@^9.11.2:
+  version "9.11.2"
+  resolved "https://registry.yarnpkg.com/rich-markdown-editor/-/rich-markdown-editor-9.11.2.tgz#12437f5594b492b2c64d6994554311ba0a45e77f"
+  integrity sha512-Pj/rBqHqB6tyqgzcdQ/KWFkEn5Yh6cOrjNoIGmmwXDVpsbYV/J9gcBiUfeA2oCAgjf8M1peSFgDPfwzl6SXP5g==
   dependencies:
     "@domoinc/slate-edit-table" "^0.22.2"
     "@tommoor/slate-edit-list" "0.19.0-0"
@@ -9725,7 +9725,7 @@ rich-markdown-editor@^9.10.0:
     slate "^0.45.0"
     slate-collapse-on-escape "^0.8.1"
     slate-drop-or-paste-images "^0.9.1"
-    slate-instant-replace "^0.1.13"
+    slate-instant-replace "^0.1.14"
     slate-md-serializer "5.4.4"
     slate-paste-linkify "^0.7.0"
     slate-react "^0.21.20"
@@ -10180,10 +10180,10 @@ slate-hotkeys@^0.2.9:
     is-hotkey "0.1.4"
     slate-dev-environment "^0.2.2"
 
-slate-instant-replace@^0.1.13:
-  version "0.1.13"
-  resolved "https://registry.yarnpkg.com/slate-instant-replace/-/slate-instant-replace-0.1.13.tgz#03a2c908253c399a1ca5d6922a93867eb186c69b"
-  integrity sha512-jesj33+TUgrmcVKGBy6QgqORaAq55hSuFmBOv70iNjif0CHqK9CapWfHOLg8N8HWw+VAX0YpSaqy/lAQSSmwWg==
+slate-instant-replace@^0.1.14:
+  version "0.1.15"
+  resolved "https://registry.yarnpkg.com/slate-instant-replace/-/slate-instant-replace-0.1.15.tgz#91c40c355e369780c4680c1abbe9b417b7787fe2"
+  integrity sha512-HK+AI4P4CPXTbMMRAd92+O5z61Ah5XcrOH5qU8NZXDGpw/GMrJFBD7+go5aowSdsqfZhnszUouAuCBmHzTrETg==
 
 slate-md-serializer@5.4.4:
   version "5.4.4"
