@@ -77,13 +77,9 @@ class App {
             // on os x it's common to re-create a window in the app
             // when the dock icon is clicked and there are no other
             // windows open
-            /*/
-            if (this._windowManager.windowCount === 0) {
+            if (!this.editorWindow && !this.searchWindow) {
                 this.ready()
             }
-             */
-
-            this.ready();
         });
 
         // createTray()
