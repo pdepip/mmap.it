@@ -6,6 +6,7 @@ import { SearchWindow } from '../windows/search';
 import { FileManager } from '../filemanager';
 import { Accessor } from './accessor';
 import { appUpdater } from './autoupdate';
+import { createTray } from '../tray';
 
 const isDev: boolean = require('electron-is-dev');
 
@@ -81,8 +82,6 @@ class App {
                 this.ready()
             }
         });
-
-        // createTray()
     }
 
     ready = () => {
@@ -102,6 +101,7 @@ class App {
             appUpdater();
         }
 
+        createTray()
         /*
         // Set up autoupdater
         if (this.editorWindow.browserWindow) {

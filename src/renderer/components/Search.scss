@@ -36,6 +36,7 @@ body {
     display: flex;
     flex-direction: column;
     width: 300px;
+    overflow-y: scroll;
 
     background-color: rgb(246,246,246);
     border-right: 1px solid rgb(222, 222, 222);
