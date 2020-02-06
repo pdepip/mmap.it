@@ -7,7 +7,7 @@ let tray: Tray | null;
 const app = electron.app;
 
 const createTray = () => {
-    tray = new Tray(path.join(__dirname, '../src/assets/menubarTemplate.png'));
+    tray = new Tray(path.join(__dirname, './src/assets/icons/menubarTemplate.png'));
 
     const menu = Menu.buildFromTemplate([
         {

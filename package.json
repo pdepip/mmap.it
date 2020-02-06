@@ -67,6 +67,7 @@
     },
     "files": [
       "dist/",
+      "images",
       "node_modules/",
       "package.json"
     ],

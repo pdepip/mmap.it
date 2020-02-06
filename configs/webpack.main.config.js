@@ -30,7 +30,12 @@ module.exports = merge.smart(baseConfig, {
                         '@babel/plugin-transform-async-to-generator',
                     ]
                 }
-            }
+            },
+            {
+                test: /\.(jpe?g|gif|png|svg|woff|ttf|wav|mp3)$/,
+                loader: "file",
+            },
+
         ]
     },
     plugins: [
