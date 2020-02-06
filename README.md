@@ -1,36 +1,57 @@
 <p align="center" style="text-align: center;">
-  <a href="https://super-productivity.com/">
-    <img align="center" alt="Logo" src="build/icon.png" width="128px"/>
+  <a href="https://mmap.it/">
+     <img align="center" alt="Logo" src="build/icon.png" width="128px"/>
   </a>
   <h1 align="center">mmap.it</h1>
 </p>
 
-Seamlessy Store and access the information you care about. MMAP.it is a personal knowledge base built for speed and simplicity 
+
+A personal knowledge base that allows you to seamlessly store and retrieve information.
+
+
+
+## Installation
+
+mmap.it requires the following dependencies:
+
+- Node.js > 12
+- yarn
+
+
+
+### Development
+
+In development you can quickly get started by following these steps:
+
+1. Clone this repo
+2. `yarn`
+3. `yarn start-dev`
+
+
+
+### Production
+
+For a production release you will have to take these steps:
+
+1. Bump version in `package.json`
+2. x
+
+
 
 ## Releasing
 ```bash
 yarn dist
 ```
 
+
+
 ## Contributing
-### Running the development server
-To run the developement server you will need node 13 and yarn installed.
 
-#### Clone Repo
+mmap.it is built and maintained by a small team - we'd love your help fixing bugs and adding features!
 
-```bash
-git clone https://github.com/pdepip/mmap.it
-```
 
-#### Install dependencies
 
-```bash
-yarn 
-```
+## License
 
-#### Run the server
-
-```bash
-yarn start-dev
-```
+mmap.it is **license pending**
 
