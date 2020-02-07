@@ -12,6 +12,7 @@ const Title: React.FunctionComponent<Props> = ({ title, setTitle }) => (
     <fieldset className="field-container">
         <input
             autoFocus
+            ref={(input) => { input ? input.focus() : null}}
             value={title}
             onChange={e => setTitle(e.target.value)}
             type="text"
