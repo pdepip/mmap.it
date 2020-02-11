@@ -1,10 +1,22 @@
 import { all, call, fork, put, takeEvery, takeLatest, select } from 'redux-saga/effects';
 import { ipcRenderer } from 'electron'
 import { SearchActionTypes, Document } from './types';
-import { queryError, querySuccess } from './actions'
+import { queryError, querySuccess, deleteDocumentById } from './actions'
 import { callApi } from '../../utils/api'
 
 const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:5000'
+
+function* handleDeleteDocument() {
+    try {
+        const state = yield select();
+        const activeIdx: number = state.search.activeIdx
+        const activeDocument: Document = state.search.documents[activeIdx ];
+        const res = ipcRenderer.sendSync('fm::delete', activeDocument)
+        yield put(deleteDocumentById(res))
+    } catch (err) {
+        console.log('[ERROR] handleDeleteDocument', err);
+    }
+}
 
 function* handleOpenDocument() {
     try {
@@ -54,8 +66,16 @@ function* watchOpenDocument() {
     yield takeEvery(SearchActionTypes.OPEN_DOCUMENT, handleOpenDocument);
 }
 
+function* watchDeleteDocument() {
+    yield takeEvery(SearchActionTypes.DELETE_DOCUMENT, handleDeleteDocument);
+}
+
 function* searchSaga() {
-    yield all([fork(watchQueryRequest), fork(watchOpenDocument)])
+    yield all([
+        fork(watchQueryRequest), 
+        fork(watchOpenDocument),
+        fork(watchDeleteDocument),
+    ])
 }
 
 export default searchSaga;

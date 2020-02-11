@@ -8,7 +8,7 @@ const app = electron.app;
 
 const createTray = () => {
     tray = new Tray(path.join(__dirname, './src/assets/icons/menubarTemplate.png'));
-
+    
     const menu = Menu.buildFromTemplate([
         {
             label: 'Quit',

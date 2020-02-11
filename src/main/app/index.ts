@@ -102,19 +102,6 @@ class App {
         }
 
         createTray()
-        /*
-        // Set up autoupdater
-        if (this.editorWindow.browserWindow) {
-            this.editorWindow.browserWindow.webContents.once('did-frame-finish-load', () => {
-                const checkOS = this._isWindowsOrmacOS();
-                if (checkOS && !isDev) {
-                    // Initate auto-updates on macOs and windows
-                    appUpdater();
-                }
-            });
-        }
-        */
-
     };
 
     // --- private --------------------------------
@@ -154,47 +141,6 @@ class App {
         log.transports.file.init()
         */
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }
 

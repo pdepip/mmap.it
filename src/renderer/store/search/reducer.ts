@@ -59,6 +59,16 @@ const reducer: Reducer<SearchState> = (state = initialState, action) => {
     case SearchActionTypes.CLEAR_SEARCH: {
         return { ...initialState }
     }
+    case SearchActionTypes.DELETE_DOCUMENT_BY_ID: {
+        return { 
+            ...state, 
+            documents: state.documents.filter( i => i.id !== action.payload ),
+            activeIdx: state.documents.length == 2 ? 0 : state.activeIdx 
+        }
+    }
+    case SearchActionTypes.PREPEND_DOCUMENT: {
+        return { ...state, documents: [action.payload, ...state.documents] }
+    }
     default: {
             return state;
         }

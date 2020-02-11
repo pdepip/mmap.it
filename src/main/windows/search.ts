@@ -27,6 +27,10 @@ class SearchWindow extends BaseWindow {
         ipcMain.on('kb::hide-search', (e) => {
             win.hide()
         });
+
+        ipcMain.on('kb::new-document', (e, doc) => {
+            win.webContents.send('new-document', doc)
+        });
     }
 
     /*
