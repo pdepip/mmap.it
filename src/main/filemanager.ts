@@ -1,4 +1,4 @@
-import { ipcMain } from 'electron';
+import { ipcMain, dialog } from 'electron';
 import EventEmitter from 'events';
 import { Accessor } from './app/accessor';
 import * as fs from 'fs';
@@ -63,7 +63,12 @@ class FileManager extends EventEmitter {
 
         ipcMain.on('fm::search', (event, query) => {
             const res: any = this._search(query)
-            event.returnValue = res
+            event.returnValue = res;
+        });
+
+        ipcMain.on('fm::delete', (event, { id, title, text }) => {
+            const res: any = this._deleteFile(id, title, text)
+            event.returnValue = res;
         });
     }
 
@@ -92,6 +97,32 @@ class FileManager extends EventEmitter {
             })
         }
         return result        
+    }
+
+    _deleteFile(id: string, title: string, text: string) {
+        const filename: string = this._directory + '/' + id + '.json';
+
+        const doc: any = { id, title, text }
+
+        const options: any = {
+            type: 'question',
+            buttons: ['Yes Delete', 'No'],
+            defaultId: 0,
+            message: "Are you sure you'd like to delete this item?",
+            detail: title,
+        }
+        console.log('DELETING:', filename);
+        try {
+            fs.unlinkSync(filename)
+        } catch (err)  {
+            console.log('failed to delete file', err)
+            throw err
+        }
+
+        // remove from index
+        this._index.removeDoc(doc);
+
+        return id
     }
 
     _saveFile(id: string, title: string, text: string, isUpdate: boolean) {

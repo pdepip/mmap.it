@@ -14,6 +14,7 @@ import {
     activeIdxDecrease,
     setActiveIdx,
     openDocument,
+    deleteDocument,
 } from '../store/search/actions';
 import { Document } from '../store/search/types';
 
@@ -29,6 +30,7 @@ interface PropsFromDispatch {
     activeIdxDecrease: typeof activeIdxDecrease;
     setActiveIdx: typeof setActiveIdx;
     openDocument: typeof openDocument;
+    deleteDocument: typeof deleteDocument;
 }
 
 type AllProps = PropsFromState & PropsFromDispatch;
@@ -42,6 +44,7 @@ class SearchPage extends React.Component<AllProps> {
             activeIdxIncrease,
             activeIdxDecrease,
             openDocument,
+            deleteDocument,
         } = this.props;
 
         if (e.keyCode === 38 && activeIdx > 0) {
@@ -50,6 +53,8 @@ class SearchPage extends React.Component<AllProps> {
             activeIdxIncrease()
         } else if (e.key === "Enter") {
             openDocument()
+        } else if (e.metaKey && e.key == 'd') {
+            deleteDocument(documents[activeIdx])
         }
 
     }
@@ -115,6 +120,7 @@ const mapDispatchToProps = {
     activeIdxDecrease,
     setActiveIdx,
     openDocument,
+    deleteDocument,
 };
 
 export default connect(
