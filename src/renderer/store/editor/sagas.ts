@@ -18,6 +18,7 @@ function* handleSave() {
         }
         ipcRenderer.send('kb::hide-editor')
         ipcRenderer.send('fm::save', data.id, data.title, data.text, data.isUpdate)
+        ipcRenderer.send('kb::new-document', data)
         yield put(saveSuccess(data))
         
         /* REMOVED BECAUSE WE ARE NOT USING AN API. 

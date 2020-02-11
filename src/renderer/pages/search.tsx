@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { ipcRenderer } from 'electron';
 import { connect } from 'react-redux';
 
 require('../components/Application.scss');
@@ -15,6 +16,7 @@ import {
     setActiveIdx,
     openDocument,
     deleteDocument,
+    prependDocument,
 } from '../store/search/actions';
 import { Document } from '../store/search/types';
 
@@ -31,6 +33,7 @@ interface PropsFromDispatch {
     setActiveIdx: typeof setActiveIdx;
     openDocument: typeof openDocument;
     deleteDocument: typeof deleteDocument;
+    prependDocument: typeof prependDocument;
 }
 
 type AllProps = PropsFromState & PropsFromDispatch;
@@ -59,11 +62,17 @@ class SearchPage extends React.Component<AllProps> {
 
     }
 
+    componentDidMount() {
+        ipcRenderer.on('new-document', (e, doc) => {
+            this.props.prependDocument(doc)
+        });
+    }
+
  	componentWillMount() {
     	document.addEventListener("keydown", this.handleKeyDown.bind(this));
 
         this.props.setQuery("")
-  	}
+    }
 
   	componentWillUnmount() {
     	document.removeEventListener("keydown", this.handleKeyDown.bind(this));
@@ -121,6 +130,7 @@ const mapDispatchToProps = {
     setActiveIdx,
     openDocument,
     deleteDocument,
+    prependDocument
 };
 
 export default connect(

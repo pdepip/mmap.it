@@ -18,3 +18,5 @@ export const clearSearch = () => action(SearchActionTypes.CLEAR_SEARCH)
 
 export const deleteDocument = (document: Document) => action(SearchActionTypes.DELETE_DOCUMENT, document)
 export const deleteDocumentById = (id: number) => action(SearchActionTypes.DELETE_DOCUMENT_BY_ID, id)
+
+export const prependDocument = (document: Document) => action(SearchActionTypes.PREPEND_DOCUMENT, document)

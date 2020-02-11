@@ -66,6 +66,9 @@ const reducer: Reducer<SearchState> = (state = initialState, action) => {
             activeIdx: state.documents.length == 2 ? 0 : state.activeIdx 
         }
     }
+    case SearchActionTypes.PREPEND_DOCUMENT: {
+        return { ...state, documents: [action.payload, ...state.documents] }
+    }
     default: {
             return state;
         }

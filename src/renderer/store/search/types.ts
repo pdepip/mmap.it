@@ -11,6 +11,7 @@ export enum SearchActionTypes {
     CLEAR_SEARCH = '@@search/CLEAR_SEARCH',
     DELETE_DOCUMENT = '@@search/DELETE_DOCUMENT',
     DELETE_DOCUMENT_BY_ID = '@@search/DELETE_DOCUMENT_BY_ID',
+    PREPEND_DOCUMENT = '@@search/PREPEND_DOCUMENT',
 }
 
 export interface Document {
