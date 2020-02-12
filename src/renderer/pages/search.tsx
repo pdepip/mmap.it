@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { ipcRenderer } from 'electron';
 import { connect } from 'react-redux';
-
+import styled from 'styled-components';
 require('../components/Application.scss');
 
 import Markdown from '../components/Markdown';
 import SearchBar from '../components/SearchBar';
 import QueryResults from '../components/QueryResults';
-
+import Page from './page';
 import { ApplicationState } from '../store';
 import { 
     setQuery, 
@@ -92,11 +92,11 @@ class SearchPage extends React.Component<AllProps> {
         const markdown: string = documents.length > 0 ? documents[activeIdx].text : ""
 
         return (
-            <div className="application">
-                <div className="search-container">
+            <Page>
+                <SearchContainer>
                     <SearchBar query={query} setQuery={setQuery} />
-                </div>
-                <div className="body-container search-body">
+                </SearchContainer>
+                <SearchResultsContainer>
                     <QueryResults 
                       documents={documents}
                       activeIdx={activeIdx}
@@ -111,8 +111,8 @@ class SearchPage extends React.Component<AllProps> {
                       setMarkdown={() => console.log("no op")}
                       readOnly={true}
                     />
-                </div>
-            </div>
+                </SearchResultsContainer>
+            </Page>
         );
     }
 }
@@ -137,3 +137,22 @@ export default connect(
     mapStateToProps,
     mapDispatchToProps
 )(SearchPage);
+
+const SearchResultsContainer = styled('div')`
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    background-color: #fff;
+	padding: 0px;
+	-webkit-app-region: no-drag;
+`
+
+const SearchContainer = styled('div')`
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+    height: 90px;
+    position: relative;
+    border-bottom: 1px solid #dedede;
+`

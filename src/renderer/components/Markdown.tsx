@@ -44,4 +44,5 @@ const MarkdownDiv = styled('div')`
     font-size: 16px;
     padding: 20px;
     width: calc(100% - 40px);
+    overflow-y: scroll;
 `

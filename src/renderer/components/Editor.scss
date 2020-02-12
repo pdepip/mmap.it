@@ -44,21 +44,6 @@ textarea {
 }
 
 .title-container {
-    position: relative;
-    font-size: 24px;
-    height: 125px !important;
-    line-height: 80px;
-    padding-bottom: 0px;
-
-    &:after {
-        content: '';
-        position: absolute;
-        left: 4%;
-        bottom: -4;
-        height: 1px;
-        width: 92%;
-        border-bottom: 1px solid rgb(240, 240, 240);
-    }
 
     input {
         padding-bottom: 0px;

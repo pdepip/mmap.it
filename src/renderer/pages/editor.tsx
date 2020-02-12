@@ -2,10 +2,12 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { ipcRenderer } from 'electron';
 import { Dispatch } from 'redux';
+import styled from 'styled-components';
 require('../components/Application.scss');
 
 import Markdown from '../components/Markdown';
 import Title from '../components/Title';
+import Page from './page';
 
 import { ApplicationState } from '../store';
 import { uuidv4 } from '../utils/general';
@@ -82,19 +84,19 @@ class EditorPage extends React.Component<AllProps> {
         }
 
         return (
-            <div className="application">
-                <div className="search-container title-container">
+            <Page>
+                <SearchTitleContainer>
                     <Title title={title} setTitle={setTitle} />
-                </div>
-                <div className="body-container">
+                </SearchTitleContainer>
+                <EditorContainer>
                     <Markdown 
                       onSave={() => saveRequest(doc)}
                       setMarkdown={this.handleMarkdownChange.bind(this)} 
                       markdown={markdown}
                       activeIdx={activeIdx}
                     />
-                </div>
-            </div>
+                </EditorContainer>
+            </Page>
         );
     }
 }
@@ -118,3 +120,35 @@ export default connect(
     mapStateToProps,
     mapDispatchToProps
 )(EditorPage);
+
+const SearchTitleContainer = styled('div')`
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+    position: relative;
+    font-size: 24px;
+    height: 125px;
+    position: relative;
+    border-bottom: 1px solid #dedede;
+
+	&:after {
+		content: '';
+		position: absolute;
+		left: 4%;
+		bottom: -4;
+		height: 1px;
+		width: 92%; 
+		border-bottom: 1px solid rgb(240, 240, 240);
+	}
+`
+
+const EditorContainer = styled('div')`
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    background-color: #fff;
+    padding: 24px;
+    padding-top: 12px;
+    -webkit-app-region: no-drag;
+`
