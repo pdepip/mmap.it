@@ -2,9 +2,6 @@ import * as React from 'react';
 import FieldContainer from './FieldContainer';
 import styled from 'styled-components';
 
-//require('./Editor.scss');
-//require('./Search.scss');
-
 export interface Props {
     title: string;
     setTitle: (title: string) => void;
@@ -35,4 +32,6 @@ const StyledInput = styled('input')`
     background: white;
     border-radius: 3px;
     transition: all 0.4s ease;
+    font-size: 100%;
+    box-sizing: border-box;
 `

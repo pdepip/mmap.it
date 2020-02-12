@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { Document } from '../store/search/types';
 import classnames from 'classnames';
-
-require('./Search.scss');
+import styled from 'styled-components';
 
 export interface Props {
     activeIdx: number;
@@ -13,22 +12,43 @@ export interface Props {
 }
 
 const QueryResults: React.FunctionComponent<Props> = ({documents, activeIdx, setActiveIdx}) => (
-    <div className="query-results">
+    <StyledSearchResults>
 
     { documents.map((document, idx) => {
             return (
-                <div 
-                  className={classnames({
-                    'item': true,
-                    'active': idx == activeIdx,
-                    })}
+                <Item 
+                  active={idx == activeIdx}
                   key={idx} 
                   onClick={() => setActiveIdx(idx)}
-                >{document.title}</div>
+                >
+                {document.title}
+                </Item>
             )
         })
     }
-    </div>
+    </StyledSearchResults>
 );
 
 export default QueryResults;
+
+const StyledSearchResults = styled('div')`
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    overflow-y: scroll;
+
+    background-color: rgb(246,246,246);
+    border-right: 1px solid rgb(222, 222, 222);
+`
+
+const Item = styled('div')`
+    padding: 10px;
+    cursor: pointer;
+    font-size: 14px;
+
+  ${({ active }) => active && `
+      background-color: rgb(63, 147, 247);
+      color: #fff;
+  `}
+`

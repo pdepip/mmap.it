@@ -1,3 +1,7 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat);
+
+$tundora: #4b4848;
+
 html,
 body {
     width: 100%;
@@ -10,4 +14,25 @@ body {
     height: 100%;
     width: 100%;
     display: flex;
+}
+
+.title-bar {
+    -webkit-user-select: none;
+    -webkit-app-region: drag;
+}
+
+*:focus {
+    outline: none;
+}
+
+body {
+    font-family: 'Montserrat', 'Helevtica', sans-serif;
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    color: $tundora;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 1.25s ease-in-out;
 }
