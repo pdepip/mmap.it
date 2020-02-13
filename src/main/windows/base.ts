@@ -53,6 +53,10 @@ class BaseWindow extends EventEmitter {
                     this.browserWindow.show(); // focus the window up front on the active screen
                     this.browserWindow.setVisibleOnAllWorkspaces(false); // disable all screen behavior
 
+                    if (this.type === WindowType.SEARCH) {
+                        this.browserWindow.setAlwaysOnTop(true, "floating", 1);
+                    }
+
 					// Get mouse cursor absolute position
                     const {x, y} = screen.getCursorScreenPoint();
 					// Find the display where the mouse cursor will be
