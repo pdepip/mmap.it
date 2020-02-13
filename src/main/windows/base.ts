@@ -1,5 +1,5 @@
 import { BrowserWindow, globalShortcut, ipcMain, screen } from 'electron';
-import EventEmitter from 'events';
+import * as EventEmitter from 'events';
 import * as path from 'path';
 import * as url from 'url';
 
@@ -54,21 +54,24 @@ class BaseWindow extends EventEmitter {
                     this.browserWindow.setVisibleOnAllWorkspaces(false); // disable all screen behavior
 
 					// Get mouse cursor absolute position
-					const {x, y} = screen.getCursorScreenPoint();
+                    const {x, y} = screen.getCursorScreenPoint();
 					// Find the display where the mouse cursor will be
-					const currentDisplay = screen.getDisplayNearestPoint({ x, y });
+                    const currentDisplay = screen.getDisplayNearestPoint({ x, y });
 					// Set window position to that display coordinates
-					this.browserWindow.setPosition(currentDisplay. workArea.x, currentDisplay. workArea.y);
+                    this.browserWindow.setPosition(currentDisplay. workArea.x, currentDisplay. workArea.y);
 					// Center window relatively to that display
-					if (this.type === WindowType.EDITOR) {
+                    if (this.type === WindowType.EDITOR) {
 					    this.browserWindow.center();
                     } else if (this.type === WindowType.SEARCH) {
-                        let width = currentDisplay.bounds.width;
-                        //this.browserWindow.setPosition(currentDisplay.workArea.x + width - 700, 0)
-                        this.browserWindow.setPosition(currentDisplay.workArea.x + width - 700, currentDisplay.workArea.y)
+                        const width = currentDisplay.bounds.width;
+                        // this.browserWindow.setPosition(currentDisplay.workArea.x + width - 700, 0)
+                        this.browserWindow.setPosition(
+                            currentDisplay.workArea.x + width - 700, 
+                            currentDisplay.workArea.y
+                        )
                     }
 					// Display the window
-					this.browserWindow.show();
+                    this.browserWindow.show();
                 }
             }
         });
@@ -92,9 +95,7 @@ class BaseWindow extends EventEmitter {
         this.id = null;
     }
 
-    // --- private ------------------------------
-
-    _buildUrlString() {
+    buildUrlString() {
         let winUrl: string;
         if (process.env.NODE_ENV === 'development') {
             winUrl = 'http://localhost:2003';
@@ -106,7 +107,7 @@ class BaseWindow extends EventEmitter {
             });
         }
 
-        winUrl += '?type=' + this.type;
+        winUrl += `?type=${this.type}`;
 
         return winUrl;
     }

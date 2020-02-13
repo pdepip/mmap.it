@@ -19,10 +19,10 @@ class EditorWindow extends BaseWindow {
     }
 
     init() {
-        this._listenForIpcRenderer()
+        this.listenForIpcRenderer()
     }
 
-    _listenForIpcRenderer() {
+    private listenForIpcRenderer() {
         ipcMain.on('kb::hide-editor', (e) => {
             win.hide()
         });
@@ -56,11 +56,11 @@ class EditorWindow extends BaseWindow {
         this.id = win.id;
         this.type = WindowType.EDITOR;
 
-        const urlString = super._buildUrlString();
+        const urlString = super.buildUrlString();
         win.loadURL(urlString);
         win.center();
 
-        if (process.env.NODE_ENV == 'production') {
+        if (process.env.NODE_ENV === 'production') {
             win.hide();
         }
 
@@ -72,13 +72,6 @@ class EditorWindow extends BaseWindow {
             e.preventDefault();
             win.hide();
         });
-
-        /*
-        win.on('closed', (e) => {
-            e.preventDefault();
-            win.hide()
-        });
-        */
 
         this.browserWindow = win;
     }
