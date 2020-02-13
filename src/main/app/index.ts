@@ -82,6 +82,10 @@ class App {
                 this.ready()
             }
         });
+
+        // hides the dock icon for our app which allows our windows to join other 
+        // apps' spaces. without this our windows open on the nearest "desktop" space
+        app.dock.hide();
     }
 
     ready = () => {
