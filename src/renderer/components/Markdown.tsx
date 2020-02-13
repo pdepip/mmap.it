@@ -1,7 +1,6 @@
 import * as React from 'react';
-import * as ReactMarkdown from 'react-markdown';
 import Editor from 'rich-markdown-editor';
-import { Document } from '../store/editor/types';
+import { Document } from '../stores/editor/types';
 import styled from 'styled-components';
 
 export interface Props {
@@ -27,7 +26,7 @@ const Markdown: React.FunctionComponent<Props> = (
             id={markdown}
             defaultValue={markdown}
             onSave={onSave}
-            onCancel={() => console.log('Cancel triggered')}
+            onCancel={null}
             onChange={setMarkdown}
             readOnly={readOnly}
             activeIdx={activeIdx}

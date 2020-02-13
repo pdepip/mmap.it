@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Document } from '../store/search/types';
-import classnames from 'classnames';
+import { Document } from '../stores/search/types';
+import * as classnames from 'classnames';
 import styled from 'styled-components';
 
 export interface Props {
@@ -8,23 +8,29 @@ export interface Props {
     documents: Document[];
     increaseActiveIdx: () => void;
     decreaseActiveIdx: () => void;
-    setActiveIdx: (number) => void;
+    setActiveIdx: (idx: number) => void;
+}
+
+interface ItemProps {
+    active: boolean;
+    key: number;
+    onClick: () => void;
 }
 
 const QueryResults: React.FunctionComponent<Props> = ({documents, activeIdx, setActiveIdx}) => (
     <StyledSearchResults>
 
     { documents.map((document, idx) => {
-            return (
-                <Item 
-                  active={idx == activeIdx}
-                  key={idx} 
-                  onClick={() => setActiveIdx(idx)}
-                >
-                {document.title}
-                </Item>
-            )
-        })
+        return (
+            <Item 
+                active={idx === activeIdx}
+                key={idx}
+                onClick={() => setActiveIdx(idx)}
+            >
+            {document.title}
+            </Item>
+        )
+    })
     }
     </StyledSearchResults>
 );
@@ -42,12 +48,12 @@ const StyledSearchResults = styled('div')`
     border-right: 1px solid rgb(222, 222, 222);
 `
 
-const Item = styled('div')`
+const Item = styled.div<ItemProps>`
     padding: 10px;
     cursor: pointer;
     font-size: 14px;
 
-  ${({ active }) => active && `
+  ${( p: ItemProps ) => p.active && `
       background-color: rgb(63, 147, 247);
       color: #fff;
   `}

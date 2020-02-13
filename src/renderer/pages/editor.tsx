@@ -3,16 +3,16 @@ import { connect } from 'react-redux';
 import { ipcRenderer } from 'electron';
 import { Dispatch } from 'redux';
 import styled from 'styled-components';
+import { v4 as uuid } from 'uuid';
 require('../components/Application.scss');
 
 import Markdown from '../components/Markdown';
 import Title from '../components/Title';
 import Page from './page';
 
-import { ApplicationState } from '../store';
-import { uuidv4 } from '../utils/general';
-import { setTitle, setMarkdown, saveRequest, setId, toggleJustSaved } from '../store/editor/actions';
-import { Document } from '../store/editor/types';
+import { ApplicationState } from '../stores';
+import { setTitle, setMarkdown, saveRequest, setId, toggleJustSaved } from '../stores/editor/actions';
+import { Document } from '../stores/editor/types';
 
 interface PropsFromState {
     id: string;
@@ -46,7 +46,7 @@ class EditorPage extends React.Component<AllProps> {
     }
 
     componentWillUnmount() {
-        //ipcRenderer.removeListener('document-data', (e, doc) => { });
+        // ipcRenderer.removeListener('document-data', (e, doc) => { });
     }
 
     public handleMarkdownChange(value) {
@@ -67,11 +67,7 @@ class EditorPage extends React.Component<AllProps> {
             toggleJustSaved,
         } = this.props;
 
-        const doc: Document = { 
-            id: id,
-            title: title,
-            markdown: markdown
-        }
+        const doc: Document = { id, title, markdown };
 
         // Force Reload 
         let activeIdx: any = undefined;
@@ -80,7 +76,7 @@ class EditorPage extends React.Component<AllProps> {
             activeIdx = "refresh"
         }
         if (id) {
-            activeIdx = uuidv4()
+            activeIdx = uuid()
         }
 
         return (

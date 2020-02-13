@@ -10,7 +10,7 @@ export interface Props {
 const SearchBar: React.FunctionComponent<Props> = ({ query, setQuery }) => (
     <FieldContainer>
         <StyledSearchInput
-            autoFocus
+            autoFocus={true}
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             type="text"

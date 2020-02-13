@@ -4,8 +4,7 @@ import { Store } from 'redux';
 import { Provider } from 'react-redux';
 import { AppContainer } from 'react-hot-loader';
 
-import store from './store';
-import { ApplicationState } from './store';
+import { ApplicationState } from './stores';
 import Routes from './routes';
 
 // Get args to determine what window to render

@@ -8,7 +8,7 @@ import Markdown from '../components/Markdown';
 import SearchBar from '../components/SearchBar';
 import QueryResults from '../components/QueryResults';
 import Page from './page';
-import { ApplicationState } from '../store';
+import { ApplicationState } from '../stores';
 import { 
     setQuery, 
     activeIdxIncrease,
@@ -17,8 +17,8 @@ import {
     openDocument,
     deleteDocument,
     prependDocument,
-} from '../store/search/actions';
-import { Document } from '../store/search/types';
+} from '../stores/search/actions';
+import { Document } from '../stores/search/types';
 
 interface PropsFromState {
     query: string;
@@ -56,7 +56,7 @@ class SearchPage extends React.Component<AllProps> {
             activeIdxIncrease()
         } else if (e.key === "Enter") {
             openDocument()
-        } else if (e.metaKey && e.key == 'd') {
+        } else if (e.metaKey && e.key === 'd') {
             deleteDocument(documents[activeIdx])
         }
 
@@ -68,9 +68,8 @@ class SearchPage extends React.Component<AllProps> {
         });
     }
 
- 	componentWillMount() {
-    	document.addEventListener("keydown", this.handleKeyDown.bind(this));
-
+    componentWillMount() {
+        document.addEventListener("keydown", this.handleKeyDown.bind(this));
         this.props.setQuery("")
     }
 
@@ -105,11 +104,11 @@ class SearchPage extends React.Component<AllProps> {
                       setActiveIdx={setActiveIdx}
                     />
                     <Markdown 
-                      markdown={markdown} 
-					  activeIdx={markdown}
-                      onSave={() => console.log("no op")}
-                      setMarkdown={() => console.log("no op")}
-                      readOnly={true}
+                        markdown={markdown} 
+                        activeIdx={markdown}
+                        onSave={() => console.log("no op")}
+                        setMarkdown={() => console.log("no op")}
+                        readOnly={true}
                     />
                 </SearchResultsContainer>
             </Page>

@@ -16,11 +16,11 @@ const reducer: Reducer<EditorState> = (state = initialState, action) => {
         return { ...state, id: action.payload };
     }
     case EditorActionTypes.SET_TITLE: {
-            return { ...state, title: action.payload };
-        }
+        return { ...state, title: action.payload };
+    }
     case EditorActionTypes.SET_MARKDOWN: {
-            return { ...state, markdown: action.payload };
-        }
+        return { ...state, markdown: action.payload };
+    }
     case EditorActionTypes.SAVE_SUCCESS: {
         return { ...state, id: '', markdown: '', title: '', justSaved: true };
     }
@@ -31,8 +31,8 @@ const reducer: Reducer<EditorState> = (state = initialState, action) => {
         return { ...initialState }
     }
     default: {
-            return state;
-        }
+        return state;
+    }
     }
 };
 

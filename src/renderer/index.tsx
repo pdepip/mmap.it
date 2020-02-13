@@ -2,8 +2,8 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { createBrowserHistory } from 'history';
 import { ipcRenderer } from 'electron';
-import { clearDoc } from './store/editor/actions';
-import { clearSearch, setQuery } from './store/search/actions';
+import { clearDoc } from './stores/editor/actions';
+import { clearSearch, setQuery } from './stores/search/actions';
 
 import App from './app';
 // import * as serviceWorker from './serviceWorker';
@@ -29,5 +29,3 @@ ipcRenderer.on('rnd::clear-search', (e) => {
 });
 
 ReactDOM.render(<App store={store} history={history} />, mainElement);
-
-// serviceWorker.unregister();

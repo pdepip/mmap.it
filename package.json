@@ -144,6 +144,7 @@
     "webpack-merge": "^4.2.1"
   },
   "dependencies": {
+    "@types/styled-components": "^4.4.3",
     "@types/url-search-params": "^1.1.0",
     "classnames": "^2.2.6",
     "connected-react-router": "^6.6.1",
@@ -165,6 +166,7 @@
     "rich-markdown-editor": "^9.11.2",
     "styled-components": "^5.0.1",
     "typesafe-actions": "^4.4.2",
-    "url": "^0.11.0"
+    "url": "^0.11.0",
+    "uuid": "^3.4.0"
   }
 }

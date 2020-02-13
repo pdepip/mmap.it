@@ -1,9 +1,10 @@
 import { all, call, fork, put, takeEvery, takeLatest, select } from 'redux-saga/effects';
 import { ipcRenderer } from 'electron'
+import { v4 as uuid } from 'uuid';
 import { EditorActionTypes } from './types';
 import { saveError, saveSuccess, setTitle, setMarkdown } from './actions'
 import { callApi } from '../../utils/api'
-import { uuidv4 } from '../../utils/general'
+
 
 const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:5000'
 
@@ -11,7 +12,7 @@ function* handleSave() {
     try {
         const state = yield select();
         const data: any = {
-            id: state.editor.id ? state.editor.id : uuidv4(),
+            id: state.editor.id ? state.editor.id : uuid(),
             title: state.editor.title,
             text: state.editor.markdown,
             isUpdate: !!state.editor.id

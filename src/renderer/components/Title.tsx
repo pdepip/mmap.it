@@ -10,10 +10,10 @@ export interface Props {
 const Title: React.FunctionComponent<Props> = ({ title, setTitle }) => (
     <FieldContainer>
         <StyledInput
-            autoFocus
+            autoFocus={true}
             ref={(input) => { input ? input.focus() : null}}
             value={title}
-            onChange={e => setTitle(e.target.value)}
+            onChange={(e) => setTitle(e.target.value)}
             type="text"
             placeholder="New Title"
         />
