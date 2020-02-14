@@ -42,17 +42,13 @@ class BaseWindow extends EventEmitter {
             if (this.browserWindow) {
                 if (this.browserWindow.isVisible()) {
 
-                    if (this.type === WindowType.EDITOR) {
-                        this.browserWindow.webContents.send('rnd::clear-doc')
-                    } else if (this.type === WindowType.SEARCH) {
-                        this.browserWindow.webContents.send('rnd::clear-search')
-                    }
                     this.browserWindow.hide();
                 } else {
                     this.browserWindow.setVisibleOnAllWorkspaces(true); // put the window on all screens
                     this.browserWindow.show(); // focus the window up front on the active screen
                     this.browserWindow.setVisibleOnAllWorkspaces(false); // disable all screen behavior
 
+                    // Make sure search is always on top
                     if (this.type === WindowType.SEARCH) {
                         this.browserWindow.setAlwaysOnTop(true, "floating", 1);
                     }
