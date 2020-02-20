@@ -29,7 +29,6 @@ const Markdown: React.FunctionComponent<Props> = (
             onCancel={null}
             onChange={setMarkdown}
             readOnly={readOnly}
-            activeIdx={activeIdx}
         />
     </MarkdownDiv>
 );

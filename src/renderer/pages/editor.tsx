@@ -4,6 +4,7 @@ import { ipcRenderer } from 'electron';
 import { Dispatch } from 'redux';
 import styled from 'styled-components';
 import { v4 as uuid } from 'uuid';
+
 require('../components/Application.scss');
 
 import Markdown from '../components/Markdown';
@@ -11,7 +12,15 @@ import Title from '../components/Title';
 import Page from './page';
 
 import { ApplicationState } from '../stores';
-import { setTitle, setMarkdown, saveRequest, setId, toggleJustSaved } from '../stores/editor/actions';
+import { 
+    setTitle,
+    setMarkdown,
+    saveRequest,
+    setId,
+    toggleJustSaved,
+    setEditorMode,
+} from '../stores/editor/actions';
+import { EditorMode } from '../stores/editor/types';
 import { Document } from '../stores/editor/types';
 
 interface PropsFromState {
@@ -27,6 +36,7 @@ interface PropsFromDispatch {
     setId: typeof setId;
     saveRequest: typeof saveRequest;
     toggleJustSaved: typeof toggleJustSaved
+    setEditorMode: typeof setEditorMode
 }
 
 type AllProps = PropsFromState & PropsFromDispatch;
@@ -42,6 +52,7 @@ class EditorPage extends React.Component<AllProps> {
             this.props.setId(doc.id);
             this.props.setTitle(doc.title)
             this.props.setMarkdown(doc.text)
+            this.props.setEditorMode(EditorMode.UPDATE);
         })
     }
 
@@ -65,19 +76,24 @@ class EditorPage extends React.Component<AllProps> {
             saveRequest, 
             justSaved, 
             toggleJustSaved,
+            setEditorMode,
         } = this.props;
 
+        let activeIdx: any = undefined;
         const doc: Document = { id, title, markdown };
 
         // Force Reload 
-        let activeIdx: any = undefined;
+        // TODO: Remove this functionality once PR for rich-markdown-editor
+        //       gets merged to add programatic updates
+        if (id) {
+            activeIdx = uuid()
+        }
+
         if (justSaved) {
             toggleJustSaved()
             activeIdx = "refresh"
         }
-        if (id) {
-            activeIdx = uuid()
-        }
+        // End codeblock to remove
 
         return (
             <Page>
@@ -89,7 +105,7 @@ class EditorPage extends React.Component<AllProps> {
                       onSave={() => saveRequest(doc)}
                       setMarkdown={this.handleMarkdownChange.bind(this)} 
                       markdown={markdown}
-                      activeIdx={activeIdx}
+                      activeIdx={activeIdx}  // set to force refresh
                     />
                 </EditorContainer>
             </Page>
@@ -110,6 +126,7 @@ const mapDispatchToProps = {
     setId,
     saveRequest,
     toggleJustSaved,
+    setEditorMode,
 };
 
 export default connect(
