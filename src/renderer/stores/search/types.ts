@@ -12,6 +12,7 @@ export enum SearchActionTypes {
     DELETE_DOCUMENT = '@@search/DELETE_DOCUMENT',
     DELETE_DOCUMENT_BY_ID = '@@search/DELETE_DOCUMENT_BY_ID',
     PREPEND_DOCUMENT = '@@search/PREPEND_DOCUMENT',
+    UPDATE_DOCUMENT = '@@search/UPDATE_DOCUMENT',
 }
 
 export interface Document {

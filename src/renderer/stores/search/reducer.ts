@@ -69,6 +69,12 @@ const reducer: Reducer<SearchState> = (state = initialState, action) => {
     case SearchActionTypes.PREPEND_DOCUMENT: {
         return { ...state, documents: [action.payload, ...state.documents] }
     }
+    case SearchActionTypes.UPDATE_DOCUMENT: {
+        return {
+            ...state,
+            documents: state.documents.map((doc) => doc.id === action.payload.id ? action.payload : doc)
+        }
+    }
     default: {
         return state;
     }
