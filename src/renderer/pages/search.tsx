@@ -1,14 +1,14 @@
 import * as React from 'react';
 import { ipcRenderer } from 'electron';
 import { connect } from 'react-redux';
-
+import styled from 'styled-components';
 require('../components/Application.scss');
 
 import Markdown from '../components/Markdown';
 import SearchBar from '../components/SearchBar';
 import QueryResults from '../components/QueryResults';
-
-import { ApplicationState } from '../store';
+import Page from './page';
+import { ApplicationState } from '../stores';
 import { 
     setQuery, 
     activeIdxIncrease,
@@ -17,8 +17,9 @@ import {
     openDocument,
     deleteDocument,
     prependDocument,
-} from '../store/search/actions';
-import { Document } from '../store/search/types';
+    updateDocument,
+} from '../stores/search/actions';
+import { Document } from '../stores/search/types';
 
 interface PropsFromState {
     query: string;
@@ -34,6 +35,7 @@ interface PropsFromDispatch {
     openDocument: typeof openDocument;
     deleteDocument: typeof deleteDocument;
     prependDocument: typeof prependDocument;
+    updateDocument: typeof updateDocument;
 }
 
 type AllProps = PropsFromState & PropsFromDispatch;
@@ -56,7 +58,7 @@ class SearchPage extends React.Component<AllProps> {
             activeIdxIncrease()
         } else if (e.key === "Enter") {
             openDocument()
-        } else if (e.metaKey && e.key == 'd') {
+        } else if (e.metaKey && e.key === 'd') {
             deleteDocument(documents[activeIdx])
         }
 
@@ -64,13 +66,16 @@ class SearchPage extends React.Component<AllProps> {
 
     componentDidMount() {
         ipcRenderer.on('new-document', (e, doc) => {
-            this.props.prependDocument(doc)
+            if (!doc.isUpdate) {
+                this.props.prependDocument(doc)
+            } else {
+                this.props.updateDocument(doc);
+            }
         });
     }
 
- 	componentWillMount() {
-    	document.addEventListener("keydown", this.handleKeyDown.bind(this));
-
+    componentWillMount() {
+        document.addEventListener("keydown", this.handleKeyDown.bind(this));
         this.props.setQuery("")
     }
 
@@ -92,11 +97,11 @@ class SearchPage extends React.Component<AllProps> {
         const markdown: string = documents.length > 0 ? documents[activeIdx].text : ""
 
         return (
-            <div className="application">
-                <div className="search-container">
+            <Page>
+                <SearchContainer>
                     <SearchBar query={query} setQuery={setQuery} />
-                </div>
-                <div className="body-container search-body">
+                </SearchContainer>
+                <SearchResultsContainer>
                     <QueryResults 
                       documents={documents}
                       activeIdx={activeIdx}
@@ -105,14 +110,14 @@ class SearchPage extends React.Component<AllProps> {
                       setActiveIdx={setActiveIdx}
                     />
                     <Markdown 
-                      markdown={markdown} 
-					  activeIdx={markdown}
-                      onSave={() => console.log("no op")}
-                      setMarkdown={() => console.log("no op")}
-                      readOnly={true}
+                        markdown={markdown} 
+                        activeIdx={markdown}
+                        onSave={() => console.log("no op")}
+                        setMarkdown={() => console.log("no op")}
+                        readOnly={true}
                     />
-                </div>
-            </div>
+                </SearchResultsContainer>
+            </Page>
         );
     }
 }
@@ -130,10 +135,30 @@ const mapDispatchToProps = {
     setActiveIdx,
     openDocument,
     deleteDocument,
-    prependDocument
+    prependDocument,
+    updateDocument,
 };
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps
 )(SearchPage);
+
+const SearchResultsContainer = styled('div')`
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    background-color: #fff;
+	padding: 0px;
+	-webkit-app-region: no-drag;
+`
+
+const SearchContainer = styled('div')`
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+    height: 90px;
+    position: relative;
+    border-bottom: 1px solid #dedede;
+`

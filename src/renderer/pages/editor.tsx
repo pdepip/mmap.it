@@ -2,15 +2,26 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { ipcRenderer } from 'electron';
 import { Dispatch } from 'redux';
+import styled from 'styled-components';
+import { v4 as uuid } from 'uuid';
+
 require('../components/Application.scss');
 
 import Markdown from '../components/Markdown';
 import Title from '../components/Title';
+import Page from './page';
 
-import { ApplicationState } from '../store';
-import { uuidv4 } from '../utils/general';
-import { setTitle, setMarkdown, saveRequest, setId, toggleJustSaved } from '../store/editor/actions';
-import { Document } from '../store/editor/types';
+import { ApplicationState } from '../stores';
+import { 
+    setTitle,
+    setMarkdown,
+    saveRequest,
+    setId,
+    toggleJustSaved,
+    setEditorMode,
+} from '../stores/editor/actions';
+import { EditorMode } from '../stores/editor/types';
+import { Document } from '../stores/editor/types';
 
 interface PropsFromState {
     id: string;
@@ -25,6 +36,7 @@ interface PropsFromDispatch {
     setId: typeof setId;
     saveRequest: typeof saveRequest;
     toggleJustSaved: typeof toggleJustSaved
+    setEditorMode: typeof setEditorMode
 }
 
 type AllProps = PropsFromState & PropsFromDispatch;
@@ -40,11 +52,12 @@ class EditorPage extends React.Component<AllProps> {
             this.props.setId(doc.id);
             this.props.setTitle(doc.title)
             this.props.setMarkdown(doc.text)
+            this.props.setEditorMode(EditorMode.UPDATE);
         })
     }
 
     componentWillUnmount() {
-        //ipcRenderer.removeListener('document-data', (e, doc) => { });
+        // ipcRenderer.removeListener('document-data', (e, doc) => { });
     }
 
     public handleMarkdownChange(value) {
@@ -63,38 +76,39 @@ class EditorPage extends React.Component<AllProps> {
             saveRequest, 
             justSaved, 
             toggleJustSaved,
+            setEditorMode,
         } = this.props;
 
-        const doc: Document = { 
-            id: id,
-            title: title,
-            markdown: markdown
-        }
+        let activeIdx: any = undefined;
+        const doc: Document = { id, title, markdown };
 
         // Force Reload 
-        let activeIdx: any = undefined;
+        // TODO: Remove this functionality once PR for rich-markdown-editor
+        //       gets merged to add programatic updates
+        if (id) {
+            activeIdx = uuid()
+        }
+
         if (justSaved) {
             toggleJustSaved()
             activeIdx = "refresh"
         }
-        if (id) {
-            activeIdx = uuidv4()
-        }
+        // End codeblock to remove
 
         return (
-            <div className="application">
-                <div className="search-container title-container">
+            <Page>
+                <SearchTitleContainer>
                     <Title title={title} setTitle={setTitle} />
-                </div>
-                <div className="body-container">
+                </SearchTitleContainer>
+                <EditorContainer>
                     <Markdown 
                       onSave={() => saveRequest(doc)}
                       setMarkdown={this.handleMarkdownChange.bind(this)} 
                       markdown={markdown}
-                      activeIdx={activeIdx}
+                      activeIdx={activeIdx}  // set to force refresh
                     />
-                </div>
-            </div>
+                </EditorContainer>
+            </Page>
         );
     }
 }
@@ -112,9 +126,42 @@ const mapDispatchToProps = {
     setId,
     saveRequest,
     toggleJustSaved,
+    setEditorMode,
 };
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps
 )(EditorPage);
+
+const SearchTitleContainer = styled('div')`
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+    position: relative;
+    font-size: 24px;
+    height: 125px;
+    position: relative;
+    border-bottom: 1px solid #dedede;
+
+	&:after {
+		content: '';
+		position: absolute;
+		left: 4%;
+		bottom: -4;
+		height: 1px;
+		width: 92%; 
+		border-bottom: 1px solid rgb(240, 240, 240);
+	}
+`
+
+const EditorContainer = styled('div')`
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    background-color: #fff;
+    padding: 24px;
+    padding-top: 12px;
+    -webkit-app-region: no-drag;
+`

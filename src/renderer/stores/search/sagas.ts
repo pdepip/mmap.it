@@ -36,13 +36,13 @@ function* handleQuery() {
         const state = yield select();
 
         // dont search for empty string
-        //if (!state.search.query) return;
+        // if (!state.search.query) return;
 
-        const query: string = '/v1/documents?q=' + state.search.query
+        const query: string = `/v1/documents?q=${state.search.query}`;
         
         const res = ipcRenderer.sendSync('fm::search', state.search.query)
 
-        //const res = yield call(callApi, 'get', API_ENDPOINT, query)
+        // const res = yield call(callApi, 'get', API_ENDPOINT, query)
 
         if (res.error) {
             yield put(queryError(res.error))

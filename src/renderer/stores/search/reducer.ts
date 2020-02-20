@@ -38,7 +38,7 @@ const reducer: Reducer<SearchState> = (state = initialState, action) => {
         return { 
             ...state, 
             query: action.payload,
-            activeIdx: action.payload == '' ? 0 : state.activeIdx,
+            activeIdx: action.payload === '' ? 0 : state.activeIdx,
         };
     }
     case SearchActionTypes.INCREASE_ACTIVE_IDX: {
@@ -63,15 +63,21 @@ const reducer: Reducer<SearchState> = (state = initialState, action) => {
         return { 
             ...state, 
             documents: state.documents.filter( i => i.id !== action.payload ),
-            activeIdx: state.documents.length == 2 ? 0 : state.activeIdx 
+            activeIdx: state.documents.length === 2 ? 0 : state.activeIdx 
         }
     }
     case SearchActionTypes.PREPEND_DOCUMENT: {
         return { ...state, documents: [action.payload, ...state.documents] }
     }
-    default: {
-            return state;
+    case SearchActionTypes.UPDATE_DOCUMENT: {
+        return {
+            ...state,
+            documents: state.documents.map((doc) => doc.id === action.payload.id ? action.payload : doc)
         }
+    }
+    default: {
+        return state;
+    }
     }
 };
 

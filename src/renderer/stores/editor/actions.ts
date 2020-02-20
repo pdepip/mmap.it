@@ -1,7 +1,11 @@
 import { action } from 'typesafe-actions';
 import { ipcRenderer } from 'electron';
 
-import { EditorActionTypes, Document } from './types';
+import { 
+    EditorActionTypes, 
+    Document, 
+    EditorMode,
+} from './types';
 
 export const setTitle = (title: string) => action(EditorActionTypes.SET_TITLE, title);
 export const setMarkdown = (markdown: string) => action(EditorActionTypes.SET_MARKDOWN, markdown);
@@ -14,3 +18,5 @@ export const saveError = (message: string) => action(EditorActionTypes.SAVE_ERRO
 export const toggleJustSaved = () => action(EditorActionTypes.TOGGLE_JUST_SAVED)
 
 export const clearDoc = () => action(EditorActionTypes.CLEAR_DOC)
+
+export const setEditorMode = (mode: EditorMode) => action(EditorActionTypes.SET_MODE, mode)

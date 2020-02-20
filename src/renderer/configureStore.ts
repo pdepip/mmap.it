@@ -7,7 +7,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 import { History } from 'history';
 
-import { ApplicationState, createRootReducer, rootSaga } from './store';
+import { ApplicationState, createRootReducer, rootSaga } from './stores';
 
 export default function configureStore(
     history: History,

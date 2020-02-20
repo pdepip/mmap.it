@@ -35,7 +35,7 @@ class App {
 
     init() {
         this.appEnvironment = process.env.NODE_ENV
-        this._initializeLogger(this.appEnvironment);
+        this.initializeLogger(this.appEnvironment);
 
         if (process.platform === 'darwin') {
             app.commandLine.appendSwitch('enable-experimental-web-platform-features', 'true');
@@ -82,19 +82,23 @@ class App {
                 this.ready()
             }
         });
+
+        // hides the dock icon for our app which allows our windows to join other 
+        // apps' spaces. without this our windows open on the nearest "desktop" space
+        app.dock.hide();
     }
 
     ready = () => {
         // Create windows
-        this.editorWindow = this._createEditorWindow();
+        this.editorWindow = this.createEditorWindow();
         this.editorWindow.registerShortcut('CommandOrControl+Option+C');
 
-        this.searchWindow = this._createSearchWindow();
+        this.searchWindow = this.createSearchWindow();
         this.searchWindow.registerShortcut('Control+Space');
 
-        this.fileManager = this._createFileManager();
+        this.fileManager = this.createFileManager();
 
-        const checkOS = this._isWindowsOrmacOS();
+        const checkOS = this.isWindowsOrmacOS();
         if (checkOS && !isDev) {
             log.info("setting up appupdater")
             // Initate auto-updates on macOs and windows
@@ -109,28 +113,28 @@ class App {
     /*
      * Creates a new editor window
      */
-    _createEditorWindow() {
+    private createEditorWindow() {
         const editor: EditorWindow = new EditorWindow(this._accessor);
         editor.createWindow();
         return editor;
     }
 
-    _createSearchWindow() {
+    private createSearchWindow() {
         const search: SearchWindow = new SearchWindow(this._accessor);
         search.createWindow();
         return search;
     }
 
-    _createFileManager() {
+    private createFileManager() {
         const fileManager: FileManager = new FileManager(this._accessor);
         return fileManager
     }
 
-    _isWindowsOrmacOS() {
+    private isWindowsOrmacOS() {
         return process.platform === 'darwin' || process.platform === 'win32';
     }
 
-    _initializeLogger(environment) {
+    private initializeLogger(environment) {
         /*
         log.transports.console.level = true
         log.transports.rendererConsole = null

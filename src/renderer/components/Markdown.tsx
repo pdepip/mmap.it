@@ -1,9 +1,7 @@
 import * as React from 'react';
-import * as ReactMarkdown from 'react-markdown';
 import Editor from 'rich-markdown-editor';
-import { Document } from '../store/editor/types';
-
-require('./Editor.scss');
+import { Document } from '../stores/editor/types';
+import styled from 'styled-components';
 
 export interface Props {
     markdown: string;
@@ -22,18 +20,27 @@ const Markdown: React.FunctionComponent<Props> = (
         activeIdx=undefined,
     }
 ) => (
-    <div className="markdown" id="editor">
+    <MarkdownDiv>
         <Editor
             key={activeIdx}
             id={markdown}
             defaultValue={markdown}
             onSave={onSave}
-            onCancel={() => console.log('Cancel triggered')}
+            onCancel={null}
             onChange={setMarkdown}
             readOnly={readOnly}
-            activeIdx={activeIdx}
         />
-    </div>
+    </MarkdownDiv>
 );
 
 export default Markdown;
+
+const MarkdownDiv = styled('div')`
+    padding-top: 6px;
+    width: 100%;
+    height: calc(100% - 40px);
+    font-size: 16px;
+    padding: 20px;
+    width: calc(100% - 40px);
+    overflow-y: scroll;
+`

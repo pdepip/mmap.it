@@ -20,3 +20,4 @@ export const deleteDocument = (document: Document) => action(SearchActionTypes.D
 export const deleteDocumentById = (id: number) => action(SearchActionTypes.DELETE_DOCUMENT_BY_ID, id)
 
 export const prependDocument = (document: Document) => action(SearchActionTypes.PREPEND_DOCUMENT, document)
+export const updateDocument = (document: Document) => action(SearchActionTypes.UPDATE_DOCUMENT, document)

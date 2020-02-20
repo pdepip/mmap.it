@@ -1,5 +1,5 @@
 import { ipcMain, dialog } from 'electron';
-import EventEmitter from 'events';
+import * as EventEmitter from 'events';
 import { Accessor } from './app/accessor';
 import * as fs from 'fs';
 import * as os from 'os';
@@ -16,13 +16,13 @@ class FileManager extends EventEmitter {
         super();
 
         this._accessor = accessor;
-        this._directory = os.homedir() + '/' + '.mmap';
+        this._directory = `${os.homedir()}/.mmap`;
 
         this._index = elasticlunr()
         this._index.saveDocument(true);
         this._index.addField('title')
         this._index.addField('text')
-		this._index.setRef('id');
+        this._index.setRef('id');
 
         this.init();
     }
@@ -32,56 +32,56 @@ class FileManager extends EventEmitter {
         // Check if directory exists and create if it doesn't
         !fs.existsSync(this._directory) && fs.mkdirSync(this._directory);
 
-        this._buildIndex()
+        this.buildIndex()
 
-        this._listenForIpcRenderer()
+        this.listenForIpcRenderer()
     }
 
-    _buildIndex() {
+    private buildIndex() {
         fs.readdir(this._directory, (err, filenames) => {
-		if (err) {
-          throw err
-		  return;
-		}
-        filenames.forEach((filename) => {
-          fs.readFile(this._directory + '/' + filename, 'utf-8', (err, content) => {
-		    if (err) {
-              throw err;
-			  return;
-			}
-            let doc: any = JSON.parse(content)
-            this._index.addDoc(doc)
-		  });
-		});
-	  });
+            if (err) {
+                throw err
+                return;
+            }
+            filenames.forEach((filename) => {
+                fs.readFile(`${this._directory}/${filename}`, 'utf-8', (err, content) => {
+                    if (err) {
+                        throw err;
+                        return;
+                    }
+                    const doc: any = JSON.parse(content)
+                    this._index.addDoc(doc)
+                });
+            });
+        });
     }
 
-    _listenForIpcRenderer() {
+    private listenForIpcRenderer() {
         ipcMain.on('fm::save', (e, id, title, text, isUpdate) => {
-            this._saveFile(id, title, text, isUpdate);
+            this.saveFile(id, title, text, isUpdate);
         });
 
         ipcMain.on('fm::search', (event, query) => {
-            const res: any = this._search(query)
+            const res: any = this.search(query)
             event.returnValue = res;
         });
 
         ipcMain.on('fm::delete', (event, { id, title, text }) => {
-            const res: any = this._deleteFile(id, title, text)
+            const res: any = this.deleteFile(id, title, text)
             event.returnValue = res;
         });
     }
 
-	_search(query: string) {
+    private search(query: string) {
         let result: any[] = [];
-        if (query == "") {
+        if (query === "") {
             const docs: any = this._index.documentStore.docs
             const allDocs = Object.keys(docs).map((key) => docs[key])
 
             allDocs.sort((a, b) => {
                 return b.createdAt.localeCompare(a.createdAt)
             })
-            return allDocs.slice(0, 10)
+            result = allDocs.slice(0, 10)
         } else {
             this._index.search(query, {
                 fields: {
@@ -99,8 +99,8 @@ class FileManager extends EventEmitter {
         return result        
     }
 
-    _deleteFile(id: string, title: string, text: string) {
-        const filename: string = this._directory + '/' + id + '.json';
+    private deleteFile(id: string, title: string, text: string) {
+        const filename: string = `${this._directory}/${id}.json`;
 
         const doc: any = { id, title, text }
 
@@ -125,13 +125,13 @@ class FileManager extends EventEmitter {
         return id
     }
 
-    _saveFile(id: string, title: string, text: string, isUpdate: boolean) {
-        const filename: string = this._directory + '/' + id + '.json';
+    private saveFile(id: string, title: string, text: string, isUpdate: boolean) {
+        const filename: string = `${this._directory}/${id}.json`;
 
         const doc: any = {
-            id: id,
-            title: title,
-            text: text,
+            id,
+            title,
+            text,
             createdAt: new Date().toISOString(),
         }
 

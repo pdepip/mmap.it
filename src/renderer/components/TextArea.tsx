@@ -1,6 +1,5 @@
 import * as React from 'react';
-
-require('./Editor.scss');
+import styled from 'styled-components';
 
 export interface Props {
     text: string;
@@ -8,15 +7,31 @@ export interface Props {
 }
 
 const TextArea: React.FunctionComponent<Props> = ({ text, updateText }) => (
-    <div className="textarea">
-        <textarea
+    <TextAreaContainer>
+        <StyledTextArea
             id="input"
-            className="textarea-elem"
             onChange={updateText}
             value={text}
             placeholder="Enter Text Here"
         />
-    </div>
+    </TextAreaContainer>
 );
 
 export default TextArea;
+
+const StyledTextArea = styled('textarea')`
+    font-size: 16px;
+    background-color: #fbfdff;
+    width: 100%;
+    height: 100%;
+    border: none;
+    resize: none;
+`
+
+const TextAreaContainer = styled('div')`
+    width: 100%;
+    height: calc(100% - 40px);
+    font-size: 16px; 
+    padding: 20px;
+    width: calc(100% - 40px);
+`

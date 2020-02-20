@@ -1,5 +1,4 @@
-import { BrowserWindow, ipcMain, dialog } from 'electron';
-import electron from 'electron';
+import { BrowserWindow, ipcMain, screen, dialog } from 'electron';
 import * as path from 'path';
 import * as url from 'url';
 import electronLog from 'electron-log';
@@ -20,10 +19,10 @@ class SearchWindow extends BaseWindow {
     }
 
     init() {
-        this._listenForIpcRenderer()
+        this.listenForIpcRenderer()
     }
 
-    _listenForIpcRenderer() {
+    private listenForIpcRenderer() {
         ipcMain.on('kb::hide-search', (e) => {
             win.hide()
         });
@@ -40,8 +39,8 @@ class SearchWindow extends BaseWindow {
      */
     createWindow(options = {}) {
 
-		let display = electron.screen.getPrimaryDisplay();
-		let width = display.bounds.width;
+        const display = screen.getPrimaryDisplay();
+        const width = display.bounds.width;
 
         win = new BrowserWindow({
             x: width - 700,
@@ -60,10 +59,10 @@ class SearchWindow extends BaseWindow {
         this.id = win.id;
         this.type = WindowType.SEARCH;
 
-        const urlString = super._buildUrlString();
+        const urlString = super.buildUrlString();
         win.loadURL(urlString);
 
-        if (process.env.NODE_ENV == 'production') {
+        if (process.env.NODE_ENV === 'production') {
             win.hide();
         }
 

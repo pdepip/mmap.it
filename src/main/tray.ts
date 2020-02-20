@@ -1,15 +1,14 @@
-import { ipcMain, Tray, Menu } from 'electron';
-import path from 'path';
-import electron from 'electron';
+import * as electron from 'electron';
+import * as path from 'path';
 
-let tray: Tray | null;
+let tray: electron.Tray | null;
 
 const app = electron.app;
 
 const createTray = () => {
-    tray = new Tray(path.join(__dirname, './src/assets/icons/menubarTemplate.png'));
+    tray = new electron.Tray(path.join(__dirname, './src/assets/icons/menubarTemplate.png'));
     
-    const menu = Menu.buildFromTemplate([
+    const menu = electron.Menu.buildFromTemplate([
         {
             label: 'Quit',
             click() { app.quit(); }
