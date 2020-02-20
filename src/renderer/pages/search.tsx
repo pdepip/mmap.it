@@ -17,6 +17,7 @@ import {
     openDocument,
     deleteDocument,
     prependDocument,
+    updateDocument,
 } from '../stores/search/actions';
 import { Document } from '../stores/search/types';
 
@@ -34,6 +35,7 @@ interface PropsFromDispatch {
     openDocument: typeof openDocument;
     deleteDocument: typeof deleteDocument;
     prependDocument: typeof prependDocument;
+    updateDocument: typeof updateDocument;
 }
 
 type AllProps = PropsFromState & PropsFromDispatch;
@@ -64,7 +66,11 @@ class SearchPage extends React.Component<AllProps> {
 
     componentDidMount() {
         ipcRenderer.on('new-document', (e, doc) => {
-            this.props.prependDocument(doc)
+            if (!doc.isUpdate) {
+                this.props.prependDocument(doc)
+            } else {
+                this.props.updateDocument(doc);
+            }
         });
     }
 
@@ -129,7 +135,8 @@ const mapDispatchToProps = {
     setActiveIdx,
     openDocument,
     deleteDocument,
-    prependDocument
+    prependDocument,
+    updateDocument,
 };
 
 export default connect(
