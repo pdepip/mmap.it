@@ -40,18 +40,24 @@ class BaseWindow extends EventEmitter {
     registerShortcut(key: string) {
         const shortcut = globalShortcut.register(key, () => {
             if (this.browserWindow) {
+
+                // Handle hiding window
                 if (this.browserWindow.isVisible()) {
 
+                    if (this.type === WindowType.SEARCH) {
+                        this.browserWindow.webContents.send('rnd::hide-search')
+                    } else if (this.type === WindowType.EDITOR) {
+                        this.browserWindow.webContents.send('rnd::hide-editor')
+                    }
+
                     this.browserWindow.hide();
+
+                // Handle showing window
                 } else {
+                    // For multiple monitors
                     this.browserWindow.setVisibleOnAllWorkspaces(true); // put the window on all screens
                     this.browserWindow.show(); // focus the window up front on the active screen
                     this.browserWindow.setVisibleOnAllWorkspaces(false); // disable all screen behavior
-
-                    // Make sure search is always on top
-                    if (this.type === WindowType.SEARCH) {
-                        this.browserWindow.setAlwaysOnTop(true, "floating", 1);
-                    }
 
 					// Get mouse cursor absolute position
                     const {x, y} = screen.getCursorScreenPoint();
@@ -70,6 +76,12 @@ class BaseWindow extends EventEmitter {
                             currentDisplay.workArea.y
                         )
                     }
+
+                    // Make sure search is always on top
+                    if (this.type === WindowType.SEARCH) {
+                        this.browserWindow.setAlwaysOnTop(true, "floating", 1);
+                    }
+
 					// Display the window
                     this.browserWindow.show();
                 }
