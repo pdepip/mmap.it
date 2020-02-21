@@ -19,6 +19,7 @@ export enum WindowLifecycle {
 }
 
 class BaseWindow extends EventEmitter {
+
     // properties
     _accessor: Accessor | undefined;
     id: number | null;

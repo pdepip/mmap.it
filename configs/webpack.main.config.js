@@ -24,10 +24,12 @@ module.exports = merge.smart(baseConfig, {
                             { targets: 'maintained node versions' }
                         ],
                         '@babel/preset-typescript',
+                        '@babel/preset-react',
                     ],
                     plugins: [
                         ['@babel/plugin-proposal-class-properties', { loose: true }],
                         '@babel/plugin-transform-async-to-generator',
+                        '@babel/plugin-proposal-object-rest-spread'
                     ]
                 }
             },

@@ -12,7 +12,7 @@ const isDev: boolean = require('electron-is-dev');
 
 class App {
     // properties
-    _accessor: Accessor | undefined;
+    _accessor: Accessor; 
     _args: object | undefined;
 
     editorWindow: EditorWindow | null;
@@ -22,7 +22,7 @@ class App {
 
     appEnvironment: string | undefined;
 
-    constructor(accessor: Accessor | undefined, args: object | undefined) {
+    constructor(accessor: Accessor, args: object | undefined) {
         this._accessor = accessor;
         this._args = args || { _: [] };
 
