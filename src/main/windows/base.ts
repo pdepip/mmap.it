@@ -82,7 +82,9 @@ class BaseWindow extends EventEmitter {
                     // Make sure search is always on top
                     if (this.type === WindowType.SEARCH) {
                         this.browserWindow.setAlwaysOnTop(true, "floating", 1);
-                    }
+
+                        this._accessor.metrics.userSearch()
+                    } 
 
 					// Display the window
                     this.browserWindow.show();
