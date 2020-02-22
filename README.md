@@ -27,6 +27,18 @@ In development you can quickly get started by following these steps:
 2. `yarn`
 3. `yarn start-dev`
 
+To transpile the mixpanel client
+
+```
+cd ~/dev/mixpanel
+
+./node_modules/.bin/babel lib -d ./lib/
+
+cp ./lib/* ~/mmap/mmap.it/node_modules/mixpanel/lib/
+```
+
+```./node_modules/.bin/babel src -d node_modules/mixpanel/lib```
+
 
 
 ### Production

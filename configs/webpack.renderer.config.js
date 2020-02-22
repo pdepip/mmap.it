@@ -25,10 +25,10 @@ module.exports = merge.smart(baseConfig, {
                             { targets: { browsers: 'last 2 versions ' } }
                         ],
                         '@babel/preset-typescript',
-                        '@babel/preset-react'
+                        '@babel/preset-react',
                     ],
                     plugins: [
-                        ['@babel/plugin-proposal-class-properties', { loose: true }]
+                        ['@babel/plugin-proposal-class-properties', { loose: true }],
                     ]
                 }
             },
