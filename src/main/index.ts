@@ -1,7 +1,9 @@
 import App from './app';
 import { Accessor } from './app/accessor';
 
-let accessor: Accessor | undefined;
+const appEnv: object = {};
+const accessor: Accessor = new Accessor(appEnv);
+//let accessor: Accessor;
 let args: object | undefined;
 
 // Start the application

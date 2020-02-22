@@ -5,14 +5,15 @@ import * as fs from 'fs';
 import * as os from 'os';
 import * as path from 'path';
 import * as elasticlunr from 'elasticlunr';
+import { v4 as uuid } from 'uuid';
 
 class FileManager extends EventEmitter {
 
-    _accessor: Accessor | undefined;
+    _accessor: Accessor; 
     _directory: string; 
     _index: any;
 
-    constructor(accessor: Accessor | undefined) {
+    constructor(accessor: Accessor) {
         super();
 
         this._accessor = accessor;
@@ -29,8 +30,26 @@ class FileManager extends EventEmitter {
 
     init() {
 
-        // Check if directory exists and create if it doesn't
-        !fs.existsSync(this._directory) && fs.mkdirSync(this._directory);
+        const identityFilePath: string = `${this._directory}/.identity`
+
+        let userId: string;
+        // Check if directory exists and create if it doesn't 
+        if (!fs.existsSync(identityFilePath)) {
+            // create identity file
+            if (!fs.existsSync(this._directory)) {
+                fs.mkdirSync(this._directory, { recursive: true });
+            }
+            fs.writeFileSync(identityFilePath, uuid())
+
+            // create user metric
+            userId = fs.readFileSync(identityFilePath, 'utf-8');
+            this._accessor.metrics.setUserId(userId)
+            this._accessor.metrics.createUser()
+        } else {
+            userId = fs.readFileSync(identityFilePath, 'utf-8');
+            this._accessor.metrics.setUserId(userId)
+            this._accessor.metrics.userLogin()
+        }
 
         this.buildIndex()
 
@@ -44,14 +63,17 @@ class FileManager extends EventEmitter {
                 return;
             }
             filenames.forEach((filename) => {
-                fs.readFile(`${this._directory}/${filename}`, 'utf-8', (err, content) => {
-                    if (err) {
-                        throw err;
-                        return;
-                    }
-                    const doc: any = JSON.parse(content)
-                    this._index.addDoc(doc)
-                });
+                // Filter out hidden files
+                if (! /^\..*/.test(filename)) {
+                    fs.readFile(`${this._directory}/${filename}`, 'utf-8', (err, content) => {
+                        if (err) {
+                            throw err;
+                            return;
+                        }
+                        const doc: any = JSON.parse(content)
+                        this._index.addDoc(doc)
+                    });
+                }
             });
         });
     }
@@ -59,6 +81,7 @@ class FileManager extends EventEmitter {
     private listenForIpcRenderer() {
         ipcMain.on('fm::save', (e, id, title, text, isUpdate) => {
             this.saveFile(id, title, text, isUpdate);
+            this._accessor.metrics.userSave()
         });
 
         ipcMain.on('fm::search', (event, query) => {
