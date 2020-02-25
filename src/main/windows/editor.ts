@@ -12,7 +12,7 @@ class EditorWindow extends BaseWindow {
     /*
      * @param {Accessor} accessor the application acccessor for application instances
      */
-    constructor(accessor: Accessor | undefined) {
+    constructor(accessor: Accessor) {
         super(accessor);
 
         this.init();
