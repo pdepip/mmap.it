@@ -62,9 +62,11 @@ class SearchWindow extends BaseWindow {
         const urlString = super.buildUrlString();
         win.loadURL(urlString);
 
+        /*
         if (process.env.NODE_ENV === 'production') {
             win.hide();
         }
+        */
 
         // Set titlebar height
         win.setSheetOffset(32);

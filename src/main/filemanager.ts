@@ -5,6 +5,7 @@ import * as fs from 'fs';
 import * as os from 'os';
 import * as path from 'path';
 import * as elasticlunr from 'elasticlunr';
+import welcomeDoc from './welcome.json';
 import { v4 as uuid } from 'uuid';
 
 class FileManager extends EventEmitter {
@@ -40,6 +41,8 @@ class FileManager extends EventEmitter {
                 fs.mkdirSync(this._directory, { recursive: true });
             }
             fs.writeFileSync(identityFilePath, uuid())
+
+            this.saveFile(welcomeDoc.id, welcomeDoc.title, welcomeDoc.text, false);
 
             // create user metric
             userId = fs.readFileSync(identityFilePath, 'utf-8');
