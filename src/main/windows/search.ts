@@ -12,7 +12,7 @@ class SearchWindow extends BaseWindow {
     /*
      * @param {Accessor} accessor the application acccessor for application instances
      */
-    constructor(accessor: Accessor | undefined) {
+    constructor(accessor: Accessor) {
         super(accessor);
 
         this.init();
@@ -62,9 +62,11 @@ class SearchWindow extends BaseWindow {
         const urlString = super.buildUrlString();
         win.loadURL(urlString);
 
+        /*
         if (process.env.NODE_ENV === 'production') {
             win.hide();
         }
+        */
 
         // Set titlebar height
         win.setSheetOffset(32);
