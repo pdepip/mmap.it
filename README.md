@@ -1,20 +1,21 @@
-<p align="center" style="text-align: center;">
-  <a href="https://mmap.it/">
-     <img align="center" alt="Logo" src="build/icon.png" width="128px"/>
-  </a>
-  <h1 align="center">mmap.it</h1>
+<p align="center">
+<h1 align="center">mmap.it</h1> 
 </p>
 
+<p align="center">
+<i>A personal knowledge base to seamlessly store and retrieve information.<br/>Try out mmap.it at <a href="https://www.mmap.it">www.mmap.it</a>.</i>
+<br/>
+  <img src="https://user-images.githubusercontent.com/8173045/78063441-35812e80-735e-11ea-94ec-8f02fcaf941c.png" alt="mmap.it" width="800" />
+</p>
 
-A personal knowledge base that allows you to seamlessly store and retrieve information.
-
+This is the source code that runs [**mmap.it**](https://mmap.it) and all the associated services. 
 
 
 ## Installation
 
 mmap.it requires the following dependencies:
 
-- Node.js > 12
+- Node.js >= 12
 - yarn
 
 
@@ -26,19 +27,6 @@ In development you can quickly get started by following these steps:
 1. Clone this repo
 2. `yarn`
 3. `yarn start-dev`
-
-To transpile the mixpanel client
-
-```
-cd ~/dev/mixpanel
-
-./node_modules/.bin/babel lib -d ./lib/
-
-cp ./lib/* ~/mmap/mmap.it/node_modules/mixpanel/lib/
-```
-
-```./node_modules/.bin/babel src -d node_modules/mixpanel/lib```
-
 
 
 ### Production

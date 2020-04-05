@@ -22,7 +22,6 @@ import { clearSearch, setQuery } from './stores/search/actions';
 
 
 ipcRenderer.on('rnd::clear-doc', (e) => {
-    console.log("CLEARRR DOC")
     store.dispatch(clearDoc());
 })
 

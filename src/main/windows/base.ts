@@ -21,13 +21,13 @@ export enum WindowLifecycle {
 class BaseWindow extends EventEmitter {
 
     // properties
-    _accessor: Accessor | undefined;
+    _accessor: Accessor; 
     id: number | null;
     browserWindow: BrowserWindow | null;
     lifecycle: WindowLifecycle;
     type: WindowType;
 
-    constructor(accessor: Accessor | undefined) {
+    constructor(accessor: Accessor) {
         super();
 
         this._accessor = accessor;
