@@ -62,8 +62,6 @@ yarn dist
 mmap.it is built and maintained by a small team - we'd love your help fixing bugs and adding features!
 
 
-
 ## License
 
-mmap.it is **license pending**
-
+mmap.it is [BSL 1.1 licensed](https://github.com/pdepip/mmap.it/blob/master/LICENSE).
