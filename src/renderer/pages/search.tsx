@@ -18,6 +18,7 @@ import {
     deleteDocument,
     prependDocument,
     updateDocument,
+    forceRender,
 } from '../stores/search/actions';
 import { Document } from '../stores/search/types';
 
@@ -25,6 +26,7 @@ interface PropsFromState {
     query: string;
     activeIdx: number;
     documents: Document[];
+    renderIdx: number;
 }
 
 interface PropsFromDispatch {
@@ -36,6 +38,7 @@ interface PropsFromDispatch {
     deleteDocument: typeof deleteDocument;
     prependDocument: typeof prependDocument;
     updateDocument: typeof updateDocument;
+    forceRender: typeof forceRender;
 }
 
 type AllProps = PropsFromState & PropsFromDispatch;
@@ -72,6 +75,10 @@ class SearchPage extends React.Component<AllProps> {
                 this.props.updateDocument(doc);
             }
         });
+
+        ipcRenderer.on('rnd::focus-search', (e) => {
+            this.props.forceRender()
+        });
     }
 
     componentWillMount() {
@@ -92,13 +99,15 @@ class SearchPage extends React.Component<AllProps> {
             activeIdxIncrease,
             activeIdxDecrease,
             setActiveIdx,
+            renderIdx,
         } = this.props;
 
-        const markdown: string = documents.length > 0 ? documents[activeIdx].text : ""
+        const activeDoc: Document = documents[activeIdx]
+        const markdown: string = activeDoc ? activeDoc.text : "";
 
         return (
             <Page>
-                <SearchContainer>
+                <SearchContainer key={renderIdx}>
                     <SearchBar query={query} setQuery={setQuery} />
                 </SearchContainer>
                 <SearchResultsContainer>
@@ -126,6 +135,7 @@ const mapStateToProps = ({ search }: ApplicationState) => ({
     query: search.query,
     documents: search.documents,
     activeIdx: search.activeIdx,
+    renderIdx: search.renderIdx,
 });
 
 const mapDispatchToProps = {
@@ -137,6 +147,7 @@ const mapDispatchToProps = {
     deleteDocument,
     prependDocument,
     updateDocument,
+    forceRender,
 };
 
 export default connect(
