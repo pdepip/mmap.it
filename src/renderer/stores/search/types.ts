@@ -13,6 +13,7 @@ export enum SearchActionTypes {
     DELETE_DOCUMENT_BY_ID = '@@search/DELETE_DOCUMENT_BY_ID',
     PREPEND_DOCUMENT = '@@search/PREPEND_DOCUMENT',
     UPDATE_DOCUMENT = '@@search/UPDATE_DOCUMENT',
+    FORCE_RENDER = '@@search/FORCE_RENDER',
 }
 
 export interface Document {
@@ -30,4 +31,5 @@ export interface SearchState {
     readonly documents: Document[];
     readonly activeIdx: number;
     readonly markdown: string;
+    readonly renderIdx: number;
 }

@@ -30,6 +30,7 @@ export const initialState: SearchState = {
     activeIdx: 0,
     documents: [],
     markdown: '',
+    renderIdx: 0,
 };
 
 const reducer: Reducer<SearchState> = (state = initialState, action) => {
@@ -38,8 +39,11 @@ const reducer: Reducer<SearchState> = (state = initialState, action) => {
         return { 
             ...state, 
             query: action.payload,
-            activeIdx: action.payload === '' ? 0 : state.activeIdx,
+            activeIdx: state.query === '' ? 0 : state.activeIdx,
         };
+    }
+    case SearchActionTypes.FORCE_RENDER: {
+        return { ...state, renderIdx: state.renderIdx + 1 }
     }
     case SearchActionTypes.INCREASE_ACTIVE_IDX: {
         return { ...state, activeIdx: state.activeIdx + 1 }

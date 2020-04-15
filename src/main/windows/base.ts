@@ -84,6 +84,8 @@ class BaseWindow extends EventEmitter {
                         this.browserWindow.setAlwaysOnTop(true, "floating", 1);
 
                         this._accessor.metrics.userSearch()
+
+                        this.browserWindow.webContents.send('rnd::focus-search')
                     } 
 
 					// Display the window

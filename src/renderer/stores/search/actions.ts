@@ -21,3 +21,5 @@ export const deleteDocumentById = (id: number) => action(SearchActionTypes.DELET
 
 export const prependDocument = (document: Document) => action(SearchActionTypes.PREPEND_DOCUMENT, document)
 export const updateDocument = (document: Document) => action(SearchActionTypes.UPDATE_DOCUMENT, document)
+
+export const forceRender = () => action(SearchActionTypes.FORCE_RENDER)
