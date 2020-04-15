@@ -31,18 +31,11 @@ In development you can quickly get started by following these steps:
 
 ### Production
 
-For a production release you will have to take these steps:
+For a production installation these are the suggested steps:
 
-1. Bump version in `package.json`
-2. x
-
-
-
-## Releasing
-```bash
-yarn dist
-```
-
+1. Clone thhis repo and install dependencies with `yarn` or `npm install`
+2. Bump the version number in package.json
+3. Build and package the application with `yarn dist` 
 
 
 ## Contributing
