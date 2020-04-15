@@ -39,7 +39,7 @@ const reducer: Reducer<SearchState> = (state = initialState, action) => {
         return { 
             ...state, 
             query: action.payload,
-            activeIdx: action.payload === '' ? 0 : state.activeIdx,
+            activeIdx: state.query === '' ? 0 : state.activeIdx,
         };
     }
     case SearchActionTypes.FORCE_RENDER: {
