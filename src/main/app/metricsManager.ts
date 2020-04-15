@@ -8,7 +8,10 @@ class MetricsManager {
     _userId: string | null;
 
     constructor() {
-        this._client = Mixpanel.init(process.env.MIXPANEL_MMAP_KEY, {
+
+        const api_key: string = process.env.MIXPANEL_MMAP_KEY || ""
+
+        this._client = Mixpanel.init(api_key, {
             protocol: 'https'
         });
 
