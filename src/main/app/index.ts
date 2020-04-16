@@ -1,4 +1,4 @@
-import { app, BrowserWindow, globalShortcut } from 'electron';
+import { app, ipcMain, BrowserWindow, globalShortcut } from 'electron';
 import log from 'electron-log';
 
 import { EditorWindow } from '../windows/editor';
@@ -104,6 +104,14 @@ class App {
             // Initate auto-updates on macOs and windows
             appUpdater();
         }
+
+        ipcMain.on('kb::hide-search', () => {
+            if (this.editorWindow &&
+                this.editorWindow.browserWindow &&
+                !this.editorWindow.browserWindow.isVisible()) {
+                app.hide();
+            }
+        });
 
         createTray()
     };

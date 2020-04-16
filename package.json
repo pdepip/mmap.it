@@ -1,6 +1,6 @@
 {
   "name": "mmap.it",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "",
   "main": "./dist/main.js",
   "scripts": {
@@ -151,6 +151,7 @@
     "babel-preset-react": "^6.24.1",
     "classnames": "^2.2.6",
     "connected-react-router": "^6.6.1",
+    "dotenv": "^8.2.0",
     "elasticlunr": "^0.9.5",
     "electron-is-dev": "^1.1.0",
     "electron-log": "^4.0.3",
@@ -158,7 +159,7 @@
     "events": "^3.0.0",
     "history": "^4.10.1",
     "immutable": "^4.0.0-rc.12",
-    "mixpanel": "^0.11.0",
+    "mixpanel": "https://github.com/pdepip/mixpanel-node",
     "path": "^0.12.7",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",

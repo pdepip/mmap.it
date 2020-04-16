@@ -53,8 +53,10 @@ function appUpdater() {
         }
     });
 
-    // init for updates
-    autoUpdater.checkForUpdates()
+    // check for updates every 15 minutes
+    setInterval(() => {
+        autoUpdater.checkForUpdates()
+    }, 900000)
 }
 
 export { appUpdater }

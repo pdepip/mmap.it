@@ -1,4 +1,10 @@
-import { BrowserWindow, globalShortcut, ipcMain, screen } from 'electron';
+import {
+    app,
+    BrowserWindow,
+    globalShortcut,
+    ipcMain,
+    screen,
+} from 'electron';
 import * as EventEmitter from 'events';
 import * as path from 'path';
 import * as url from 'url';
@@ -35,7 +41,6 @@ class BaseWindow extends EventEmitter {
         this.browserWindow = null;
         this.lifecycle = WindowLifecycle.NONE;
         this.type = WindowType.BASE;
-
     }
 
     registerShortcut(key: string) {
