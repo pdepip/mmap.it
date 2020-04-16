@@ -30,5 +30,9 @@ ipcRenderer.on('rnd::clear-search', (e) => {
     store.dispatch(setQuery(""))
 });
 
+ipcRenderer.on('rnd::hide-search', (e) => {
+    ipcRenderer.send('kb::hide-search')
+});
+
 
 ReactDOM.render(<App store={store} history={history} />, mainElement);
