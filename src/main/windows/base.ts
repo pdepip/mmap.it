@@ -79,7 +79,7 @@ class BaseWindow extends EventEmitter {
                         const width = currentDisplay.bounds.width;
                         // this.browserWindow.setPosition(currentDisplay.workArea.x + width - 700, 0)
                         this.browserWindow.setPosition(
-                            currentDisplay.workArea.x + width - 700, 
+                            currentDisplay.workArea.x + width - this.browserWindow.getBounds().width, 
                             currentDisplay.workArea.y
                         )
                     }
