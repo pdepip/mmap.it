@@ -1,5 +1,5 @@
 import { Reducer } from 'redux';
-import { EditorState, EditorActionTypes, EditorMode } from './types';
+import { EditorState, EditorActionTypes } from './types';
 
 // Type-safe initialStaet
 export const initialState: EditorState = {
@@ -8,7 +8,6 @@ export const initialState: EditorState = {
     id: '',
     loading: false,
     renderIdx: 0,
-    mode: EditorMode.CREATE,
 };
 
 const reducer: Reducer<EditorState> = (state = initialState, action) => {
@@ -30,9 +29,6 @@ const reducer: Reducer<EditorState> = (state = initialState, action) => {
     }
     case EditorActionTypes.CLEAR_DOC: {
         return { ...initialState }
-    }
-    case EditorActionTypes.SET_MODE: {
-        return { ...state, mode: action.payload }
     }
     default: {
         return state;
