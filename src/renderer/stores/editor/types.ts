@@ -6,14 +6,8 @@ export enum EditorActionTypes {
     SAVE_REQUEST = '@@editor/SAVE_REQUEST',
     SAVE_SUCCESS = '@@editor/SAVE_SUCCESS',
     SAVE_ERROR = '@@editor/SAVE_ERROR',
-    TOGGLE_JUST_SAVED = '@@editor/TOGGLE_JUST_SAVED',
     CLEAR_DOC = '@@editor/CLEAR_DOC',
-    SET_MODE = '@@editor/SET_MODE',
-}
-
-export enum EditorMode {
-    CREATE = "CREATE",
-    UPDATE = "UPDATE",
+    FORCE_RENDER = '@@editor/FORCE_RENDER',
 }
 
 export interface Document {
@@ -29,6 +23,5 @@ export interface EditorState {
     readonly id: string;
     readonly title: string;
     readonly errors?: string;
-    readonly justSaved: boolean;
-    readonly mode: EditorMode;
+    readonly renderIdx: number;
 }

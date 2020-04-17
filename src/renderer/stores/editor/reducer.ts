@@ -1,5 +1,5 @@
 import { Reducer } from 'redux';
-import { EditorState, EditorActionTypes, EditorMode } from './types';
+import { EditorState, EditorActionTypes } from './types';
 
 // Type-safe initialStaet
 export const initialState: EditorState = {
@@ -7,14 +7,16 @@ export const initialState: EditorState = {
     markdown: '',
     id: '',
     loading: false,
-    justSaved: false,
-    mode: EditorMode.CREATE,
+    renderIdx: 0,
 };
 
 const reducer: Reducer<EditorState> = (state = initialState, action) => {
     switch (action.type) {
     case EditorActionTypes.SET_ID: {
         return { ...state, id: action.payload };
+    }
+    case EditorActionTypes.FORCE_RENDER: {
+        return { ...state, renderIdx: state.renderIdx + 1 }
     }
     case EditorActionTypes.SET_TITLE: {
         return { ...state, title: action.payload };
@@ -23,16 +25,10 @@ const reducer: Reducer<EditorState> = (state = initialState, action) => {
         return { ...state, markdown: action.payload };
     }
     case EditorActionTypes.SAVE_SUCCESS: {
-        return { ...state, id: '', markdown: '', title: '', justSaved: true };
-    }
-    case EditorActionTypes.TOGGLE_JUST_SAVED: {
-        return { ...state, justSaved: !state.justSaved };
+        return { ...state, id: '', markdown: '', title: '' };
     }
     case EditorActionTypes.CLEAR_DOC: {
         return { ...initialState }
-    }
-    case EditorActionTypes.SET_MODE: {
-        return { ...state, mode: action.payload }
     }
     default: {
         return state;

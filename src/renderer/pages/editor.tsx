@@ -17,17 +17,15 @@ import {
     setMarkdown,
     saveRequest,
     setId,
-    toggleJustSaved,
-    setEditorMode,
+    forceRender,
 } from '../stores/editor/actions';
-import { EditorMode } from '../stores/editor/types';
 import { Document } from '../stores/editor/types';
 
 interface PropsFromState {
     id: string;
     title: string;
     markdown: string;
-    justSaved: boolean;
+    renderIdx: number;
 }
 
 interface PropsFromDispatch {
@@ -35,8 +33,7 @@ interface PropsFromDispatch {
     setMarkdown: typeof setMarkdown;
     setId: typeof setId;
     saveRequest: typeof saveRequest;
-    toggleJustSaved: typeof toggleJustSaved
-    setEditorMode: typeof setEditorMode
+    forceRender: typeof forceRender;
 }
 
 type AllProps = PropsFromState & PropsFromDispatch;
@@ -52,7 +49,7 @@ class EditorPage extends React.Component<AllProps> {
             this.props.setId(doc.id);
             this.props.setTitle(doc.title)
             this.props.setMarkdown(doc.text)
-            this.props.setEditorMode(EditorMode.UPDATE);
+            this.props.forceRender();
         })
     }
 
@@ -74,26 +71,10 @@ class EditorPage extends React.Component<AllProps> {
             setTitle, 
             setMarkdown, 
             saveRequest, 
-            justSaved, 
-            toggleJustSaved,
-            setEditorMode,
+            renderIdx,
         } = this.props;
 
-        let activeIdx: any = undefined;
         const doc: Document = { id, title, markdown };
-
-        // Force Reload 
-        // TODO: Remove this functionality once PR for rich-markdown-editor
-        //       gets merged to add programatic updates
-        if (id) {
-            activeIdx = uuid()
-        }
-
-        if (justSaved) {
-            toggleJustSaved()
-            activeIdx = "refresh"
-        }
-        // End codeblock to remove
 
         return (
             <Page>
@@ -102,10 +83,10 @@ class EditorPage extends React.Component<AllProps> {
                 </SearchTitleContainer>
                 <EditorContainer>
                     <Markdown 
+                      key={renderIdx}
                       onSave={() => saveRequest(doc)}
                       setMarkdown={this.handleMarkdownChange.bind(this)} 
                       markdown={markdown}
-                      activeIdx={activeIdx}  // set to force refresh
                     />
                 </EditorContainer>
             </Page>
@@ -117,7 +98,7 @@ const mapStateToProps = ({ editor }: ApplicationState) => ({
     id: editor.id,
     title: editor.title,
     markdown: editor.markdown,
-    justSaved: editor.justSaved,
+    renderIdx: editor.renderIdx
 });
 
 const mapDispatchToProps = {
@@ -125,8 +106,7 @@ const mapDispatchToProps = {
     setMarkdown,
     setId,
     saveRequest,
-    toggleJustSaved,
-    setEditorMode,
+    forceRender,
 };
 
 export default connect(
