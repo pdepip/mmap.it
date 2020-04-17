@@ -7,7 +7,7 @@ export const initialState: EditorState = {
     markdown: '',
     id: '',
     loading: false,
-    justSaved: false,
+    renderIdx: 0,
     mode: EditorMode.CREATE,
 };
 
@@ -16,6 +16,9 @@ const reducer: Reducer<EditorState> = (state = initialState, action) => {
     case EditorActionTypes.SET_ID: {
         return { ...state, id: action.payload };
     }
+    case EditorActionTypes.FORCE_RENDER: {
+        return { ...state, renderIdx: state.renderIdx + 1 }
+    }
     case EditorActionTypes.SET_TITLE: {
         return { ...state, title: action.payload };
     }
@@ -23,10 +26,7 @@ const reducer: Reducer<EditorState> = (state = initialState, action) => {
         return { ...state, markdown: action.payload };
     }
     case EditorActionTypes.SAVE_SUCCESS: {
-        return { ...state, id: '', markdown: '', title: '', justSaved: true };
-    }
-    case EditorActionTypes.TOGGLE_JUST_SAVED: {
-        return { ...state, justSaved: !state.justSaved };
+        return { ...state, id: '', markdown: '', title: '' };
     }
     case EditorActionTypes.CLEAR_DOC: {
         return { ...initialState }
