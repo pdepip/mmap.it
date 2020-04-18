@@ -9,6 +9,7 @@ export interface Props {
     setMarkdown: (markdown: string) => void;
     readOnly?: boolean;
     activeIdx?: string | undefined;
+    autoFocus?: boolean;
 }
 
 const Markdown: React.FunctionComponent<Props> = (
@@ -17,7 +18,8 @@ const Markdown: React.FunctionComponent<Props> = (
         setMarkdown, 
         onSave, 
         readOnly = false, 
-        activeIdx=undefined,
+        activeIdx = undefined,
+        autoFocus = false,
     }
 ) => (
     <MarkdownDiv>
@@ -29,6 +31,7 @@ const Markdown: React.FunctionComponent<Props> = (
             onCancel={null}
             onChange={setMarkdown}
             readOnly={readOnly}
+            autoFocus={autoFocus}
         />
     </MarkdownDiv>
 );
