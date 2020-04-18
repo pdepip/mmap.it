@@ -112,6 +112,7 @@ class FileManager extends EventEmitter {
             this._index.search(query, {
                 fields: {
                     title: { boost: 2 },
+                    text: { boost: 1 },
                 },
                 bool: 'OR',
                 expand: true,
