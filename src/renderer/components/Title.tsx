@@ -5,9 +5,14 @@ import styled from 'styled-components';
 export interface Props {
     title: string;
     setTitle: (title: string) => void;
+    autoFocus: boolean;
 }
 
-const Title: React.FunctionComponent<Props> = ({ title, setTitle }) => (
+const Title: React.FunctionComponent<Props> = ({ 
+    title, 
+    setTitle, 
+    autoFocus,
+}) => (
     <FieldContainer>
         <StyledInput
             autoFocus={true}

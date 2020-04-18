@@ -76,13 +76,21 @@ class EditorPage extends React.Component<AllProps> {
 
         const doc: Document = { id, title, markdown };
 
+        // autofocus text box on update
+        const afEditor: boolean = (!id) ? false : true;
+        const afTitle: boolean = (!id) ? true : false;
+
         return (
             <Page>
                 <SearchTitleContainer>
-                    <Title title={title} setTitle={setTitle} />
+                    <Title 
+                      autoFocus={afTitle} 
+                      title={title} 
+                      setTitle={setTitle} />
                 </SearchTitleContainer>
                 <EditorContainer>
                     <Markdown 
+                      autoFocus={afEditor}
                       key={renderIdx}
                       onSave={() => saveRequest(doc)}
                       setMarkdown={this.handleMarkdownChange.bind(this)} 

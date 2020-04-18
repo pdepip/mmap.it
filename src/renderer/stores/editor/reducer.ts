@@ -25,7 +25,12 @@ const reducer: Reducer<EditorState> = (state = initialState, action) => {
         return { ...state, markdown: action.payload };
     }
     case EditorActionTypes.SAVE_SUCCESS: {
-        return { ...state, id: '', markdown: '', title: '' };
+        return { 
+            ...state, 
+            id: '', 
+            markdown: '', 
+            title: '', 
+            renderIdx: state.renderIdx + 1};
     }
     case EditorActionTypes.CLEAR_DOC: {
         return { ...initialState }

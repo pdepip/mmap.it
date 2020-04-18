@@ -105,10 +105,20 @@ class App {
             appUpdater();
         }
 
+        // Gives focus back to previous window
         ipcMain.on('kb::hide-search', () => {
             if (this.editorWindow &&
                 this.editorWindow.browserWindow &&
                 !this.editorWindow.browserWindow.isVisible()) {
+                app.hide();
+            }
+        });
+
+        // Gives focus back to previous window
+        ipcMain.on('kb::hide-editor', () => {
+            if (this.searchWindow &&
+                this.searchWindow.browserWindow &&
+                !this.searchWindow.browserWindow.isVisible()) {
                 app.hide();
             }
         });

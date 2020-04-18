@@ -2,7 +2,13 @@ import { all, call, fork, put, takeEvery, takeLatest, select } from 'redux-saga/
 import { ipcRenderer } from 'electron'
 import { v4 as uuid } from 'uuid';
 import { EditorActionTypes } from './types';
-import { saveError, saveSuccess, setTitle, setMarkdown } from './actions'
+import { 
+    saveError, 
+    saveSuccess, 
+    setTitle, 
+    setMarkdown,
+    forceRender,
+} from './actions'
 import { callApi } from '../../utils/api'
 
 
@@ -18,8 +24,16 @@ function* handleSave() {
             isUpdate: !!state.editor.id
         }
         ipcRenderer.send('kb::hide-editor')
-        ipcRenderer.send('fm::save', data.id, data.title, data.text, data.isUpdate)
-        ipcRenderer.send('kb::new-document', data)
+
+        if (data.title) {
+            ipcRenderer.send(
+                'fm::save', 
+                data.id, 
+                data.title, 
+                data.text, 
+                data.isUpdate)
+            ipcRenderer.send('kb::new-document', data)
+        }
         yield put(saveSuccess(data))
         
         /* REMOVED BECAUSE WE ARE NOT USING AN API. 

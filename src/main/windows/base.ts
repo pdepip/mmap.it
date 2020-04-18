@@ -53,7 +53,6 @@ class BaseWindow extends EventEmitter {
                     if (this.type === WindowType.SEARCH) {
                         this.browserWindow.webContents.send('rnd::hide-search')
                     } else if (this.type === WindowType.EDITOR) {
-                        this.browserWindow.webContents.send('rnd::clear-doc')
                         this.browserWindow.webContents.send('rnd::hide-editor')
                     }
 
