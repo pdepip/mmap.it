@@ -31,7 +31,11 @@ ipcRenderer.on('rnd::clear-search', (e) => {
 });
 
 ipcRenderer.on('rnd::hide-search', (e) => {
-    ipcRenderer.send('kb::hide-search')
+    ipcRenderer.send('kb::hide-search');
+});
+
+ipcRenderer.on('rnd::hide-editor', (e) => {
+    ipcRenderer.send('kb::hide-editor');
 });
 
 
