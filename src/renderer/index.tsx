@@ -17,12 +17,13 @@ const initialState = window.INITIAL_REDUX_STATE;
 const store = configureStore(history, initialState);
 
 
-import { clearDoc } from './stores/editor/actions';
+import { clearDoc, forceRender } from './stores/editor/actions';
 import { clearSearch, setQuery } from './stores/search/actions';
 
 
 ipcRenderer.on('rnd::clear-doc', (e) => {
     store.dispatch(clearDoc());
+    store.dispatch(forceRender());
 })
 
 ipcRenderer.on('rnd::clear-search', (e) => {
