@@ -84,6 +84,7 @@ class EditorPage extends React.Component<AllProps> {
             <Page>
                 <SearchTitleContainer>
                     <Title 
+                      key={renderIdx}
                       autoFocus={afTitle} 
                       title={title} 
                       setTitle={setTitle} />
