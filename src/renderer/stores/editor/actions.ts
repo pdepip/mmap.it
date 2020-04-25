@@ -17,3 +17,5 @@ export const saveError = (message: string) => action(EditorActionTypes.SAVE_ERRO
 export const clearDoc = () => action(EditorActionTypes.CLEAR_DOC)
 
 export const forceRender = () => action(EditorActionTypes.FORCE_RENDER)
+
+export const toggleEditing = () => action(EditorActionTypes.TOGGLE_EDITING)
