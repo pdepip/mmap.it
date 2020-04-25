@@ -7,6 +7,7 @@ export const initialState: EditorState = {
     markdown: '',
     id: '',
     loading: false,
+    editing: false,
     renderIdx: 0,
 };
 
@@ -22,7 +23,11 @@ const reducer: Reducer<EditorState> = (state = initialState, action) => {
         return { ...state, title: action.payload };
     }
     case EditorActionTypes.SET_MARKDOWN: {
-        return { ...state, markdown: action.payload };
+        return {
+            ...state,
+            markdown: action.payload,
+            editing: action.payload !== state.markdown
+        };
     }
     case EditorActionTypes.SAVE_SUCCESS: {
         return { 
@@ -30,10 +35,14 @@ const reducer: Reducer<EditorState> = (state = initialState, action) => {
             id: '', 
             markdown: '', 
             title: '', 
+            editing: false,
             renderIdx: state.renderIdx + 1};
     }
     case EditorActionTypes.CLEAR_DOC: {
         return { ...initialState }
+    }
+    case EditorActionTypes.TOGGLE_EDITING: {
+        return { ...state, editing: true }
     }
     default: {
         return state;

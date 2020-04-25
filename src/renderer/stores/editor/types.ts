@@ -8,6 +8,7 @@ export enum EditorActionTypes {
     SAVE_ERROR = '@@editor/SAVE_ERROR',
     CLEAR_DOC = '@@editor/CLEAR_DOC',
     FORCE_RENDER = '@@editor/FORCE_RENDER',
+    TOGGLE_EDITING = '@@editor/TOGGLE_EDITING',
 }
 
 export interface Document {
@@ -24,4 +25,5 @@ export interface EditorState {
     readonly title: string;
     readonly errors?: string;
     readonly renderIdx: number;
+    readonly editing: boolean;
 }
