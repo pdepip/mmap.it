@@ -22,8 +22,6 @@ import { clearSearch, setQuery } from './stores/search/actions';
 
 
 ipcRenderer.on('rnd::clear-doc', (e) => {
-    store.dispatch(clearDoc());
-    store.dispatch(forceRender());
 })
 
 ipcRenderer.on('rnd::clear-search', (e) => {
@@ -37,6 +35,11 @@ ipcRenderer.on('rnd::hide-search', (e) => {
 
 ipcRenderer.on('rnd::hide-editor', (e) => {
     ipcRenderer.send('kb::hide-editor');
+
+    if (!store.getState().editor.editing) {
+        store.dispatch(clearDoc())
+        store.dispatch(forceRender())
+    }
 });
 
 
