@@ -41,10 +41,12 @@ class MetricsManager {
 
     userSearch() {
         this._client.people.increment(this._userId, 'searches')
+        this._client.track('search', { user: this._userId })
     }
 
     userSave() {
         this._client.people.increment(this._userId, 'saves')
+        this._client.track('save', { user: this._userId })
     }
 
     userUpdates() {

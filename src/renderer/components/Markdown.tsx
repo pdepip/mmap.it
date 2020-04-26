@@ -2,6 +2,7 @@ import * as React from 'react';
 import Editor from 'rich-markdown-editor';
 import { Document } from '../stores/editor/types';
 import styled from 'styled-components';
+import { shell } from 'electron';
 
 export interface Props {
     markdown: string;
@@ -30,6 +31,9 @@ const Markdown: React.FunctionComponent<Props> = (
             onSave={onSave}
             onCancel={null}
             onChange={setMarkdown}
+            onClickLink={href => {
+                shell.openExternal(href)
+            }}
             readOnly={readOnly}
             autoFocus={autoFocus}
         />
