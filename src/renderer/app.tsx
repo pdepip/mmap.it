@@ -18,11 +18,9 @@ interface AppProps {
 
 const App: React.FC<AppProps> = ({ store, history }) => {
     return (
-        <AppContainer>
             <Provider store={store}>
                 <Routes page={page} />
             </Provider>
-        </AppContainer>
     );
 };
 

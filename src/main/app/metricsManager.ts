@@ -1,4 +1,4 @@
-import * as Mixpanel from 'mixpanel';
+//import * as Mixpanel from 'mixpanel';
 import * as ip from 'ip';
 
 class MetricsManager { 
@@ -11,9 +11,11 @@ class MetricsManager {
 
         const api_key: string = process.env.MIXPANEL_MMAP_KEY || ""
 
+	/*
         this._client = Mixpanel.init(api_key, {
             protocol: 'https'
         });
+	*/
 
         this._userId = "";
     }
@@ -23,6 +25,8 @@ class MetricsManager {
     }
 
     createUser() {
+	console.log('metricsManger - no op user create')
+	  /*
         this._client.people.set(this._userId, {
             $created: (new Date()).toISOString(),
             $ip: ip.address(),
@@ -33,28 +37,34 @@ class MetricsManager {
             updates: 0,
             logins: 0,
         });
+	*/
     }
 
     userLogin() {
-        this._client.people.increment(this._userId, 'logins')
+	 console.log("metricsManager - no op user login")
+        //this._client.people.increment(this._userId, 'logins')
     }
 
     userSearch() {
-        this._client.people.increment(this._userId, 'searches')
-        this._client.track('search', { user: this._userId })
+	 console.log("metricsManager - no op user user search")
+        //this._client.people.increment(this._userId, 'searches')
+        //this._client.track('search', { user: this._userId })
     }
 
     userSave() {
-        this._client.people.increment(this._userId, 'saves')
-        this._client.track('save', { user: this._userId })
+	 console.log("metricsManager - no op user user save")
+        //this._client.people.increment(this._userId, 'saves')
+        //this._client.track('save', { user: this._userId })
     }
 
     userUpdates() {
-        this._client.people.increment(this._userId, 'updates')
+	 console.log("metricsManager - no op user user update")
+        //this._client.people.increment(this._userId, 'updates')
     }
 
     userDeletes() {
-        this._client.people.increment(this._userId, 'deletes')
+	 console.log("metricsManager - no op user user delete")
+        //this._client.people.increment(this._userId, 'deletes')
     }
 
 }

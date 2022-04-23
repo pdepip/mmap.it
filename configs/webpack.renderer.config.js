@@ -15,7 +15,9 @@ module.exports = merge.smart(baseConfig, {
             {
                 test: /\.tsx?$/,
                 exclude: /node_modules/,
-                loader: 'babel-loader',
+                use: [
+                    {
+                        loader: 'babel-loader',
                 options: {
                     cacheDirectory: true,
                     babelrc: false,
@@ -28,26 +30,30 @@ module.exports = merge.smart(baseConfig, {
                         '@babel/preset-react',
                     ],
                     plugins: [
-                        ['@babel/plugin-proposal-class-properties', { loose: true }],
+                        ['@babel/plugin-proposal-class-properties'],
                     ]
                 }
+                    }
+                ],
             },
             {
                 test: /\.scss$/,
-                loaders: ['style-loader', 'css-loader', 'sass-loader']
+                use: [
+                  { loader: "style-loader" },
+                  { loader: "css-loader" },
+                  { loader: "sass-loader" }
+                ],
             },
             {
                 test: /\.css$/,
-                loaders: ['style-loader', 'css-loader']
+                use: [
+                  { loader: "style-loader" },
+                  { loader: "css-loader" }
+                ]
             },
             {
                 test: /\.(gif|png|jpe?g|svg)$/,
-                use: [
-                    'file-loader',
-                    {
-                        loader: 'image-webpack-loader',
-                    }
-                ]
+                use: [{ loader: 'image-webpack-loader' }]
             },
             // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
             {
@@ -61,7 +67,6 @@ module.exports = merge.smart(baseConfig, {
         new ForkTsCheckerWebpackPlugin({
             reportFiles: ['src/renderer/**/*']
         }),
-        new webpack.NamedModulesPlugin(),
         new HtmlWebpackPlugin(),
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')

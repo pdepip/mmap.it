@@ -13,18 +13,18 @@ class Routes extends React.Component<Props> {
         switch (this.props.page) {
         case 'editor':
             {
-                    return <EditorPage />;
-                }
+                return <EditorPage />;
+            }
             break;
         case 'search':
             {
-                    return <SearchPage />;
-                }
+                return <SearchPage />;
+            }
             break;
         default:
             {
-                    return <EditorPage />;
-                }
+                return <EditorPage />;
+            }
             break;
         }
     }
